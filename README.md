@@ -1,22 +1,6 @@
 # Linea
 Control of photovoltaic power plant using Node-RED”
 
-//*****************************************************************************
-//
-// File Name        : 'Instrukce_ Cti_Me'
-// Title            : Pokyny
-// Author           : http://www.prochazka.zde.cz -> hacesoft 2024
-// Created          : 22-06-2024, 11:00
-// Revised          : 29-06-2024, 21:52
-// Version          : 1.01
-// Target Platfirm  : Node-RED
-//
-// This code is distributed under the GNU Public License
-// Vsechny informace jsou zahrnuty pod GPL licenci, pokud není explicitne uveden jiný typ licence.
-// Pouzivání techto stránek ke komercním �celum lze jen se souhlasem autora.
-// Vsechna práva vyhrazena (c) 1997 - 2024 hacesoft.
-//
-//*****************************************************************************
 
 Budu rád za jakýkoliv zpetnou odezvu a případnou opravu chyb a vylepšení.
 
