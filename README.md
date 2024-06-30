@@ -18,14 +18,15 @@ Zatím je vše tak nejak ve vývoji, neco už tam funguje ale je to třeba dodá
 Funkce: Prodej baterii - ranní špička a Prodej baterii - večerní špička jsou v GUI připravené a také najití techto useku,
 maji je nastarosti funkce:
 
+```
   // Hleda ranni a odpoleni peaky
   // prvni promenna je pole aktualniho spot a druha promenna rika jak dlouhy peak muse bejt
   const morningPeak1 = findMorningPeakHours(todayHourlyPrices, 2);
   const afternoonPeak1 = findAfternoonPeakHours(todayHourlyPrices, 2);
-
+```
 Ale zatím nejsou zapracované do celkové logiky která je:
 
-
+```
 nSet_Grid_Point = fSet_Grid(nGridConsumptionEnable, nSetGridValue, isSpotAutoCtrlEnabled, spotTresholdPrice, currentPrice, nPretoky);    
     let nZbytekFV = pvPower - (totalACLoad + nRezerva);
     // funkce na posun nabijeni baterii
@@ -51,6 +52,7 @@ nSet_Grid_Point = fSet_Grid(nGridConsumptionEnable, nSetGridValue, isSpotAutoCtr
             }
         }
     }
+```
 
 Zde potom zapracuji...Casem
 
