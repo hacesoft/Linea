@@ -25,10 +25,9 @@ maji je nastarosti funkce:
 
 Ale zatím nejsou zapracované do celkové logiky která je:
 
+
 nSet_Grid_Point = fSet_Grid(nGridConsumptionEnable, nSetGridValue, isSpotAutoCtrlEnabled, spotTresholdPrice, currentPrice, nPretoky);    
-
     let nZbytekFV = pvPower - (totalACLoad + nRezerva);
-
     // funkce na posun nabijeni baterii
     if (tStartBatteryTime && tStopBatteryTime) {
         if (debug) {
