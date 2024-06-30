@@ -52,22 +52,23 @@ nSet_Grid_Point = fSet_Grid(nGridConsumptionEnable, nSetGridValue, isSpotAutoCtr
     }
 ```
 
-Zde potom zapracuji...Casem
+Zde potom zapracuji… Časem
 
 Vysvětlení významu přepínačů:
 
-- Automacitky podle SPOPTUu : tlačítko po aktivaci sleduje aktualní cenu spotu a v kolonce Limitni cena je trigger dokdy se mají posílat přetoky.
-- Přetoky: Zap / Vyp : tlačítko zapne nebo vypne přetoky, není nikterak blokováno žádnou logikou, taková pojistka
-- Zap/Vyp AcPowerSetPoint - zapnet tuto funkci. Pak nasledujícím ovladačem nastavujete požadovaný odber, Ja mám -100W, díky tomuto nastavení mám cca celkový odber do z GRIDu do 1kW za den, 
-			    když nastavím 0 tak to déla daleko více. Tato funkce se automaticky vypne když je spot zakazaný... Časem předelám tak aby fungovalo tot nastavení 
-			    i do zakázaného spotu ale do doby než bude spot zaporny.
-- Posunutí nabíjení Baterie: nastavíte od - do ma tato funkce pracovat. Nastavuji od rána a do sepnutí bojleru, to je 11 hodin. Tato funkce pracuje tak, že si zjistí aktuální dodávku
-			     z panelů, a aktuální dodběr a připočíta k tomu nejakou rezervy a kladný rozdíl nastaví do stejného registru jako funkce Zap/Vip AcPowerSetPoint.
-- Prodej baterii - ranní špička - momentálne neimplementováno, viz predchozí text.
-- Prodej baterii - večerní špička - momentálne neimplementováno, viz predchozí text.
-				
+- Automaticky podle SPOTu: Tlačítko po aktivaci sleduje aktuální cenu spotu a v kolonce Limitní cena je trigger, dokud se mají posílat přetoky.
+- Přetoky: Zap / Vyp: Tlačítko zapne nebo vypne přetoky, není nikterak blokováno žádnou logikou, taková pojistka.
+			Zap/Vyp AcPowerSetPoint: Zapne tuto funkci. Pak následujícím ovladačem nastavujete požadovaný odběr. Já mám -100W, 
+			díky tomuto nastavení mám cca celkový odběr do z GRIDu do 1kW za den. Když nastavím 0, tak to dělá daleko více. 
+			Tato funkce se automaticky vypne, když je spot zakázán… Časem předělám tak, aby fungovalo toto nastavení i do zakázaného spotu, ale do doby, než bude spot záporný.
+- Posunutí nabíjení Baterie: Nastavíte od - do má tato funkce pracovat. Nastavuji od rána a do sepnutí bojleru, to je 11 hodin. 
+			Tato funkce pracuje tak, že si zjistí aktuální dodávku z panelů, a aktuální odběr a připočítá k tomu nějakou rezervu, 
+			kladný rozdíl nastaví do stejného registru jako funkce Zap/Vyp AcPowerSetPoint.
+- Prodej baterii - ranní špička - momentálně neimplementováno, viz předchozí text.
+ -Prodej baterii - večerní špička - momentálně neimplementováno, viz předchozí text.
 
-Nainstalovane NODE:
+
+Nainstalované NODE:
 
 - @victronenergy/node-red-contrib-victron - 1.5.17
 - node-red - 4.0.0
