@@ -1,6 +1,7 @@
 # Linea
 Control of photovoltaic power plant using Node-RED”
 
+![image](https://github.com/hacesoft/Linea/assets/53556265/c8a5d96b-6b64-4ad5-81d6-ca480925546d)
 
 Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 
