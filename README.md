@@ -69,6 +69,50 @@ Vysvětlení významu přepínačů:
  -Prodej baterii - večerní špička - momentálně neimplementováno, viz předchozí text.
 
 
+Pokud má někro rád kulaté dlaždice a chce toto: ![image](https://github.com/hacesoft/Linea/assets/53556265/a39f2a8a-10ad-4e8f-b15c-bd0ed1efdb8b)
+Tak ve flow GUI je template: ![image](https://github.com/hacesoft/Linea/assets/53556265/e2cf93ab-71df-44d3-ac8a-e895fdfe1815)
+
+a je třeba v CCS profilu vypnout okraje a zapnout zakulacení rohů:).
+
+```
+    .nr-dashboard-theme ui-card-panel {
+        background-color: var(--background);
+        border: 0px solid var(--okraj-karty);      //nastaveni okraje karet
+    }
+
+    /* Kulatění rohů */
+    .Kulati_Nahore {
+        border-top-left-radius: var(--radius-s);
+        border-top-right-radius: var(--radius-s);
+    }
+
+    .Kulati_Dole {
+        border-bottom-left-radius: var(--radius-s);
+        border-bottom-right-radius: var(--radius-s);
+    }
+```
+
+a takto vypadá původní nastavení:
+
+```
+    .nr-dashboard-theme ui-card-panel {
+        background-color: var(--background);
+        border: 2px solid var(--okraj-karty);      //nastaveni okraje karet
+    }
+
+    /* Kulatění rohů */
+    .Kulati_Nahore {
+       // border-top-left-radius: var(--radius-s);
+       // border-top-right-radius: var(--radius-s);
+    }
+
+    .Kulati_Dole {
+       // border-bottom-left-radius: var(--radius-s);
+       // border-bottom-right-radius: var(--radius-s);
+    }
+```
+
+
 Nainstalované NODE:
 
 - @victronenergy/node-red-contrib-victron - 1.5.17
