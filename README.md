@@ -2,21 +2,19 @@
 Control of photovoltaic power plant using Node-RED”
 
 
-Budu rád za jakýkoliv zpetnou odezvu a případnou opravu chyb a vylepšení.
+Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 
-Svoje Flow provozuji na NASu, proto pouzivám node-red-contrib-modbus.
-Sice to zle pouzivat i na Cerbu, ale to je tím jednak zpomalováno, a zadruhe, flow vidi kdokoliv je admin FVE a to se me nelibi, aby tam 
-nahližela instalační firma nebo nekdo www.deltagreen.cz.
-Node victron-vrm-api zatím není třeba instalovat, ježtě ho nepoužívám, to platí i pro nadstavbu: node-red-contrib-victron-modbus a její příslušný 
-attributes.csv soubor, který se musí nainstalovat dle pokynů. 
-Soubor CCGX-Modbus-TCP-register-list-2.90.xlsx je seznam registru a jejích funkcí.
-Do FLOW se naimportuje, po nainstalovaní potřebných NODE knihoven soubor: battery control.json, ten je převážně zadpovedný za manipulaci s
-registrem GRID POINT, tak i Spot excess.json, ten je zodpovedný za řízení SPOTu. 
-Nově vzniklé flow GUI.json obsahuje zaležitosti grafického zobrazení, zatím je to hybrid, postupně bude předeláváno.
-Zatím je vše tak nejak ve vývoji, neco už tam funguje ale je to třeba dodáhnout. Potom je třeba predelat UI, zatím je to poházené...
+Své flow provozuji na NASu, proto používám node-red-contrib-modbus. Sice to lze používat i na Cerbu, ale tím je jednak zpomalováno a zadruhé, 
+flow vidí kdokoliv, kdo je admin FVE, a to se mi nelíbí, aby tam nahlížela instalační firma nebo někdo z www.deltagreen.cz. Node victron-vrm-api 
+zatím není třeba instalovat, ještě ho nepoužívám. To platí i pro nadstavbu: node-red-contrib-victron-modbus a její příslušný attributes.csv soubor, 
+který se musí nainstalovat dle pokynů. Soubor CCGX-Modbus-TCP-register-list-2.90.xlsx je seznam registrů a jejich funkcí. 
 
-Funkce: Prodej baterii - ranní špička a Prodej baterii - večerní špička jsou v GUI připravené a také najití techto useku,
-maji je nastarosti funkce:
+Do flow se naimportuje, po nainstalování potřebných node knihoven soubor: battery control.json, ten je převážně zodpovědný za manipulaci s registrem GRID POINT, 
+tak i Spot excess.json, ten je zodpovědný za řízení SPOTu. Nově vzniklé flow GUI.json obsahuje záležitosti grafického zobrazení, 
+zatím je to hybrid, postupně bude předěláváno. Zatím je vše tak nějak ve vývoji, něco už tam funguje, ale je to třeba dořešit. 
+Potom je třeba předělat UI, zatím je to poházené… 
+
+Funkce: Prodej baterii - ranní špička a Prodej baterii - večerní špička jsou v GUI připravené a také nalezení těchto úseků, mají je na starosti funkce:
 
 ```
   // Hleda ranni a odpoleni peaky
