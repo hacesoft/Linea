@@ -2,8 +2,8 @@
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 - Verze 14072024: 
-  - Přidán flow na přímé ovládání pomocí shelly plychinu ventilátoru. Pro vaše účely je třeba upravit a nebo úplně vymazat. Není to úplně dodělané, hlavně GUI je nedodělané a nešikovné. 
-  - Už funguje funkce prodej ranní špičky, zatím ranní špička je definována na údek 2 hodin.
+  - Přidán flow na přímé ovládání pomocí shelly pluginu ventilátoru. Pro vaše účely je třeba upravit a nebo úplně vymazat. Není to úplně dodělané, hlavně GUI je nedodělané a nešikovné. 
+  - Už funguje funkce prodej ranní špičky, zatím ranní špička je definována na údek 2 hodin. 
   - Přidány testovací výpisy, stačí v patřičném node zapnout DEBUG na true a případně si upravit požadovaný výpis proměnné.
   - Přidány globální funkce - takže se opakující funkce napíšou jen jednou a v dalších node function se jen načtou.
   - Opraveno napříč flow práce s časem. Od této verze se zadá v globálních proměnných na flow GUI County_Code a TZidentifier. 
