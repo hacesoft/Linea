@@ -1,7 +1,7 @@
 # Linea
-Control of photovoltaic power plant using Node-RED”
+Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
-- Verze 14072024:
+- Verze 14072024: 
   - Přidán flow na přímé ovládání pomocí shelly plychinu ventilátoru. Pro vaše účely je třeba upravit a nebo úplně vymazat. Není to úplně dodělané, hlavně GUI je nedodělané a nešikovné. 
   - Už funguje funkce prodej ranní špičky, zatím ranní špička je definována na údek 2 hodin.
   - Přidány testovací výpisy, stačí v patřičném node zapnout DEBUG na true a případně si upravit požadovaný výpis proměnné.
@@ -131,13 +131,12 @@ a takto vypadá původní nastavení:
 
 Nainstalované NODE:
 
-- @victronenergy/node-red-contrib-victron - 1.5.17
-- node-red - 4.0.0
+- node-red - 4.0.2
 - node-red-contrib-config - 1.2.1
 - node-red-contrib-cron-plus - 2.1.0
-- node-red-contrib-modbus - 5.31.0
+- node-red-contrib-modbus - 5.40.0
 - node-red-contrib-victron-modbus - 0.1.5
 - node-red-dashboard - 3.6.5
-- victron-vrm-api - 0.2.5
+- victron-vrm-api - 0.2.6
 
 
