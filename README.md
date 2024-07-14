@@ -1,7 +1,22 @@
 # Linea
 Control of photovoltaic power plant using Node-RED”
 
-![image](https://github.com/hacesoft/Linea/assets/53556265/c8a5d96b-6b64-4ad5-81d6-ca480925546d)
+-Verze 14072024:
+	- Pridán flow na přímé ovladádaní pomoci shelly plychinu ventilatoru. Pro vaše učely je třeba upravit a nebo uplně vymazat. Není to uplně dodělané, hlavne GUI je 			nedodělané a nešikovné. 
+ 	- Už funguje funkce prodej ranní špičky, zatím ranní špička je definována na udek 2 hodin
+  	- Opraveno napříč flow práce s časem. Od této verze se zadá v globálnich proměnných na flow GUI County_Code a TZidentifier. 
+	```
+	//Definice timezone and Country code
+	//LIST CODES: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+	const sCounty_Code ="cs-CZ";
+	const sTZidentifier = "Europe/Prague";
+	```
+ 	- Přidány testovací vypisy, ztači v patřičném node zapnout DEBUG na true a případně si upravit pozadovaný výpis proměnné
+  	- Přidány globální funkce - takže se opakujicí funkce napíšou jen jednou a v dalších node function se jen načtou.
+   
+
+![image](https://github.com/user-attachments/assets/9ab14a0e-0656-4e6b-a26c-97137024f918)
+
 
 Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 
