@@ -1,6 +1,14 @@
 # Linea
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
+![image](https://github.com/user-attachments/assets/9ab14a0e-0656-4e6b-a26c-97137024f918)
+
+- Verze 15072024:
+  - FIX funkce convert signet to unsignet na flow battery control.
+  - FIX funkce convert unsignet to signet na flow battery control.
+  - Částečně přepracován flow Spot Excess Control. Část node předělána do function node: Logick write resister 2707
+ 
+    
 - Verze 14072024: 
   - Přidán flow na přímé ovládání pomocí shelly pluginu ventilátoru. Pro vaše účely je třeba upravit a nebo úplně vymazat. Není to úplně dodělané, hlavně GUI je nedodělané a nešikovné. 
   - Už funguje funkce prodej ranní špičky, zatím ranní špička je definována na údek 2 hodin. 
@@ -14,9 +22,6 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 const sCounty_Code ="cs-CZ";
 const sTZidentifier = "Europe/Prague";
 ```
-   
-
-![image](https://github.com/user-attachments/assets/9ab14a0e-0656-4e6b-a26c-97137024f918)
 
 
 Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
