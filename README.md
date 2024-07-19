@@ -7,8 +7,8 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
   - FIX funkce CopyOnChane_2707 - Ted se zapisuji posílají do registru 2707 jen změny, nikoliv stejná hodnota.
   - FIX function GLOBAl FUNCTION - funkce sExtractTime a mExtractTime mají stejný časový základ pomocí funkce fSetFixedDate a nemůže se stát že budou rozdílné hodnoty.
   - Nejvíc je přepracován flow chlazení fve:
-		- Kde jednak jsou indikátory, zda se ventilátory točí, je to odezva od PLUGINu SHELLY, která potvrdí přijetí příkazu. Není implementováno monitorování odběru ele.i.
-    		- Zapnutí ventilátoru je okamžitě, jak dosáhne hodnoty triggeru, ale vypnuji je až prijde 20x za sebou příkaz STOP. Tím se vyhneme nějakému mraku.
+	- Kde jednak jsou indikátory, zda se ventilátory točí, je to odezva od PLUGINu SHELLY, která potvrdí přijetí příkazu. Není implementováno monitorování odběru ele.i.
+   	- Zapnutí ventilátoru je okamžitě, jak dosáhne hodnoty triggeru, ale vypnuji je až prijde 20x za sebou příkaz STOP. Tím se vyhneme nějakému mraku.
     		
 
 - Verze 15072024:
