@@ -1,12 +1,20 @@
 # Linea
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
-![image](https://github.com/user-attachments/assets/9ab14a0e-0656-4e6b-a26c-97137024f918)
+![image](https://github.com/user-attachments/assets/807db702-0484-4eac-b5ba-3b941eb94950)
+
+- Verze 19072024:
+  - FIX funkce CopyOnChane_2707 - Ted se zapisuji posílají do registru 2707 jen změny, nikoliv stejná hodnota.
+  - FIX function GLOBAl FUNCTION - funkce sExtractTime a mExtractTime mají stejný časový základ pomocí funkce fSetFixedDate a nemůže se stát že budou rozdílné hodnoty.
+  - Nejvíc je přepracován flow chlazení fve:
+		- Kde jednak jsou indikátory, zda se ventilátory točí, je to odezva od PLUGINu SHELLY, která potvrdí přijetí příkazu. Není implementováno monitorování odběru ele.i.
+    		- Zapnutí ventilátoru je okamžitě, jak dosáhne hodnoty triggeru, ale vypnuji je až prijde 20x za sebou příkaz STOP. Tím se vyhneme nějakému mraku.
+    		
 
 - Verze 15072024:
   - FIX funkce convert signet to unsignet na flow battery control.
   - FIX funkce convert unsignet to signet na flow battery control.
-  - Částečně přepracován flow Spot Excess Control. Část node předělána do function node: Logick write resister 2707
+  - Částečně přepracován flow Spot Excess Control. Část node předělána do function node: Logick write resister 2707.
  
     
 - Verze 14072024: 
