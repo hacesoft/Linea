@@ -3,26 +3,30 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 ![image](https://github.com/user-attachments/assets/807db702-0484-4eac-b5ba-3b941eb94950)
 
+- Verze 20072024:
+  - FIX CCS profil - Drobný detail, při zavírání karet se sloupce pohybovaly.
+  - FIX flow chlazení FVE - Přidán node delay 3s pro posun paketu.
+
 - Verze 19072024:
-  - FIX funkce CopyOnChane_2707 - Ted se zapisuji posílají do registru 2707 jen změny, nikoliv stejná hodnota.
-  - FIX function GLOBAl FUNCTION - funkce sExtractTime a mExtractTime mají stejný časový základ pomocí funkce fSetFixedDate a nemůže se stát že budou rozdílné hodnoty.
-  - Nejvíc je přepracován flow chlazení fve:
+ - FIX funkce CopyOnChane_2707 - Teď se do registru 2707 zapisují a posílají jen změny, nikoliv stejná hodnota.
+ - FIX function GLOBAL FUNCTION - Funkce sExtractTime a mExtractTime mají stejný časový základ pomocí funkce fSetFixedDate a nemůže se stát, že budou mít rozdílné hodnoty.
+ - Nejvíce je přepracován flow chlazení FVE:
 	- Kde jednak jsou indikátory, zda se ventilátory točí, je to odezva od PLUGINu SHELLY, která potvrdí přijetí příkazu. Není implementováno monitorování odběru ele.i.
-   	- Zapnutí ventilátoru je okamžitě, jak dosáhne hodnoty triggeru, ale vypnuji je až prijde 20x za sebou příkaz STOP. Tím se vyhneme nějakému mraku.
+	- Zapnutí ventilátoru je okamžité, jakmile dosáhne hodnoty triggeru, ale vypínám je až po přijetí 20x za sebou příkazu STOP. Tím se vyhneme nějakému mraku.
     		
 
 - Verze 15072024:
-  - FIX funkce convert signet to unsignet na flow battery control.
-  - FIX funkce convert unsignet to signet na flow battery control.
-  - Částečně přepracován flow Spot Excess Control. Část node předělána do function node: Logick write resister 2707.
+ - FIX funkce convert signet to unsigned na flow battery control.
+ - FIX funkce convert unsigned to signet na flow battery control.
+ - Částečně přepracován flow Spot Excess Control. Část node předělána do function node: Logical write register 2707.
  
     
 - Verze 14072024: 
-  - Přidán flow na přímé ovládání pomocí shelly pluginu ventilátoru. Pro vaše účely je třeba upravit a nebo úplně vymazat. Není to úplně dodělané, hlavně GUI je nedodělané a nešikovné. 
-  - Už funguje funkce prodej ranní špičky, zatím ranní špička je definována na údek 2 hodin. 
-  - Přidány testovací výpisy, stačí v patřičném node zapnout DEBUG na true a případně si upravit požadovaný výpis proměnné.
-  - Přidány globální funkce - takže se opakující funkce napíšou jen jednou a v dalších node function se jen načtou.
-  - Opraveno napříč flow práce s časem. Od této verze se zadá v globálních proměnných na flow GUI County_Code a TZidentifier. 
+ - Přidán flow pro přímé ovládání ventilátoru pomocí pluginu Shelly. Pro vaše účely je třeba upravit nebo úplně vymazat. Není to úplně dokončené, hlavně GUI je nedokončené a nepraktické.
+ - Už funguje funkce prodeje ranní špičky, zatím je ranní špička definována na úsek 2 hodin.
+ - Přidány testovací výpisy, stačí v příslušném node zapnout DEBUG na true a případně si upravit požadovaný výpis proměnné.
+ - Přidány globální funkce - takže se opakující funkce napíšou jen jednou a v dalších node function se jen načtou.
+ - Opravena práce s časem napříč flow. Od této verze se zadává v globálních proměnných na flow GUI County_Code a TZidentifier.
 
 ```javascript
 // Definice timezone and Country code
