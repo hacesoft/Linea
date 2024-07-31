@@ -2,12 +2,14 @@
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
-- INSTALACE: Klikněte kdekoliv na prázdné místo FLOW levým tlačítkem myši a vyberte: ![image](https://github.com/user-attachments/assets/644a08ea-4e1f-48ce-9c42-d9b74f0a1a06)
-- Na Import nodes vyberte kartu CLIPBOARD, klikněte na tlačítko select a file import, vyberte váš FLOW soubor a vše potvrďte.
 
-
-![image](https://github.com/user-attachments/assets/807db702-0484-4eac-b5ba-3b941eb94950)
-
+- Verze 31072024:
+  - Odstranění zavislosti na knihovně: node-red-contrib-config.
+  - Odstranění závislosti na knihovně: node-red-contrib-victron-modbus. Tuto knihovnu jsem nikdy nepoužil, a nakonec jsem ji úplně zavrhl.
+  - FIX: Některé ovládací prvky při nahrání konfigurace řádně nereagovaly na aktuální nastavení.
+  - Upozornění: Přepínač “Přetoky: Zap / Vyp” není a nebude ukládán do globální struktury, a tudíž nebude uložen s konfigurací, aby se zabránilo nechtěnému zapnutí přetoků. Toto je řízeno přepínačem automaticky spot a limitní cenou (trigger).
+ 
+    
 - Verze 29072024:
   - Přidána karta Config - z karty zatím funguje nastavení TCP, kde zadáte IP adresu vaší FVE, port a ID, které většinou nebudete měnit. Port je defaultně 502 a ID je defaultně 100. Potom dáte connect. Jelikož je v knihovně 	modbus chyba, nefunguje signalizace stavu připojení a pořád uvidíte CONNECTING…
   - Také je funkční nastavení FILE, kde když máte první instalaci, tak pokud neexistuje na disku (v ROOT adresáři node-red) konfigurační soubor, tak si ho vytvoří. Parametry nastavení si můžete upravit dle libosti a uložit 		tlačítkem SAVE CONFIG. Tlačítko DELETE CONFIG je dobré, když instalujete novou verzi FLOW, aby se načetly korektně defaultní hodnoty.
@@ -19,7 +21,8 @@ Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí im
 - Verze 20072024:
   - FIX CCS profil - Drobný detail, při zavírání karet se sloupce pohybovaly.
   - FIX flow chlazení FVE - Přidán node delay 3s pro posun paketu.
-
+ 
+    
 - Verze 19072024:
   - FIX funkce CopyOnChane_2707 - Teď se do registru 2707 zapisují a posílají jen změny, nikoliv stejná hodnota.
   - FIX function GLOBAL FUNCTION - Funkce sExtractTime a mExtractTime mají stejný časový základ pomocí funkce fSetFixedDate a nemůže se stát, že budou mít rozdílné hodnoty.
@@ -157,15 +160,18 @@ a takto vypadá původní nastavení:
        // border-bottom-right-radius: var(--radius-s);
     }
 ```
+- INSTALACE: Klikněte kdekoliv na prázdné místo FLOW levým tlačítkem myši a vyberte: ![image](https://github.com/user-attachments/assets/644a08ea-4e1f-48ce-9c42-d9b74f0a1a06)
+- Na Import nodes vyberte kartu CLIPBOARD, klikněte na tlačítko select a file import, vyberte váš FLOW soubor a vše potvrďte.
+
+
+![image](https://github.com/user-attachments/assets/807db702-0484-4eac-b5ba-3b941eb94950)
 
 
 Nainstalované NODE:
 
 - node-red - 4.0.2
-- node-red-contrib-config - 1.2.1
 - node-red-contrib-cron-plus - 2.1.0
 - node-red-contrib-modbus - 5.40.0
-- node-red-contrib-victron-modbus - 0.1.5
 - node-red-dashboard - 3.6.5
 - victron-vrm-api - 0.2.6
 
