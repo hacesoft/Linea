@@ -1,6 +1,9 @@
 # Linea
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
+![image](https://github.com/user-attachments/assets/56265cc9-3810-4bd6-b1c2-c63d0d5facbc)
+
+
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
 - Verze 31072024:
@@ -162,9 +165,6 @@ a takto vypadá původní nastavení:
 ```
 - INSTALACE: Klikněte kdekoliv na prázdné místo FLOW levým tlačítkem myši a vyberte: ![image](https://github.com/user-attachments/assets/644a08ea-4e1f-48ce-9c42-d9b74f0a1a06)
 - Na Import nodes vyberte kartu CLIPBOARD, klikněte na tlačítko select a file import, vyberte váš FLOW soubor a vše potvrďte.
-
-
-![image](https://github.com/user-attachments/assets/807db702-0484-4eac-b5ba-3b941eb94950)
 
 
 Nainstalované NODE:
