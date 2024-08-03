@@ -6,8 +6,8 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
--Verze 03082024:
-  - Opravena kritická chyba selhání SPOTU, po odstranění knihovny node-red-contrib-config, jsem kód nedostatečně upravil.
+- Verze 03082024:
+   - Opravena kritická chyba selhání SPOTU, po odstranění knihovny node-red-contrib-config, jsem kód nedostatečně upravil.
 
 - Verze 31072024:
   - Odstranění zavislosti na knihovně: node-red-contrib-config.
