@@ -1,7 +1,7 @@
 # Linea
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
-![image](https://github.com/user-attachments/assets/56265cc9-3810-4bd6-b1c2-c63d0d5facbc)
+![image](https://github.com/user-attachments/assets/684a98d1-4341-49f8-9ef8-a12f7ee135a3)
 
 
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
