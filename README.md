@@ -1,11 +1,18 @@
 # Linea
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
-![image](https://github.com/user-attachments/assets/684a98d1-4341-49f8-9ef8-a12f7ee135a3)
+![image](https://github.com/user-attachments/assets/10caabba-9c36-4a09-b9b1-bf2cce12ab75)
+
 
 
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
+- Verze 14082024:
+  - Opraveny drobné chyby v CSS profilu.
+  - Opraveny drobné chyby ve FLOW.
+  - Možnost konfigurovat konstantu: nBalancingReserve. Hodnota ve watech slouží k přičtení hodnoty po rozdílu mezi celkovou zátěží a aktuální výrobou z FV panelu. Rozdíl se pošle na GRID, aby se zamezilo kolísání nabíjení/vybíjení baterie. Tato konstanta má u mě hodnotu 230W. U jiného systému možná bude třeba upravit.
+  - Přidán k LABELu “Údaje o instalaci:” aktuální čas a datum.
+ 
 - Verze 13082024:
   - Konečně je dokončena funkce pro večerní prodej baterie.
   - Na kartě CONFIG je nyní možné nastavit i maximální vybíjecí proud ve W, pro ranní a večerní špičku dohromady.
