@@ -7,6 +7,12 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
+- Verze 25082024:
+ - Opraveny drobnosti v tooltipu.
+ - Zněna cesty ukládání konfiguračního souboru do root/mode_modules
+ - Token se ukládá do konfiguračního souboru. Když Node-Red běží v kontejneru tak se často restartuje, a pak se stratí připojení na VRM
+ - V Inmout boxu pro zadání Tokenu je primitivní test validace tokenu.
+   
 - Verze 14082024:
   - Opraveny drobné chyby v CSS profilu.
   - Opraveny drobné chyby ve FLOW.
