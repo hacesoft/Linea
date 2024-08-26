@@ -9,8 +9,8 @@ Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí im
 
 - Verze 25082024:
   - Opraveny drobnosti v tooltipu.
-  - Zněna cesty ukládání konfiguračního souboru do root/mode_modules
-  - Token se ukládá do konfiguračního souboru. Když Node-Red běží v kontejneru tak se často restartuje, a pak se stratí připojení na VRM
+  - Změna cesty ukládání konfiguračního souboru do root/mode_modules
+  - Token se ukládá do konfiguračního souboru. Když Node-Red běží v kontejneru tak se často restartuje, a pak se ztratí připojení na VRM
   - V Inmout boxu pro zadání Tokenu je primitivní test validace tokenu.
    
 - Verze 14082024:
