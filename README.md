@@ -1,12 +1,16 @@
 # Linea
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
-![image](https://github.com/user-attachments/assets/10caabba-9c36-4a09-b9b1-bf2cce12ab75)
-
+![image](https://github.com/user-attachments/assets/0028437e-37e0-4939-8d66-a8fb5432cde2)
 
 
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
+- Verze 15092024:
+  - Přidána funkce GRID CHARGING nabíjení baterie z GRIDu. Nabíjecí proud se nastavuje na kartě CONFIG, položka MAX GRID POINT, a je jedno, zda uvedené číslo je kladné nebo záporné. Patřičné funkce si to upraví dle svého požadavku. Nastavíte, do jakého SOC má nabíjet, a po dosažení se automaticky vypne a dál nepokračuje. Není to funkce na udržení baterie na daném SOC, ale je to spíše míněno pro nouzové nabití baterie pro očekávaný nadcházející výpadek elektřiny. Do konfigurace se ukládá jen nastavená hodnota SOC.
+  - Přidány diagnostické funkce ohledně vypadávání načítání dat z VRM. Možná bude hlásit chyby uložení souboru.
+  - Opravena chyba ztráty tokenu pro VRM. Oprava je provedena takto: V případě ztráty tokenu je načtena konfigurace a vezme se jen hodnota tokenu, zbytek nastavení je ignorován.
+        
 - Verze 25082024:
   - Opraveny drobnosti v tooltipu.
   - Změna cesty ukládání konfiguračního souboru do root/mode_modules
