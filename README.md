@@ -200,10 +200,8 @@ a takto vypadá původní nastavení:
 
 Nainstalované NODE:
 
-- node-red - 4.0.2
-- node-red-contrib-cron-plus - 2.1.0
-- node-red-contrib-modbus - 5.40.0
+- node-red - 4.0.3
+- node-red-contrib-modbus - 5.42.0
 - node-red-dashboard - 3.6.5
-- victron-vrm-api - 0.2.6
 
 
