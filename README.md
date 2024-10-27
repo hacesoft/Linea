@@ -6,6 +6,10 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
+- Verze 14102014:
+   - Upravena logika u funkcí prodej baterie v ranní i odpolední špičce.
+ 
+     
 - Verze 28082024:
   - Na kartě config tlačítko CONNECT je signalizováno indikátorem, zda je zařízení připojeno na danou IP adresu. Chyba v samotné knihovně node-red-contrib-modbus stále existuje. Celý fígl spočívá v tom, že flow se pokouší přečíst SN instalace. Pokud neuspěje nebo cca 4 sekundy nepřijde žádná informace o SN čísle, indikátor změní barvu na šedou. Po připojení indikátor změní barvu na zelenou. Komponenta node connection nevysílá žádné zprávy, tudíž jsem zavedl do flow časové razítko a pokud je platné, není dostupné zařízení na dané IP adrese.
   - Přidána defaultní konfigurace. Po spuštění flow na kartě config vidíte tlačítka DEFAULT LOAD a DEFAULT SAVE. Nastavte si vše, jak potřebujete, a proveďte uložení. Toto je základní nastavení, abyste nemuseli měnit nic v globální struktuře a při updatu na novou verzi opět vše měnit. Vše děláte jen v UI. Po tomto uložení tlačítka změní názvy na CONFIG LOAD a CONFIG SAVE, zde si nastavte, co potřebujete. Celý smysl toho je, že při restartu node-red se načte defaultní konfigurace. Takže tam doporučuji nastavit IP adresy a login k VRM, včetně základního nastavení přepínačů funkcí.
