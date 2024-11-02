@@ -6,6 +6,11 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
+- Verze 02112024:
+   - Byl přidán indikátor na kartě FVE::Real Data - doba provozu, který indikuje, jak dlouho dané FLOW běží. Při jakékoli změně se počitadlo nuluje.
+   - Flow umí vyhodnotit, kde je spuštěno, a podle toho samo nastaví cestu k úložišti.
+
+
 - Verze 14102014:
    - Upravena logika u funkcí prodej baterie v ranní i odpolední špičce.
  
