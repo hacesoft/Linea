@@ -3,9 +3,64 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 ![image](https://github.com/user-attachments/assets/21efd405-18f0-4cbd-80e1-cc43f975d301)
 
+<h4>Popis FLOW LINEA pro Node-RED</h4>
+
+> FLOW je rozšíření pro Node-RED, které poskytuje řadu funkcí pro řízení a monitorování fotovoltaických elektráren (FVE) a bateriových úložišť. Tento nástroj je neustále vyvíjen a aktualizován, aby zahrnoval nejnovější funkce a opravy chyb.
+
+<h4>Hlavní funkce FLOW:</h4>
+<h5>Instalace a závislosti:</h5>
+
+>> Doporučuje se instalovat nejnovější verzi FLOW.
+Instalace probíhá importem FLOW do Node-RED po nainstalování závislých knihoven.
+ 
+<h4>Verze a aktualizace:</h4>
+
+ - 07022025: Drobné úpravy kódu, přidány ikony a výpočty úložení elektrické energie do a z baterie.
+ - 02112024: Přidán indikátor doby provozu na kartě FVE::Real Data.
+ - 14102014: Upravena logika prodeje baterie v ranní a odpolední špičce.
+ - 28082024: Přidán indikátor připojení zařízení na kartě config.
+ - 15092024: Přidána funkce GRID CHARGING pro nabíjení baterie z GRIDu.
+ - 25082024: Opraveny drobnosti v tooltipu a změna cesty ukládání konfiguračního souboru.
+ - 14082024: Opraveny drobné chyby v CSS profilu a FLOW, možnost konfigurovat konstantu nBalancingReserve.
+ - 13082024: Dokončena funkce pro večerní prodej baterie a možnost nastavit maximální vybíjecí proud.
+ - 03082024: Opravena kritická chyba selhání SPOTU.
+ - 31072024: Odstranění závislosti na knihovnách node-red-contrib-config a node-red-contrib-victron-modbus.
+ - 29072024: Přidána karta Config pro nastavení TCP a FILE.
+ - 20072024: Opraveny drobné chyby v CSS profilu a flow chlazení FVE.
+ - 19072024: Opraveny funkce pro zápis změn do registru a synchronizace času.
+ - 15072024: Opraveny funkce pro konverzi signed/unsigned hodnot.
+ - 14072024: Přidán flow pro přímé ovládání ventilátoru pomocí pluginu Shelly a funkce prodeje ranní špičky.
+   
+<h4>Funkce a ovládací prvky:</h4>
+
+- Automatické řízení podle SPOTu: Sleduje aktuální cenu spotu a řídí přetoky.
+- Přetoky: Zapíná nebo vypíná přetoky.
+- Posunutí nabíjení baterie: Nastavuje časové období pro nabíjení baterie.
+- Prodej baterie: Funkce pro prodej baterie v ranní a večerní špičce (zatím neimplementováno).
+- Konfigurace a uživatelské rozhraní:
+
+- Možnost nastavit TCP a FILE konfiguraci.
+- Ukládání a načítání defaultní konfigurace.
+- Indikátory stavu připojení a chyb.
+
+  
+<h4>Diagnostika a opravy:</h4>
+
+- Diagnostické funkce pro monitorování chyb a ztrát tokenů.
+- Opravy chyb v logice a synchronizaci času.
+
+<h4>Instalace FLOW:</h4>
+
+- Nainstalujte potřebné knihovny: node-red, node-red-contrib-modbus, node-red-dashboard.
+- Importujte soubor ALL_flow_xxx.json do Node-RED (kde xxx nahrazuje poslední verzei.
+- Nastavte konfiguraci na kartě Config a spusťte FLOW.
+- FLOW je komplexní nástroj pro řízení a monitorování FVE a bateriových úložišť, který neustále přináší nové funkce a vylepšení. Pro další informace a aktualizace sledujte vývojové záznamy a dokumentaci.
 
 
-Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
+
+>> Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
+
+<h4>Popis jednotlivých verzí:</h4>
 
 - Verze 07022025:
    - Drobné úpravy kódu.
