@@ -5,13 +5,38 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 <h4>Popis FLOW LINEA pro Node-RED</h4>
 
-> FLOW je rozšíření pro Node-RED, které poskytuje řadu funkcí pro řízení a monitorování fotovoltaických elektráren (FVE) a bateriových úložišť. Tento nástroj je neustále vyvíjen a aktualizován, aby zahrnoval nejnovější funkce a opravy chyb.
+>FLOW je rozšíření pro Node-RED, které poskytuje komplexní sadu funkcí pro řízení a monitorování fotovoltaických elektráren (FVE VICTRON) a bateriových úložišť. 
+
+<h3>Klíčové detaily:</h3>
+
+ - Hostování a nastavení: FLOW běží v rámci Node-RED, který je nutné nainstalovat na hostujícím zařízení, jako je NAS, notebook nebo PC, které je trvale zapnuto.
+
+<h3>Předpoklady:</h3>
+
+ - Aktivace Node-RED: Ujistěte se, že je Node-RED aktivován buď v CERBO (řídící jednotka pro FVE Victron) nebo hostován na jiném zařízení.
+ - Přístup k FVE: Musíte mít přihlašovací údaje pro přístup k FVE.
+ - Konfigurace sítě: Node-RED by měl být ve stejné síti jako FVE. Pokud ne, je třeba nastavit příslušná pravidla na firewallu/routeru nebo vytvořit trvalý most (např. OpenVPN) pro jejich propojení.
+ -  Doporučuje se instalovat nejnovější verzi FLOW.
+   
+<h3>Funkčnost:</h3>
+
+ - Monitorování: Monitorování výroby energie, spotřeby a úrovně úložiště v reálném čase.
+ - Řízení: Vzdálené ovládání parametrů a nastavení systému.
+
+<h3>Instalace a konfigurace:</h3>
+
+ - Instalace Node-RED: Postupujte podle oficiálního průvodce instalací Node-RED pro váš konkrétní operační systém.
+ - Nainstalujde závislé knihovny pro běh FLOW (seznam je na konci této stránky). Může se stát, že bude třeba restartovat Node-Red, postupujde podle pokynu na obrazovce. Zde je návod jak postupovat: https://nodered.org/docs/user-guide/editor/palette/manager
+ - Nastavení rozšíření FLOW: Nainstalujte rozšíření FLOW prostřednictvím importu. Zde je návod jak postupovat: https://nodered.org/docs/user-guide/editor/workspace/import-export
+ - Konfigurace FLOW: Konfigurace se provádí z UI FLOW, to znamená: http://IP:PORT/ui/  příklad: http:192.168.8.10/1881/ui/
+	- IP je adresa vaší instalace Node-Red
+   	- PORT je hodnota kterou jste zadali pri instalaci Node-Redu
+- Přejdete na karu CONFIG. Tam zadejte IP adresu (bez http) vaší FVE a klikněte na tlačítko CONNECT, v nastaveni VRM propojíte FLOW s VRM. Pokud toto neprovedete, FLOW funguje nadále, jen nejsou zobrazovány tyto udáje: ![image](https://github.com/user-attachments/assets/0ab15b2c-12f5-42dc-b8d7-0cd2e5f728cd)
+- Po nastavení provedtě uloženi konfigurce. Vše je poprano níže v tomto textu.
+
 
 <h4>Hlavní funkce FLOW:</h4>
 <h5>Instalace a závislosti:</h5>
-
->> Doporučuje se instalovat nejnovější verzi FLOW.
-Instalace probíhá importem FLOW do Node-RED po nainstalování závislých knihoven.
  
 <h4>Verze a aktualizace:</h4>
 
