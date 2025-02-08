@@ -1,6 +1,8 @@
 # Linea
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
+>> Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
+
 ![image](https://github.com/user-attachments/assets/21efd405-18f0-4cbd-80e1-cc43f975d301)
 
 <h4>Popis FLOW LINEA pro Node-RED</h4>
@@ -27,60 +29,27 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
  - Instalace Node-RED: Postupujte podle oficiálního průvodce instalací Node-RED pro váš konkrétní operační systém.
  - Nainstalujde závislé knihovny pro běh FLOW (seznam je na konci této stránky). Může se stát, že bude třeba restartovat Node-Red, postupujde podle pokynu na obrazovce. Zde je návod jak postupovat: https://nodered.org/docs/user-guide/editor/palette/manager
- - Nastavení rozšíření FLOW: Nainstalujte rozšíření FLOW prostřednictvím importu. Zde je návod jak postupovat: https://nodered.org/docs/user-guide/editor/workspace/import-export
+ - Nainstalujte FLOW prostřednictvím importu:
+	- Importujte soubor ALL_flow_xxx.json do Node-RED (kde xxx nahrazuje číslo verze). Zde je návod jak postupovat: https://nodered.org/docs/user-guide/editor/workspace/import-export
+	- Nebo:  Klikněte kdekoliv na prázdné místo FLOW levým tlačítkem myši a vyberte: ![image](https://github.com/user-attachments/assets/644a08ea-4e1f-48ce-9c42-d9b74f0a1a06)
+	- Na Import nodes vyberte kartu CLIPBOARD, klikněte na tlačítko select a file import, vyberte váš FLOW soubor a vše potvrďte.
  - Konfigurace FLOW: Konfigurace se provádí z UI FLOW, to znamená: http://IP:PORT/ui/  příklad: http:192.168.8.10/1881/ui/
 	- IP je adresa vaší instalace Node-Red
    	- PORT je hodnota kterou jste zadali pri instalaci Node-Redu
-- Přejdete na karu CONFIG. Tam zadejte IP adresu (bez http) vaší FVE a klikněte na tlačítko CONNECT, v nastaveni VRM propojíte FLOW s VRM. Pokud toto neprovedete, FLOW funguje nadále, jen nejsou zobrazovány tyto udáje: ![image](https://github.com/user-attachments/assets/0ab15b2c-12f5-42dc-b8d7-0cd2e5f728cd)
-- Po nastavení provedtě uloženi konfigurce. Vše je poprano níže v tomto textu.
+ - Přejdete na karu CONFIG. Tam zadejte IP adresu (bez http) vaší FVE a klikněte na tlačítko CONNECT, v nastaveni VRM propojíte FLOW s VRM. Pokud toto neprovedete, FLOW funguje nadále, jen nejsou zobrazovány tyto udáje: ![image](https://github.com/user-attachments/assets/0ab15b2c-12f5-42dc-b8d7-0cd2e5f728cd)
+ - Po nastavení provedtě uloženi konfigurce. Vše je poprano níže v tomto textu.
+ - FLOW je komplexní nástroj pro řízení a monitorování FVE a bateriových úložišť, který neustále přináší nové funkce a vylepšení. Pro další informace a aktualizace sledujte vývojové záznamy a dokumentaci.
 
 
-<h4>Hlavní funkce FLOW:</h4>
-<h5>Instalace a závislosti:</h5>
- 
-<h4>Verze a aktualizace:</h4>
+<h3>Funkce a ovládací prvky:</h3>
 
- - 07022025: Drobné úpravy kódu, přidány ikony a výpočty úložení elektrické energie do a z baterie.
- - 02112024: Přidán indikátor doby provozu na kartě FVE::Real Data.
- - 14102014: Upravena logika prodeje baterie v ranní a odpolední špičce.
- - 28082024: Přidán indikátor připojení zařízení na kartě config.
- - 15092024: Přidána funkce GRID CHARGING pro nabíjení baterie z GRIDu.
- - 25082024: Opraveny drobnosti v tooltipu a změna cesty ukládání konfiguračního souboru.
- - 14082024: Opraveny drobné chyby v CSS profilu a FLOW, možnost konfigurovat konstantu nBalancingReserve.
- - 13082024: Dokončena funkce pro večerní prodej baterie a možnost nastavit maximální vybíjecí proud.
- - 03082024: Opravena kritická chyba selhání SPOTU.
- - 31072024: Odstranění závislosti na knihovnách node-red-contrib-config a node-red-contrib-victron-modbus.
- - 29072024: Přidána karta Config pro nastavení TCP a FILE.
- - 20072024: Opraveny drobné chyby v CSS profilu a flow chlazení FVE.
- - 19072024: Opraveny funkce pro zápis změn do registru a synchronizace času.
- - 15072024: Opraveny funkce pro konverzi signed/unsigned hodnot.
- - 14072024: Přidán flow pro přímé ovládání ventilátoru pomocí pluginu Shelly a funkce prodeje ranní špičky.
-   
-<h4>Funkce a ovládací prvky:</h4>
-
-- Automatické řízení podle SPOTu: Sleduje aktuální cenu spotu a řídí přetoky.
-- Přetoky: Zapíná nebo vypíná přetoky.
-- Posunutí nabíjení baterie: Nastavuje časové období pro nabíjení baterie.
-- Prodej baterie: Funkce pro prodej baterie v ranní a večerní špičce (zatím neimplementováno).
-- Konfigurace a uživatelské rozhraní:
-
-- Možnost nastavit TCP a FILE konfiguraci.
-- Ukládání a načítání defaultní konfigurace.
-- Indikátory stavu připojení a chyb.
-
-  
-<h4>Diagnostika a opravy:</h4>
-
-- Diagnostické funkce pro monitorování chyb a ztrát tokenů.
-- Opravy chyb v logice a synchronizaci času.
-
-<h4>Instalace FLOW:</h4>
-
-- Nainstalujte potřebné knihovny: node-red, node-red-contrib-modbus, node-red-dashboard.
-- Importujte soubor ALL_flow_xxx.json do Node-RED (kde xxx nahrazuje poslední verzei.
-- Nastavte konfiguraci na kartě Config a spusťte FLOW.
-- FLOW je komplexní nástroj pro řízení a monitorování FVE a bateriových úložišť, který neustále přináší nové funkce a vylepšení. Pro další informace a aktualizace sledujte vývojové záznamy a dokumentaci.
-
+ - Automatické řízení podle SPOTu: Sleduje aktuální cenu spotu a řídí přetoky.
+ - Přetoky: Zapíná nebo vypíná přetoky.
+ - Posunutí nabíjení baterie: Nastavuje časové období pro nabíjení baterie.
+ - Prodej baterie: Funkce pro prodej baterie v ranní a večerní špičce.
+ - Možnost konfigurace přímo z UI, bez zasahu do samotného FLOW.
+ - Ukládání a načítání defaultní konfigurace.
+ - Indikátory stavu připojení a chyb.
 
 
 >> Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do node-red, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
@@ -182,122 +151,8 @@ const sTZidentifier = "Europe/Prague";
 ```
 
 
-Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
+<h4>Nainstalované NODE:</h4>
 
-Své flow provozuji na NASu, proto používám node-red-contrib-modbus. Sice to lze používat i na Cerbu, ale tím je jednak zpomalováno a zadruhé, 
-flow vidí kdokoliv, kdo je admin FVE, a to se mi nelíbí, aby tam nahlížela instalační firma nebo někdo z www.deltagreen.cz. Node victron-vrm-api 
-zatím není třeba instalovat, ještě ho nepoužívám. To platí i pro nadstavbu: node-red-contrib-victron-modbus a její příslušný attributes.csv soubor, 
-který se musí nainstalovat dle pokynů. Soubor CCGX-Modbus-TCP-register-list-2.90.xlsx je seznam registrů a jejich funkcí. 
-
-Do flow se naimportuje, po nainstalování potřebných node knihoven soubor: battery control.json, ten je převážně zodpovědný za manipulaci s registrem GRID POINT, 
-tak i Spot excess.json, ten je zodpovědný za řízení SPOTu. Nově vzniklé flow GUI.json obsahuje záležitosti grafického zobrazení, 
-zatím je to hybrid, postupně bude předěláváno. Zatím je vše tak nějak ve vývoji, něco už tam funguje, ale je to třeba dořešit. 
-Potom je třeba předělat UI, zatím je to poházené… 
-
-Funkce: Prodej baterii - ranní špička a Prodej baterii - večerní špička jsou v GUI připravené a také nalezení těchto úseků, mají je na starosti funkce:
-
-```
-  // Hleda ranni a odpoleni peaky
-  // prvni promenna je pole aktualniho spot a druha promenna rika jak dlouhy peak muse bejt
-  const morningPeak1 = findMorningPeakHours(todayHourlyPrices, 2);
-  const afternoonPeak1 = findAfternoonPeakHours(todayHourlyPrices, 2);
-```
-Ale zatím nejsou zapracované do celkové logiky která je:
-
-```
-nSet_Grid_Point = fSet_Grid(nGridConsumptionEnable, nSetGridValue, isSpotAutoCtrlEnabled, spotTresholdPrice, currentPrice, nPretoky);    
-    let nZbytekFV = pvPower - (totalACLoad + nRezerva);
-    // funkce na posun nabijeni baterii
-    if (tStartBatteryTime && tStopBatteryTime) {
-        if (debug) {
-            node.warn("tStartBattery: " + tStartBatteryTime);
-            node.warn("tStopBattery: " + tStopBatteryTime);
-            node.warn("oDate_CZ: " + oDate_CZ);
-        }
-        if (switchDelayCharging == true) { // true znamena ze je aktivovana funkce posunuti nabijeni baterie
-            if (nPretoky == true) { // povolene pretoky
-                if (oDate_CZ >= tStartBatteryTime && oDate_CZ <= tStopBatteryTime) { // Aktuální čas je v rozsahu
-                    if (nZbytekFV > 0) { // Prebytek FV je kladna hodnota
-                        nSet_Grid_Point = - nZbytekFV; // prevest na zapornou hodnotu
-                    } else { // mala vyroba z FV panelu
-                        nSet_Grid_Point = 0;
-                    }
-                } else { // Aktuální čas je mimo rozsah
-                    // nSet_Grid_Point = fSet_Grid (nGridConsumptionEnable, nSetGridValue, isSpotAutoCtrlEnabled, spotTresholdPrice, currentPrice, nPretoky);    
-                }
-            } else { // Čas začátku nebo konce není nastaven
-                nSet_Grid_Point = 0;
-            }
-        }
-    }
-```
-
-Zde potom zapracuji… Časem
-
-Vysvětlení významu přepínačů:
-
-- Automaticky podle SPOTu: Tlačítko po aktivaci sleduje aktuální cenu spotu a v kolonce Limitní cena je trigger, dokud se mají posílat přetoky.
-- Přetoky: Zap / Vyp: Tlačítko zapne nebo vypne přetoky, není nikterak blokováno žádnou logikou, taková pojistka.
-			Zap/Vyp AcPowerSetPoint: Zapne tuto funkci. Pak následujícím ovladačem nastavujete požadovaný odběr. Já mám -100W, 
-			díky tomuto nastavení mám cca celkový odběr do z GRIDu do 1kW za den. Když nastavím 0, tak to dělá daleko více. 
-			Tato funkce se automaticky vypne, když je spot zakázán… Časem předělám tak, aby fungovalo toto nastavení i do zakázaného spotu, ale do doby, než bude spot záporný.
-- Posunutí nabíjení Baterie: Nastavíte od - do má tato funkce pracovat. Nastavuji od rána a do sepnutí bojleru, to je 11 hodin. 
-			Tato funkce pracuje tak, že si zjistí aktuální dodávku z panelů, a aktuální odběr a připočítá k tomu nějakou rezervu, 
-			kladný rozdíl nastaví do stejného registru jako funkce Zap/Vyp AcPowerSetPoint.
-- Prodej baterii - ranní špička - momentálně neimplementováno, viz předchozí text.
- -Prodej baterii - večerní špička - momentálně neimplementováno, viz předchozí text.
-
-
-Pokud má někro rád kulaté dlaždice a chce toto: ![image](https://github.com/hacesoft/Linea/assets/53556265/a39f2a8a-10ad-4e8f-b15c-bd0ed1efdb8b)
-Tak ve flow GUI je template: ![image](https://github.com/hacesoft/Linea/assets/53556265/e2cf93ab-71df-44d3-ac8a-e895fdfe1815)
-
-a je třeba v CCS profilu vypnout okraje a zapnout zakulacení rohů:).
-
-```
-    .nr-dashboard-theme ui-card-panel {
-        background-color: var(--background);
-        border: 0px solid var(--okraj-karty);      //nastaveni okraje karet
-    }
-
-    /* Kulatění rohů */
-    .Kulati_Nahore {
-        border-top-left-radius: var(--radius-s);
-        border-top-right-radius: var(--radius-s);
-    }
-
-    .Kulati_Dole {
-        border-bottom-left-radius: var(--radius-s);
-        border-bottom-right-radius: var(--radius-s);
-    }
-```
-
-a takto vypadá původní nastavení:
-
-```
-    .nr-dashboard-theme ui-card-panel {
-        background-color: var(--background);
-        border: 2px solid var(--okraj-karty);      //nastaveni okraje karet
-    }
-
-    /* Kulatění rohů */
-    .Kulati_Nahore {
-       // border-top-left-radius: var(--radius-s);
-       // border-top-right-radius: var(--radius-s);
-    }
-
-    .Kulati_Dole {
-       // border-bottom-left-radius: var(--radius-s);
-       // border-bottom-right-radius: var(--radius-s);
-    }
-```
-- INSTALACE: Klikněte kdekoliv na prázdné místo FLOW levým tlačítkem myši a vyberte: ![image](https://github.com/user-attachments/assets/644a08ea-4e1f-48ce-9c42-d9b74f0a1a06)
-- Na Import nodes vyberte kartu CLIPBOARD, klikněte na tlačítko select a file import, vyberte váš FLOW soubor a vše potvrďte.
-
-
-Nainstalované NODE:
-
-- node-red - 4.0.3
-- node-red-contrib-modbus - 5.42.0
-- node-red-dashboard - 3.6.5
-
-
+ - node-red - 4.0.3
+ - node-red-contrib-modbus - 5.42.0
+ - node-red-dashboard - 3.6.5
