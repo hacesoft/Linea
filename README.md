@@ -94,8 +94,10 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 ### Popis jednotlivých verzí:
 
-- **Verze: K_ALL_flows_09022025.json:**
+- **Verze: SELECTION_flows_20022025.json**
+    - Opraveny drobné překlepy. Odstraněny grafy, které nikdy správně nefungovaly. Kód pro grafy je součástí FLOW, ale je pouze zakomentován. Odstraněn FLOW pro řízení chlazení měničů a FW regulátorů, které jsou ovládány přes Shelly plugin. Od této chvíle budou exportovány pouze relevantní karty, a to s pomocí doplňku: node-red-contrib-flow-manager.
 
+- **Verze: K_ALL_flows_09022025.json:**
    - Upravená verze práce s tokenem. Token lze vygenerovat přímo ve VRM a manuálně vložit do souboru, nebo nechat vygenerovat pomocí FLOW. Toto je možnost, pokud z nějakého důvodu nemáte možnost generovat token. To může nastat, pokud nemáte dostatečná práva ve VRM pro integraci tohoto FLOW. Doporučujeme mít práva ADMIN, protože práva jako Technician nebo User nemusí být dostatečná. Ve všech ostatních verzích FLOW se používá bezpečnější BearerToken. Tato verze  (K_ALL_flows_09022025) pravděpodobně nebude dále rozvíjena.
 
 - **Verze 07022025:**
