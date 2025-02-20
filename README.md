@@ -94,6 +94,10 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 ### Popis jednotlivých verzí:
 
+- **Verze: K_ALL_flows_09022025.json:**
+
+   - Upravená verze práce s tokenem. Token lze vygenerovat přímo ve VRM a manuálně vložit do souboru, nebo nechat vygenerovat pomocí FLOW. Toto je možnost, pokud z nějakého důvodu nemáte možnost generovat token. To může nastat, pokud nemáte dostatečná práva ve VRM pro integraci tohoto FLOW. Doporučujeme mít práva ADMIN, protože práva jako Technician nebo User nemusí být dostatečná. Ve všech ostatních verzích FLOW se používá bezpečnější BearerToken. Tato verze  (K_ALL_flows_09022025) pravděpodobně nebude dále rozvíjena.
+
 - **Verze 07022025:**
   - Drobné úpravy kódu.
   - Přidány ikony.
