@@ -75,6 +75,7 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 ### Pluginy:
 - Chlazení měniču a MPTT trackerů: https://github.com/hacesoft/Cooling_Trackers_Rack
 - HW Plugin - teploměry pro Cerbo: Pluginy: https://github.com/hacesoft/LM335
+- Návod na obládání bojleru pomocí třeba NODE-RED: https://github.com/hacesoft/Clever_boiler
 
 ### Instalace a konfigurace:
 
