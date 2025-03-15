@@ -100,7 +100,20 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 >> Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do Node-RED, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
 ### Popis jednotlivých verzí:
+ 
+- **Verze: Linea_flows_15032025.json**
+  - Optimalizace FLOW
+  - Přidání čítačů pro jednotlivé fáze. Pro GRID je rozlišeno na odběr (první parametr) a přetoky (označeno jako **O (OUTPUT)**).
+    - Výpočet je prováděn následovně: aktuální vzorek (hodnota) je dělen 3600 a přičten k celkové hodnotě. Čítače se nulují o půlnoci.  
+    - Časem budou tyto hodnoty logovány do databáze pomocí vhodného **PLUGINu**.
+  - Přidány čítače energie pro baterii, zvlášť pro nabíjení a vybíjení. Tyto čítače se nenulují, vynulují se až při restartu **Node-RED**.  
+    - Časem budou logovány do databáze.
+  - Přidány teploty měničů – nutnost instalace teploměrů dle návodu: [hacesoft/LM335](https://github.com/hacesoft/LM335).
+    - Aby to fungovalo, je třeba dodržet názvy teploměrů (**name L1** – jakékoliv vaše označení, mezera a velké písmeno **L**, následované číslem fáze).  
+    - Další podmínkou je, že **FLOW** musí být propojeno s **VRM** účtem.  
+    - ID teploměru se načítá z **VRM**, a podle tohoto ID se čtou hodnoty z **Modbusu**.
 
+  
 - **Verze: SELECTION_flows_20022025.json**
     - Opraveny drobné překlepy. Odstraněny grafy, které nikdy správně nefungovaly. Kód pro grafy je součástí FLOW, ale je pouze zakomentován. Odstraněn FLOW pro řízení chlazení měničů a FW regulátorů, které jsou ovládány přes Shelly plugin. Od této chvíle budou exportovány pouze relevantní karty, a to s pomocí doplňku: node-red-contrib-flow-manager.
 
