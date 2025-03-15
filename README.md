@@ -1,7 +1,11 @@
 # Linea
 Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
->> Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
+
+## 🔗 [Nejnovější verze FLOW](#nejnovejsi-flow)  <- Zkratka na nejnovější verzi FLOW.
+
+
+Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 
 ![image](https://github.com/user-attachments/assets/429b1479-c846-463c-9bec-24ca7c06de2f)
 
@@ -9,7 +13,7 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 ### Popis FLOW LINEA pro Node-RED
 
-> FLOW je rozšíření pro Node-RED, které poskytuje komplexní sadu funkcí pro řízení a monitorování fotovoltaických elektráren (FVE VICTRON) a bateriových úložišť.
+- FLOW je rozšíření pro Node-RED, které poskytuje komplexní sadu funkcí pro řízení a monitorování fotovoltaických elektráren (FVE VICTRON) a bateriových úložišť.
 
 ### Klíčové detaily:
 
@@ -100,8 +104,9 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 >> Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do Node-RED, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
 ### Popis jednotlivých verzí:
+<a name="nejnovejsi-flow"></a>
  
-- **Verze: Linea_flows_15032025.json**
+- **Verze: 📌 Linea_flows_15032025.json**
   - Optimalizace FLOW
   - Přidání čítačů pro jednotlivé fáze. Pro GRID je rozlišeno na odběr (první parametr) a přetoky (označeno jako **O (OUTPUT)**).
     - Výpočet je prováděn následovně: aktuální vzorek (hodnota) je dělen 3600 a přičten k celkové hodnotě. Čítače se nulují o půlnoci.  
@@ -114,85 +119,85 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
     - ID teploměru se načítá z **VRM**, a podle tohoto ID se čtou hodnoty z **Modbusu**.
 
   
-- **Verze: SELECTION_flows_20022025.json**
+- **Verze: 📌 SELECTION_flows_20022025.json**
     - Opraveny drobné překlepy. Odstraněny grafy, které nikdy správně nefungovaly. Kód pro grafy je součástí FLOW, ale je pouze zakomentován. Odstraněn FLOW pro řízení chlazení měničů a FW regulátorů, které jsou ovládány přes Shelly plugin. Od této chvíle budou exportovány pouze relevantní karty, a to s pomocí doplňku: node-red-contrib-flow-manager.
 
-- **Verze: K_ALL_flows_09022025.json:**
+- **Verze: 📌 K_ALL_flows_09022025.json:**
    - Upravená verze práce s tokenem. Token lze vygenerovat přímo ve VRM a manuálně vložit do souboru, nebo nechat vygenerovat pomocí FLOW. Toto je možnost, pokud z nějakého důvodu nemáte možnost generovat token. To může nastat, pokud nemáte dostatečná práva ve VRM pro integraci tohoto FLOW. Doporučujeme mít práva ADMIN, protože práva jako Technician nebo User nemusí být dostatečná. Ve všech ostatních verzích FLOW se používá bezpečnější BearerToken. Tato verze  (K_ALL_flows_09022025) pravděpodobně nebude dále rozvíjena.
 
-- **Verze 07022025:**
+- **Verze 📌 07022025:**
   - Drobné úpravy kódu.
   - Přidány ikony.
   - Přidány výpočty úložení elektrické energie do a z baterie.
 
-- **Verze 02112024:**
+- **Verze 📌 02112024:**
   - Byl přidán indikátor na kartě FVE::Real Data - doba provozu, který indikuje, jak dlouho dané FLOW běží. Při jakékoli změně se počitadlo nuluje.
   - Flow umí vyhodnotit, kde je spuštěno, a podle toho samo nastaví cestu k úložišti.
 
-- **Verze 14102014:**
+- **Verze 📌 14102014:**
   - Upravena logika u funkcí prodej baterie v ranní i odpolední špičce.
 
-- **Verze 28082024:**
+- **Verze 📌 28082024:**
   - Na kartě config tlačítko CONNECT je signalizováno indikátorem, zda je zařízení připojeno na danou IP adresu. Chyba v samotné knihovně node-red-contrib-modbus stále existuje. Celý fígl spočívá v tom, že flow se pokouší přečíst SN instalace. Pokud neuspěje nebo cca 4 sekundy nepřijde žádná informace o SN čísle, indikátor změní barvu na šedou. Po připojení indikátor změní barvu na zelenou. Komponenta node connection nevysílá žádné zprávy, tudíž jsem zavedl do flow časové razítko a pokud je platné, není dostupné zařízení na dané IP adrese.
   - Přidána defaultní konfigurace. Po spuštění flow na kartě config vidíte tlačítka DEFAULT LOAD a DEFAULT SAVE. Nastavte si vše, jak potřebujete, a proveďte uložení. Toto je základní nastavení, abyste nemuseli měnit nic v globální struktuře a při updatu na novou verzi opět vše měnit. Vše děláte jen v UI. Po tomto uložení tlačítka změní názvy na CONFIG LOAD a CONFIG SAVE, zde si nastavte, co potřebujete. Celý smysl toho je, že při restartu node-red se načte defaultní konfigurace. Takže tam doporučuji nastavit IP adresy a login k VRM, včetně základního nastavení přepínačů funkcí.
 
-- **Verze 15092024:**
+- **Verze 📌 15092024:**
   - Přidána funkce GRID CHARGING nabíjení baterie z GRIDu. Nabíjecí proud se nastavuje na kartě CONFIG, položka MAX GRID POINT, a je jedno, zda uvedené číslo je kladné nebo záporné. Patřičné funkce si to upraví dle svého požadavku. Nastavíte, do jakého SOC má nabíjet, a po dosažení se automaticky vypne a dál nepokračuje. Není to funkce na udržení baterie na daném SOC, ale je to spíše míněno pro nouzové nabití baterie pro očekávaný nadcházející výpadek elektřiny. Do konfigurace se ukládá jen nastavená hodnota SOC.
   - Přidány diagnostické funkce ohledně vypadávání načítání dat z VRM. Možná bude hlásit chyby uložení souboru.
   - Opravena chyba ztráty tokenu pro VRM. Oprava je provedena takto: V případě ztráty tokenu je načtena konfigurace a vezme se jen hodnota tokenu, zbytek nastavení je ignorován.
 
-- **Verze 25082024:**
+- **Verze 📌 25082024:**
   - Opraveny drobnosti v tooltipu.
   - Změna cesty ukládání konfiguračního souboru do root/mode_modules.
   - Token se ukládá do konfiguračního souboru. Když Node-Red běží v kontejneru, tak se často restartuje, a pak se ztratí připojení na VRM.
   - V Inmout boxu pro zadání Tokenu je primitivní test validace tokenu.
 
-- **Verze 14082024:**
+- **Verze 📌 14082024:**
   - Opraveny drobné chyby v CSS profilu.
   - Opraveny drobné chyby ve FLOW.
   - Možnost konfigurovat konstantu: nBalancingReserve. Hodnota ve watech slouží k přičtení hodnoty po rozdílu mezi celkovou zátěží a aktuální výrobou z FV panelu. Rozdíl se pošle na GRID, aby se zamezilo kolísání nabíjení/vybíjení baterie. Tato konstanta má u mě hodnotu 230W. U jiného systému možná bude třeba upravit.
   - Přidán k LABELu “Údaje o instalaci:” aktuální čas a datum.
 
-- **Verze 13082024:**
+- **Verze 📌 13082024:**
   - Konečně je dokončena funkce pro večerní prodej baterie.
   - Na kartě CONFIG je nyní možné nastavit i maximální vybíjecí proud ve W, pro ranní a večerní špičku dohromady.
   - Drobné opravy, hlavně interpretace hodnot FALSE a TRUE, pomocí dvou negací za sebou (příklad: !!fGetConfigProperty()).
   - Na kartě config nastavíte přístup k VRM. Zde zadáte své přihlašovací údaje (ukládá se pouze email, heslo nikoli). Také zadáte název vaší instalace, ke kterému se přidá nějaký náhodný řetězec. Dále je vyžadováno číslo vaší instalace, které najdete v URL vaší VRM instalace. Po připojení se vygeneruje token, který se nikam neukládá, ale existuje v globální proměnné tak dlouho, dokud nezrestartujete Cergo nebo kontejner, kde běží Node-RED. Pak je třeba provést novou žádost o token. Vygenerovaný token pak uvidíte ve vaší instalaci ve VRM v nastavení: “Předvolby/Integrace/Přístupové Tokeny”. Na kartě FVE v sloupci Real Data máte informace o vaší instalaci.
   - Karta RealTime Power je neustále ve vývoji, sice něco ukazuje, ale zatím se na to nedá spolehnout.
 
-- **Verze 03082024:**
+- **Verze 📌 03082024:**
   - Opravena kritická chyba selhání SPOTU, po odstranění knihovny node-red-contrib-config, flow vyžadovalo větší upravu.
 
-- **Verze 31072024:**
+- **Verze 📌 31072024:**
   - Odstranění zavislosti na knihovně: node-red-contrib-config.
   - Odstranění závislosti na knihovně: node-red-contrib-victron-modbus. Tuto knihovnu jsem nikdy nepoužil, a nakonec jsem ji úplně zavrhl.
   - FIX: Některé ovládací prvky při nahrání konfigurace řádně nereagovaly na aktuální nastavení.
   - Upozornění: Přepínač “Přetoky: Zap / Vyp” není a nebude ukládán do globální struktury, a tudíž nebude uložen s konfigurací, aby se zabránilo nechtěnému zapnutí přetoků. Toto je řízeno přepínačem automaticky spot a limitní cenou (trigger).
 
-- **Verze 29072024:**
+- **Verze 📌 29072024:**
   - Přidána karta Config - z karty zatím funguje nastavení TCP, kde zadáte IP adresu vaší FVE, port a ID, které většinou nebudete měnit. Port je defaultně 502 a ID je defaultně 100. Potom dáte connect. Jelikož je v knihovně modbus chyba, nefunguje signalizace stavu připojení a pořád uvidíte CONNECTING…
   - Také je funkční nastavení FILE, kde když máte první instalaci, tak pokud neexistuje na disku (v ROOT adresáři node-red) konfigurační soubor, tak si ho vytvoří. Parametry nastavení si můžete upravit dle libosti a uložit tlačítkem SAVE CONFIG. Tlačítko DELETE CONFIG je dobré, když instalujete novou verzi FLOW, aby se načetly korektně defaultní hodnoty.
   - Napříč FLOW byly změněny proměnné ze samostatných definic na globální strukturu, která pak jde uložit na disk.
 
 ![image](https://github.com/user-attachments/assets/ef521fc2-1faa-478d-a702-8a99e7f5978a)
 
-- **Verze 20072024:**
+- **Verze 📌 20072024:**
   - FIX CCS profil - Drobný detail, při zavírání karet se sloupce pohybovaly.
   - FIX flow chlazení FVE - Přidán node delay 3s pro posun paketu.
 
-- **Verze 19072024:**
+- **Verze 📌 19072024:**
   - FIX funkce CopyOnChange_2707 - Teď se do registru 2707 zapisují a posílají jen změny, nikoliv stejná hodnota.
   - FIX function GLOBAL FUNCTION - Funkce sExtractTime a mExtractTime mají stejný časový základ pomocí funkce fSetFixedDate a nemůže se stát, že budou mít rozdílné hodnoty.
   - Nejvíce je přepracován flow chlazení FVE:
     - Kde jednak jsou indikátory, zda se ventilátory točí, je to odezva od PLUGINu SHELLY, která potvrdí přijetí příkazu. Není implementováno monitorování odběru ele.i.
     - Zapnutí ventilátoru je okamžité, jakmile dosáhne hodnoty triggeru, ale vypínám je až po přijetí 20x za sebou příkazu STOP. Tím se vyhneme nějakému mraku.
 
-- **Verze 15072024:**
+- **Verze 📌 15072024:**
   - FIX funkce convert signet to unsigned na flow battery control.
   - FIX funkce convert unsigned to signet na flow battery control.
   - Částečně přepracován flow Spot Excess Control. Část node předělána do function node: Logical write register 2707.
 
-- **Verze 14072024:**
+- **Verze 📌 14072024:**
   - Přidán flow pro přímé ovládání ventilátoru pomocí pluginu Shelly. Pro vaše účely je třeba upravit nebo úplně vymazat. Není to úplně dokončené, hlavně GUI je nedokončené a nepraktické.
   - Už funguje funkce prodeje ranní špičky, zatím je ranní špička definována na úsek 2 hodin.
   - Přidány testovací výpisy, stačí v příslušném node zapnout DEBUG na true a případně si upravit požadovaný výpis proměnné.
