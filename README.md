@@ -66,10 +66,11 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 - **Monitorování:** Monitorování výroby energie, spotřeby a úrovně úložiště v reálném čase.
 - **Řízení:** Vzdálené ovládání parametrů a nastavení systému.
-- **Plugginy**
+- **Pluginy**
 
-### Plugginy:
+### Pluginy:
 - Chlazení měniču a MPTT trackerů: https://github.com/hacesoft/Cooling_Trackers_Rack
+- HW Plugin - teploměry pro Cerbo: Pluginy: https://github.com/hacesoft/LM335
 
 ### Instalace a konfigurace:
 
