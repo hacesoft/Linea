@@ -108,7 +108,7 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 ### Popis jednotlivých verzí:
 <a name="nejnovejsi-flow"></a>
 
-- **Verze: 📌 Linea_flows_xxxx2025.json**
+- **Verze: 📌 Selection_flows_28032025.json**
 
 ### 📌 Vysvětlení funkce registrů  
 
