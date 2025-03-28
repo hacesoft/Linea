@@ -107,7 +107,62 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 
 ### Popis jednotlivých verzí:
 <a name="nejnovejsi-flow"></a>
- 
+
+- **Verze: 📌 Linea_flows_xxxx2025.json**
+
+### 📌 Vysvětlení funkce registrů  
+
+- 🛠 **Registr 2700 – ESS Control Loop Setpoint**  
+
+  Tento registr slouží k nastavení cílového výkonu pro řízení energetického systému (ESS).  
+  Určuje, kolik energie se má dodávat nebo odebírat ze sítě.  
+  Používá se k řízení toku energie mezi bateriemi, sítí a spotřebou.  
+
+  - **Kladná hodnota** → ESS dodává energii do sítě  
+  - **Záporná hodnota** → ESS odebírá energii ze sítě  
+  - **Nula (0)** → ESS se snaží dosáhnout rovnováhy  
+
+- 🛠 **Registr 2706 – Maximum System Grid Feed-In**  
+
+  Tento registr definuje **maximální povolený výkon**, který může systém dodávat do sítě.  
+  Slouží k zajištění, že systém **nepřekročí limity stanovené distributorem nebo legislativou**.  
+
+---
+
+### 🔧 Jak to funguje dohromady?  
+
+1. **ESS nastavuje výkon (Registr 2700)** → Například +2000 W znamená, že chce posílat 2 kW do sítě.  
+2. **Kontrola proti max. limitu (Registr 2706)** → Pokud je např. -1500 W, tak se výkon omezí na tuto hodnotu.  
+3. **Systém zajistí, aby nikdy nepřekročil limit feed-in do sítě.**  
+
+Toto funguje, pokud **systém není řízen** nebo je **plná baterie a není odběr elektřiny**.  
+
+Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-in do sítě**, je třeba **dynamicky nastavovat hodnotu registru 2700** podle registru 2706.  
+
+📌 **Při dosažení limitu v registru 2706 může hodnota krátkodobě překmitnout přes nastavený limit feed-in.**  
+
+👉 **Proto doporučujeme vždy nastavit hodnotu nižší než maximální povolený výkon definovaný distributorem nebo legislativou.**  
+
+---
+
+### ⚙️ Důležitá poznámka:
+
+- **🔹 FLOW LINEA**  
+  - Dynamicky řídí registr **2700** podle aktuální situace.  
+  - **Registr 2706** je nastavitelný **pouze v CONFIG** pomocí tlačítka **SET GRID FEED-IN** nebo přímo v **CERBU**.  
+  - **Nikde jinde se nenastavuje.** Pokud se vám hodnota registru 2706 mění, pravděpodobně ji mění jiné řízení vaší FVE.  
+
+- **🔹 MAX GRID POINT**  
+  - Slouží **pouze** pro nastavení **maximálního výkonu dodávaného do sítě z baterií**, **ne** z FV panelů!  
+
+- **🔹 MAXIMUM GRID FEED-IN**  
+  - Nastavuje hodnotu **registru 2706**.  
+
+---
+
+![image](https://github.com/user-attachments/assets/3396f3c3-941c-488b-9dd7-ac92a83a57a4)  
+
+
 - **Verze: 📌 Linea_flows_15032025.json**
   - Optimalizace FLOW
   - Přidání čítačů pro jednotlivé fáze. Pro GRID je rozlišeno na odběr (první parametr) a přetoky (označeno jako **O (OUTPUT)**).
@@ -119,8 +174,7 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
     - Aby to fungovalo, je třeba dodržet názvy teploměrů (**name L1** – jakékoliv vaše označení, mezera a velké písmeno **L**, následované číslem fáze).  
     - Další podmínkou je, že **FLOW** musí být propojeno s **VRM** účtem.  
     - ID teploměru se načítá z **VRM**, a podle tohoto ID se čtou hodnoty z **Modbusu**.
-
-  
+ 
 - **Verze: 📌 SELECTION_flows_20022025.json**
     - Opraveny drobné překlepy. Odstraněny grafy, které nikdy správně nefungovaly. Kód pro grafy je součástí FLOW, ale je pouze zakomentován. Odstraněn FLOW pro řízení chlazení měničů a FW regulátorů, které jsou ovládány přes Shelly plugin. Od této chvíle budou exportovány pouze relevantní karty, a to s pomocí doplňku: node-red-contrib-flow-manager.
 
