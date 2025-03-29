@@ -43,13 +43,17 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
     - Možnost prodat energii v baterii v ranní nebo večerní špičce do nastaveného SOC, případně obojí.
     - Prodávat přebytek na SPOTu do nastavené hodnoty.
     - Možností je dost.
+    - Registr 2706 (Maximum System Grid Feed In)
+      - Pokud jsou povoleny přetoky (registr 2707, pouze DC!), je třeba mít na paměti, že FLOW LINEA ovládá pouze přetoky DC, tedy z fotovoltaických panelů. Pokud máte generátor nebo jiné zařízení připojené na AC, FLOW LINEA s ním pracovat neumí. Nicméně, lze toto nastavení relativně snadno rozšířit pomocí registru 2708.
   - Při rozumném nastavení FLOW funguje zcela rozumně a automaticky.
+  
 
 - **Jak se chová FVE bez tohoto FLOW:**
   - Nejprve se uspokojí spotřeba z panelu.
   - Zbytek jde do baterie, až se baterie nabije, tak potom jde zbytek na prodej, pokud je povolen prodej (základní nastavení v Cerbu).
   - Bez povolení FLOW nikdy nic neprodá.
   - Tam se dá i nastavit omezení, kolik maximálního proudu pošle na GRID.
+  - Nastavení v registru 2706 je akceptováno. To znamená, že co tam je nastaveno, to se při přetoku pošle, pokud je plná baterie a není žádný odběr. Pak Cerbo omezuje výrobu z MPPT.
 
 - **Co se stane, když nemám žádné řízení FVE a prodávám energii:**
   - To záleží na tom, jaký máte sjednaný výkup:
@@ -109,6 +113,18 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 <a name="nejnovejsi-flow"></a>
 
 - **Verze: 📌 Selection_flows_28032025.json**
+  - Ovládání nastavení registru 2706 (Maximum System Grid Feed In):
+    - Pokud jsou povoleny přetoky (registr 2707, pouze DC!), je třeba mít na paměti, že FLOW LINEA ovládá pouze přetoky DC, tedy z fotovoltaických panelů. Pokud máte generátor nebo jiné zařízení připojené na AC, FLOW LINEA s ním pracovat neumí. Nicméně, lze toto nastavení relativně snadno rozšířit pomocí registru 2708.
+    - Existují dva režimy:
+      - Baterie je plně nabita a není dostatečný odběr.
+        - V tomto případě se uplatní nastavení z registru 2706, což znamená, že maximální množství energie, které se pošle do sítě, je dáno hodnotou v tomto registru.
+      - Baterie není plně nabita, ale přesto chceme posílat přetoky do sítě podle hodnoty v registru 2706 (Maximum System Grid Feed In).
+        - Toto řeší FLOW LINEA následovně:
+           - Jednou za sekundu (častější kontrola nemá smysl) odečte od aktuální výroby spotřebu a vyvažovací rezervu.
+           - Výslednou hodnotu nastaví do registru 2700 (ESS control loop setpoint).
+           - Pokud je tato hodnota větší než hodnota v registru 2706, nastaví do registru 2700 hodnotu shodnou s hodnotou v registru 2706.
+           - Tímto způsobem může docházet k překmitům dodávaného elektrického proudu do sítě. Tento jev trvá, dokud Cerbo vše nezpracuje a systém nevyrovná podle nastavených hodnot v registrech. Proto také nikdy nenastavujte do registru 2700 (ESS control loop setpoint) shodnou hodnotu, kterou máte povolenou od distributora sítě, ale vždy nižší.
+
 
 ### 📌 Vysvětlení funkce registrů  
 
