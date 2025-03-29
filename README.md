@@ -124,7 +124,8 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
            - Výslednou hodnotu nastaví do registru 2700 (ESS control loop setpoint).
            - Pokud je tato hodnota větší než hodnota v registru 2706, nastaví do registru 2700 hodnotu shodnou s hodnotou v registru 2706.
            - Tímto způsobem může docházet k překmitům dodávaného elektrického proudu do sítě. Tento jev trvá, dokud Cerbo vše nezpracuje a systém nevyrovná podle nastavených hodnot v registrech. Proto také nikdy nenastavujte do registru 2700 (ESS control loop setpoint) shodnou hodnotu, kterou máte povolenou od distributora sítě, ale vždy nižší.
-
+           - Když je výroba z fotovoltaických panelů menší než spotřeba plus vyvažovací rezerva a přesto je zapnutá funkce Posunutí nabíjení baterie, tak se na síť nic nepošle.
+           - Když je zapnutá funkce ranního nebo večerního prodeje baterie, nebo obě, tak se maximální proud do sítě nastavuje zvlášť a nebere v potaz nastavení registru 2706. I když nastavíte nějakou velkou hodnotu, nemusí být akceptována měniči, které pak posílají tolik, kolik mají nastavené v konfiguraci systému FVE.
 
 ### 📌 Vysvětlení funkce registrů  
 
