@@ -111,6 +111,12 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 ### Popis jednotlivých verzí:
 <a name="nejnovejsi-flow"></a>
 
+- **Verze: 📌 SELECTION_flows_05042025.json**
+  - Opravené nalezené chyby.
+  - Opravena práce s hodinami (CLK).
+  - Přepracováno flow SPOTu.
+  - Přidána funkce: Energy Threshold Injector. Funkci nebudu blíže komentovat, slouží pro mé účely. :)
+  
 - **Verze: 📌 Selection_flows_28032025.json**
   - Ovládání nastavení registru 2706 (Maximum System Grid Feed In):
     - Pokud jsou povoleny přetoky (registr 2707, pouze DC!), je třeba mít na paměti, že FLOW LINEA ovládá pouze přetoky DC, tedy z fotovoltaických panelů. Pokud máte generátor nebo jiné zařízení připojené na AC, FLOW LINEA s ním pracovat neumí. Nicméně, lze toto nastavení relativně snadno rozšířit pomocí registru 2708.
