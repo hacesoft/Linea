@@ -111,7 +111,7 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 ### Popis jednotlivých verzí:
 <a name="nejnovejsi-flow"></a>
 
-- **Verze: 📌 SELECTION_flows_12042025.json**
+- **Verze: 📌 SELECTION_flows_14042025.json**
   - Opraveny chyby v rozdělení hodin.
   - Opraveny chyby v parsování SPOTu.
   - Opravena chyba s VRM portálem.
