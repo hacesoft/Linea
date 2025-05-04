@@ -1,4 +1,4 @@
-# LINEA - Control of photovoltaic power plant using Node-RED
+# LINEA - Ovládání fotovoltaické elektrárny pomocí Node-RED
 
 ![Node-RED for Victron systems](https://github.com/user-attachments/assets/834f8837-f44a-41ba-99a4-5de1432b4935)
 
@@ -122,59 +122,288 @@ Nevadí, nastavte v Cerbu maximální dovolené povolené přetoky, minus nějak
 
 > Doporučuji vždy instalovat nejnovější verzi FLOW. Instalace se provádí importem FLOW do Node-RED, ale nejprve nezapomeňte nainstalovat závislé knihovny (ty jsou definované na konci této stránky, včetně verzí, na které je FLOW stavěno a testováno).
 
+## Popis funkcí ovládacího panelu
+
+### 1. Sekce Real Data - Detailní přehled (karta FVE)
+
+#### Zátěž a spotřeba po fázích
+
+- **Total AC zátěž:** Celková aktuální spotřeba všech fází v W
+- **L1:** Aktuální spotřeba na fázi L1 v W (v závorce denní spotřeba v kWh a teplota měniče ve °C)
+- **L2:** Aktuální spotřeba na fázi L2 v W (v závorce denní spotřeba v kWh a teplota měniče ve °C)
+- **L3:** Aktuální spotřeba na fázi L3 v W (v závorce denní spotřeba v kWh a teplota měniče ve °C)
+
+#### Síť
+
+- **Total Síť:** Celkový aktuální odběr/dodávka do sítě v W (kladná hodnota = odběr, záporná = dodávka)
+- **L1:** Aktuální odběr/dodávka na fázi L1 v W (v závorce denní čítač Wh a Wh)
+- **L2:** Aktuální odběr/dodávka na fázi L2 v W (v závorce denní čítač Wh a Wh)
+- **L3:** Aktuální odběr/dodávka na fázi L3 v W (v závorce denní čítač Wh a Wh)
+
+#### Informace o provozu
+
+- **Doba provozu:** Jak dlouho FLOW běží od posledního restartu
+- **Údaje o instalaci:** Aktuální datum a čas systému
+
+#### Přetoky a spotřeba
+
+- **Do sítě:** Množství energie dodané do sítě v kWh
+- **Ze sítě:** Množství energie odebrané ze sítě v kWh
+- **Spotřeba predikce:** Předpokládaná celková spotřeba v kWh
+- **Spotřeba celkem:** Aktuální celková spotřeba v kWh
+- **Solární predikce:** Předpokládaná výroba ze solárních panelů v kWh
+- **Solární energie celkem:** Aktuální výroba ze solárních panelů v kWh
+
+#### Stav baterie
+
+- **Baterie (Limit SoC):** Aktuální stav nabití baterie v procentech s informací o minimálním nastaveném limitu SoC
+- **Vybíjení baterie:** Aktuální výkon vybíjení baterie v W (záporná hodnota = vybíjení)
+- **Vybíjecí proud baterie:** Aktuální proud vybíjení v A
+- **Napětí baterie:** Aktuální napětí baterie ve V
+- **Battery efficiency:** Účinnost baterie v procentech (poměr odebrané energie k dodané)
+
+#### Čítače energie:
+- **První ikona baterie:** Celkové množství energie dodané do baterie v Wh
+- **Druhá ikona baterie:** Celkové množství energie odebrané z baterie v Wh
+
+#### Stav regulátorů a ventilace
+
+- **FW regulátory:** Celkový výkon FW regulátorů v W
+- **MPTT FAN:** Indikátor stavu ventilátoru pro MPPT regulátory (zelená = zapnuto)
+- **CHANGER FAN:** Indikátor stavu ventilátoru pro měnič (zelená = zapnuto)
+
+**Poznámka:** Údaje o teplotách měničů a predikce jsou dostupné pouze při aktivním propojení s VRM portálem. Čítače energie u baterie se nulují pouze při restartu Node-RED.
+
+### 2. Sekce řízení přetoků a SPOT (karta FVE)
+
+#### Základní údaje
+
+- **Přetoky:** Aktuální stav povolení přetoků do sítě ("ZAKÁZÁNY" nebo "POVOLENY")
+- **Automaticky podle SPOTu:** Přepínač pro aktivaci automatického řízení podle ceny na SPOTu
+- **Připojení na SPOT:** Indikátor stavu připojení k datovému zdroji SPOT cen
+- **Aktuální SPOT cena:** Zobrazuje aktuální cenu elektřiny na SPOTu v Kč/kWh
+- **Limitní cena:** Nastavitelná cenová hranice pro aktivaci přetoků v Kč/kWh
+- **Přetoky: Vyp / Zap:** Manuální přepínač pro povolení přetoků
+
+#### Denní přehled SPOT cen
+
+- **Dnes: Min / Max:** Minimální a maximální cena SPOTu pro aktuální den v Kč/kWh
+- **Dnešní SPOT:** Graf zobrazující průběh SPOT cen během aktuálního dne
+  - Oranžová křivka: Průběh SPOT cen (Kč/kWh)
+  - Zelená linie: Nastavená limitní cena
+  - Červená značka: Aktuální pozice v čase
+
+#### Budoucí SPOT ceny
+
+- **Zítra: Min / Max:** Minimální a maximální očekávaná cena SPOTu pro následující den
+- **Zítřejší SPOT:** Graf očekávaných SPOT cen pro následující den
+
+**Poznámka:** Data o SPOT cenách pro následující den jsou zveřejňována Operátorem trhu s elektřinou (OTE) kolem 14:00 hodin předchozího dne. Do té doby zobrazuje systém informaci "nedostupná data". OTE je zodpovědný za organizaci krátkodobého trhu s elektřinou a plynem v České republice a zveřejňuje tyto údaje na základě výsledků obchodování na denním trhu.
+
+### 3. Karta FVE - Další funkce
+
+#### Funkce pro řízení baterie
+
+- **Posunutí nabíjení baterie:** Přepínač pro aktivaci odložení nabíjení baterie
+  - Umožňuje posunout nabíjení na pozdější dobu, kdy je nízká spotřeba elektřiny
+  - Využívá se, když je výhodnější prodat elektřinu než ji ukládat do baterie
+
+#### Funkce prodeje baterie
+
+- **Prodej baterie ráno:** Přepínač pro aktivaci prodeje energie z baterie v ranní špičce
+  - Nastavitelný časový interval a cílové SOC
+  - Ideální pro využití vyšších cen elektřiny v ranních hodinách
+
+- **Prodej baterie večer:** Přepínač pro aktivaci prodeje energie z baterie ve večerní špičce
+  - Nastavitelný časový interval a cílové SOC
+  - Vhodné pro prodej energie v době večerní špičky
+
+#### NON Battery Priority Mode
+
+- Přepínač pro aktivaci režimu, který upřednostňuje použití energie ze sítě nebo FV panelů před energií z baterie
+- Ochrana baterie při nabíjení elektromobilu nebo jiné energeticky náročné spotřeby
+
+#### Energy Threshold Injector
+
+- Funkce se chová stejně jako funkce Set Point, ale s tím rozdílem, že je aktivní pouze po dobu dodávky z FV panelů
+- Pokud je nedostatečná dodávka z FV panelů, funkce nic nedělá
+- Využívá se pro optimalizaci toků energie jen v době, kdy máme dostatečnou výrobu
+
+#### Set Point
+
+- Nastavuje konstantní hodnotu výkonu (kladnou nebo zápornou) dle nastavovacího prvku AcPowerSetPoint
+- Výhodné pro minimalizaci nežádoucího odběru ze sítě - například nastavením na -100W
+- Systém se bude snažit dostat na tuto hodnotu a nebude oscilovat kolem 0, ale kolem nastavené hodnoty
+
+#### GRID CHARGING
+
+- Přepínač pro aktivaci nabíjení baterie ze sítě
+- Využitelné při očekávaném výpadku elektřiny
+- Nastavitelné cílové SOC, po jehož dosažení se nabíjení automaticky vypne
+
+### 4. Control Mode: ESS / AC Grid
+
+- Funkce pro přepínání mezi dvěma režimy řízení fotovoltaického systému
+- Pozice je indikována zeleným trojúhelníkem
+- Přepíná mezi registry 2700 a 2716
+
+#### ESS Mode (registr 2700):
+
+- Implementován ve FLASH paměti
+- Řídí tok energie mezi bateriemi, sítí a spotřebou
+- Klasický režim pro běžné použití
+
+#### AC Grid Mode (registr 2716):
+
+- Implementován v RAM paměti oproti původnímu registru 2700, který je implementován ve FLASH
+- Registr 2716 je 32 bitový
+- Umožňuje přímé řízení výkonu dodávaného do sítě
+- Výhoda: šetří životnost FLASH paměti, která má omezený počet zápisů
+
+**Důležitá poznámka:** Pro použití registru 2716 je nutné mít CERBO aktualizované na minimálně verzi 3.50 a v měničích MultiPlus-II 48 je třeba minimální firmware v510.
+
+### 5. Podrobný popis specifických funkcí
+
+#### Energy Threshold Injector
+
+- Funguje stejně jako Set Point, ale aktivuje se pouze při dostatečné dodávce energie z FV panelů
+- Při nedostatečné výrobě z panelů funkce neprovádí žádnou činnost
+- Umožňuje nastavit parametry pro řízení přetoků bez ovlivnění systému v době nízké výroby
+- Vhodné pro zajištění stabilních přetoků pouze při dostatečné výrobě z FV panelů
+
+#### NON Battery Priority Mode
+Tato funkce umožňuje upřednostnit využití elektřiny přímo ze sítě nebo z FV panelů před čerpáním z baterií:
+
+- **Primární účel:** Ochrana baterie, zejména při nabíjení elektromobilu
+- **Princip fungování:**
+  - Pokud je zapnutá, systém preferuje napájení ze sítě nebo z FV panelů
+  - Energie z baterie se používá pouze tehdy, když ostatní zdroje nestačí pokrýt spotřebu
+  - Při nabíjení elektromobilu nebo jiné náročné spotřeby se šetří bateriový systém
+
+- **Výpočet velikosti výkonu:**
+  - Systém vypočítává rozdíl mezi aktuální výrobou FV, celkovou spotřebou a vyvažovací rezervou
+  - Pokud je výsledek záporný, převede se na kladnou hodnotu pomocí funkce Math.abs()
+  - Tato hodnota se nastaví jako požadavek na odběr ze sítě
+
+- **Výhody:**
+  - Prodloužení životnosti baterie díky menšímu počtu cyklů
+  - Ochrana před hloubkovým vybíjením při náročných spotřebách
+  - Ideální pro pravidelné nabíjení elektromobilu
+
+### 6. Karta CONFIG - Nastavení systému
+
+#### Sekce FILE
+
+- **SAVE:** Uložení aktuální konfigurace do souboru
+- **LOAD:** Načtení konfigurace ze souboru
+- **DELETE CONFIG:** Smazání konfiguračního souboru
+
+#### Sekce TCP
+
+- **TCP Adresa:** IP adresa vaší FVE (bez http://)
+- **TCP Port:** Port pro TCP komunikaci (standardně 502)
+- **TCP ID:** ID zařízení pro Modbus komunikaci (standardně 100)
+- **CONNECT:** Tlačítko pro připojení k FVE se stavovým indikátorem
+
+#### Sekce Config
+
+- **ESS IP Address:** IP adresa ESS systému
+- **ESS IP Address Checking:** Adresa pro kontrolu dostupnosti ESS
+- **IP ESS Modbus:** IP adresa pro Modbus komunikaci s ESS
+- **IP Esp-01:** IP adresa ESP modulu (pokud je použit)
+- **Maximum Grid Point:** Maximální výkon dodávaný do sítě z baterií v W
+- **nBalancingReserve:** Hodnota vyvažovací rezervy v W
+- **Maximum Grid Feed In:** Nastavení maximálního výkonu pro dodávku do sítě (registr 2706) v W
+- **SET GRID FEED IN:** Tlačítko pro nastavení hodnoty v registru 2706
+- **GET GRID FEED IN:** Tlačítko pro načtení aktuální hodnoty z registru 2706
+
+#### Sekce VRM
+
+- **Email:** Přihlašovací email do VRM portálu
+- **Name your Installation:** Název vaší instalace v systému VRM
+- **VRM ID:** Identifikační číslo vaší instalace z URL ve VRM
+- **Bearer Token:** Vygenerovaný token pro API přístup
+- **SUBMIT:** Tlačítko pro odeslání údajů a vygenerování tokenu
+
+### 7. Doporučené postupy
+
+- Nejprve nakonfigurujte TCP připojení k vaší FVE v kartě CONFIG
+- Propojte FLOW s VRM portálem pro rozšířené možnosti monitorování
+- Nastavte limitní cenu SPOTu podle aktuálních tržních podmínek
+- Uložte konfiguraci pomocí tlačítka SAVE
+- Pravidelně sledujte predikce výroby a spotřeby pro optimální nastavení
+- Při používání pokročilých funkcí jako Control Mode: ESS / AC Grid ověřte, zda máte potřebné verze firmware
+
+### 8. Řešení problémů
+
+- Nedostupné predikce: Zkontrolujte připojení k VRM portálu
+- Chyby připojení: Ověřte správnost IP adresy a portu
+- Neaktuální data SPOT: Zkontrolujte připojení k datovému zdroji OTE
+- Problémy s řízením přetoků: Ujistěte se, že nemáte aktivní jiné systémy řízení přetoků
+- Nefunkční AC Grid Mode: Zkontrolujte verzi firmware v CERBO (min. 3.50) a měničích MultiPlus-II 48 (min. v510)
+
 ## Vysvětlení funkce registrů
 
-### 📌 Vysvětlení funkce registrů  
+### Modbus registry použité ve FLOW
 
-- 🛠 **Registr 2700 – ESS Control Loop Setpoint**  
+- **Registr 2700 – ESS Control Loop Setpoint**
+  - Tento registr slouží k nastavení cílového výkonu pro řízení energetického systému (ESS).
+  - Určuje, kolik energie se má dodávat nebo odebírat ze sítě.
+  - Používá se k řízení toku energie mezi bateriemi, sítí a spotřebou.
+  - **Kladná hodnota** → ESS dodává energii do sítě
+  - **Záporná hodnota** → ESS odebírá energii ze sítě
+  - **Nula (0)** → ESS se snaží dosáhnout rovnováhy
 
-  Tento registr slouží k nastavení cílového výkonu pro řízení energetického systému (ESS).  
-  Určuje, kolik energie se má dodávat nebo odebírat ze sítě.  
-  Používá se k řízení toku energie mezi bateriemi, sítí a spotřebou.  
+- **Registr 2706 – Maximum System Grid Feed-In**
+  - Tento registr definuje **maximální povolený výkon**, který může systém dodávat do sítě.
+  - Slouží k zajištění, že systém **nepřekročí limity stanovené distributorem nebo legislativou**.
 
-  - **Kladná hodnota** → ESS dodává energii do sítě  
-  - **Záporná hodnota** → ESS odebírá energii ze sítě  
-  - **Nula (0)** → ESS se snaží dosáhnout rovnováhy  
+- **Registr 2707 – Grid Feed-in Enable**
+  - Tento registr povoluje nebo zakazuje dodávku energie do sítě z DC zdrojů (fotovoltaických panelů).
+  - **0** → Dodávka energie do sítě zakázána
+  - **1** → Dodávka energie do sítě povolena
+  - Ovládá pouze DC přetoky, ne přetoky z AC zdrojů jako jsou generátory
 
-- 🛠 **Registr 2706 – Maximum System Grid Feed-In**  
+- **Registr 2708 – AC Feed-in Enable**
+  - Podobný registru 2707, ale ovládá dodávku energie do sítě z AC zdrojů.
+  - Ve FLOW LINEA není standardně implementován, ale lze ho doplnit
 
-  Tento registr definuje **maximální povolený výkon**, který může systém dodávat do sítě.  
-  Slouží k zajištění, že systém **nepřekročí limity stanovené distributorem nebo legislativou**.  
+- **Registr 2716 – AC Grid Set Point**
+  - Novější alternativa k registru 2700, implementovaná v RAM paměti místo FLASH
+  - Je 32-bitový, což poskytuje větší rozsah hodnot
+  - Umožňuje přímé řízení výkonu dodávaného do sítě
+  - Šetří životnost FLASH paměti díky omezenému počtu zápisů
+  - Vyžaduje CERBO firmware min. verze 3.50 a měniče MultiPlus-II 48 s firmware min. v510
+  - Má stejnou funkci jako registr 2700, ale s výhodou implementace v RAM
 
----
+### Jak to funguje dohromady?
 
-### 🔧 Jak to funguje dohromady?  
+1. **ESS nastavuje výkon (Registr 2700 nebo 2716)** → Například +2000 W znamená, že chce posílat 2 kW do sítě.
+2. **Kontrola proti max. limitu (Registr 2706)** → Pokud je např. -1500 W, tak se výkon omezí na tuto hodnotu.
+3. **Systém zajistí, aby nikdy nepřekročil limit feed-in do sítě.**
 
-1. **ESS nastavuje výkon (Registr 2700)** → Například +2000 W znamená, že chce posílat 2 kW do sítě.  
-2. **Kontrola proti max. limitu (Registr 2706)** → Pokud je např. -1500 W, tak se výkon omezí na tuto hodnotu.  
-3. **Systém zajistí, aby nikdy nepřekročil limit feed-in do sítě.**  
+Toto funguje, pokud **systém není řízen** nebo je **plná baterie a není odběr elektřiny**.
 
-Toto funguje, pokud **systém není řízen** nebo je **plná baterie a není odběr elektřiny**.  
+Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-in do sítě**, je třeba **dynamicky nastavovat hodnotu registru 2700/2716** podle registru 2706.
 
-Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-in do sítě**, je třeba **dynamicky nastavovat hodnotu registru 2700** podle registru 2706.  
+📌 **Při dosažení limitu v registru 2706 může hodnota krátkodobě překmitnout přes nastavený limit feed-in.**
 
-📌 **Při dosažení limitu v registru 2706 může hodnota krátkodobě překmitnout přes nastavený limit feed-in.**  
+👉 **Proto doporučujeme vždy nastavit hodnotu nižší než maximální povolený výkon definovaný distributorem nebo legislativou.**
 
-👉 **Proto doporučujeme vždy nastavit hodnotu nižší než maximální povolený výkon definovaný distributorem nebo legislativou.**  
+### Důležitá poznámka:
 
----
+- **🔹 FLOW LINEA**
+  - Dynamicky řídí registr **2700** nebo **2716** podle aktuální situace a vybraného režimu.
+  - **Registr 2706** je nastavitelný **pouze v CONFIG** pomocí tlačítka **SET GRID FEED-IN** nebo přímo v **CERBU**.
+  - **Nikde jinde se nenastavuje.** Pokud se vám hodnota registru 2706 mění, pravděpodobně ji mění jiné řízení vaší FVE.
 
-### ⚙️ Důležitá poznámka:
+- **🔹 MAX GRID POINT**
+  - Slouží **pouze** pro nastavení **maximálního výkonu dodávaného do sítě z baterií**, **ne** z FV panelů!
 
-- **🔹 FLOW LINEA**  
-  - Dynamicky řídí registr **2700** podle aktuální situace.  
-  - **Registr 2706** je nastavitelný **pouze v CONFIG** pomocí tlačítka **SET GRID FEED-IN** nebo přímo v **CERBU**.  
-  - **Nikde jinde se nenastavuje.** Pokud se vám hodnota registru 2706 mění, pravděpodobně ji mění jiné řízení vaší FVE.  
+- **🔹 MAXIMUM GRID FEED-IN**
+  - Nastavuje hodnotu **registru 2706**.
 
-- **🔹 MAX GRID POINT**  
-  - Slouží **pouze** pro nastavení **maximálního výkonu dodávaného do sítě z baterií**, **ne** z FV panelů!  
-
-- **🔹 MAXIMUM GRID FEED-IN**  
-  - Nastavuje hodnotu **registru 2706**.  
-
----
-
-![Schéma registrů](https://github.com/user-attachments/assets/3396f3c3-941c-488b-9dd7-ac92a83a57a4)  
+![Schéma registrů](https://github.com/user-attachments/assets/3396f3c3-941c-488b-9dd7-ac92a83a57a4)
 
 <a name="nejnovejsi-flow"></a>
 ## Historie verzí
