@@ -8,6 +8,7 @@
 - [❓ FAQ - Často kladené otázky](#faq)
 - [💻 Předpoklady a instalace](#předpoklady-a-instalace)
 - [🛠️ Funkčnost a pluginy](#funkčnost-a-pluginy)
+- [📊 Popis funkcí ovládacího panelu](#popis-funkcí-ovládacího-panelu)
 - [⚙️ Vysvětlení funkce registrů](#vysvětlení-funkce-registrů)
 - [📝 Historie verzí](#historie-verzí)
 - [📦 Nainstalované NODE](#nainstalované-node)
