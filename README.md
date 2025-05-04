@@ -14,6 +14,8 @@
 - [📦 Nainstalované NODE](#nainstalované-node)
 - [⚠️ Zřeknutí se odpovědnosti](#zřeknutí-se-odpovědnosti)
 
+## 🔗 [Nejnovější verze FLOW](#nejnovejsi-flow)  <- Zkratka na nejnovější verzi FLOW.
+
 ## Úvod
 
 FLOW je rozšíření pro Node-RED, které poskytuje komplexní sadu funkcí pro řízení a monitorování fotovoltaických elektráren (FVE VICTRON) a bateriových úložišť.
