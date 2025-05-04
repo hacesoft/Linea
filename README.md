@@ -7,7 +7,8 @@ Control of photovoltaic power plant using Node-RED” for Node-RED v4.0.2
 
 Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 
-![image](https://github.com/user-attachments/assets/82c7c09d-0204-4111-a154-6dcae4344d5f)
+![image](https://github.com/user-attachments/assets/834f8837-f44a-41ba-99a4-5de1432b4935)
+
 
 
 ### Popis FLOW LINEA pro Node-RED
