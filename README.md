@@ -408,7 +408,15 @@ Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-i
 ![Schéma registrů](https://github.com/user-attachments/assets/3396f3c3-941c-488b-9dd7-ac92a83a57a4)
 
 <a name="nejnovejsi-flow"></a>
+
+Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO aktualizované na minimálně verzi 3.50 a v měničích MultiPlus-II 48 minimální verze FW v510.
 ## Historie verzí
+
+### Verze: 📌 SELECTION_flows_04052025.json
+-Oprveny drobné chyby napříč celého FLOW
+-Přídány funkce: 
+  - Control Mode: ESS / AC Grid
+  - NON Battery Priority Mode
 
 ### Verze: 📌 SELECTION_flows_14042025.json
 - Opraveny chyby v rozdělení hodin.
