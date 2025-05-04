@@ -83,7 +83,7 @@ Nevadí, nastavte v Cerbu maximální dovolené povolené přetoky, minus nějak
 - **Instalace Node-RED:** Postupujte podle oficiálního průvodce instalací Node-RED pro váš konkrétní operační systém.
 - **Nainstalujde závislé knihovny** pro běh FLOW (seznam je na konci této stránky). Může se stát, že bude třeba restartovat Node-Red, postupujte podle pokynu na obrazovce. Zde je návod jak postupovat: [Node-RED Palette Manager](https://nodered.org/docs/user-guide/editor/palette/manager)
 - **Nainstalujte FLOW prostřednictvím importu:**
-  - Importujte soubor `ALL_flow_xxx.json` do Node-RED (kde `xxx` nahrazuje číslo verze). Zde je návod jak postupovat: [Node-RED Import/Export](https://nodered.org/docs/user-guide/editor/workspace/import-export)
+  - Importujte soubor `SELECTION_flows_xxx.json` do Node-RED (kde `xxx` nahrazuje číslo verze). Zde je návod jak postupovat: [Node-RED Import/Export](https://nodered.org/docs/user-guide/editor/workspace/import-export)
   - Nebo: Klikněte kdekoliv na prázdné místo FLOW levým tlačítkem myši a vyberte: 
   
   ![Import menu](https://github.com/user-attachments/assets/644a08ea-4e1f-48ce-9c42-d9b74f0a1a06)
