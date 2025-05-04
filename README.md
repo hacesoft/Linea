@@ -414,10 +414,15 @@ Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-i
 Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO aktualizované na minimálně verzi 3.50 a v měničích MultiPlus-II 48 minimální verze FW v510.
 
 ### Verze: 📌 SELECTION_flows_04052025.json
--Oprveny drobné chyby napříč celého FLOW
--Přídány funkce: 
+- Opraveny drobné chyby napříč celého FLOW.
+- Přídány funkce: 
   - Control Mode: ESS / AC Grid
+    - Funkce pro přepínání mezi dvěma režimy řízení fotovoltaického systému
+    - Pozice je indikována zeleným trojúhelníkem
+    - Přepíná mezi registry 2700 a 2716
   - NON Battery Priority Mode
+    - Přepínač pro aktivaci režimu, který upřednostňuje použití energie ze sítě nebo FV panelů před energií z baterie
+    - Ochrana baterie při nabíjení elektromobilu nebo jiné energeticky náročné spotřeby
 
 ### Verze: 📌 SELECTION_flows_14042025.json
 - Opraveny chyby v rozdělení hodin.
