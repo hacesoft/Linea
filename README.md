@@ -1,6 +1,7 @@
 # LINEA - Ovládání fotovoltaické elektrárny pomocí Node-RED
 
-![Node-RED for Victron systems](https://github.com/user-attachments/assets/834f8837-f44a-41ba-99a4-5de1432b4935)
+![image](https://github.com/user-attachments/assets/39f731fb-ee9b-4f8c-8ffd-337bbf0d268c)
+
 
 ## 📑 Obsah
 - [🔗 Nejnovější verze FLOW](#nejnovejsi-flow)
