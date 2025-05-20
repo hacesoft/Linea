@@ -414,6 +414,13 @@ Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-i
 
 Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO aktualizované na minimálně verzi 3.50 a v měničích MultiPlus-II 48 minimální verze FW v510.
 
+### Verze: 📌 SELECTION_flows_20052025.json
+- Přidána funkce:
+    - SOC delta před exportem :
+      - Po zapnutí je aktivní ovládací prvek: SOC delta v %, kde nastavíte práh SOC baterie odkdy má posílat přebytky do sítě.
+      - Je to dobré k tomu, že máte ráno baterii na třeba 20 SOC a chcete aby se baterka trošku nabila, třeba na SOC 30 a pak zbytek šel do sítě do uvedené doby, třeba
+do 11:00 hodin, kdy třeba naskočí bojler.
+
 ### Verze: 📌 SELECTION_flows_04052025.json
 - Opraveny drobné chyby napříč celého FLOW.
 - Přídány funkce: 
@@ -421,7 +428,7 @@ Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO ak
     - Funkce pro přepínání mezi dvěma režimy řízení fotovoltaického systému
     - Pozice je indikována zeleným trojúhelníkem
     - Přepíná mezi registry 2700 a 2716
-  - NON Battery Priority Mode
+  - NON Battery Priority Mode :
     - Přepínač pro aktivaci režimu, který upřednostňuje použití energie ze sítě nebo FV panelů před energií z baterie
     - Ochrana baterie při nabíjení elektromobilu nebo jiné energeticky náročné spotřeby
 
