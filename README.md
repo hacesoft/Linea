@@ -29,6 +29,45 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 
 ## FAQ
 
+### Jak nainstalovat FLOW LINEA poprvé?
+- Krok 1: Instalace závislých knihoven
+  -  Před instalací FLOW LINEA je nezbytné nainstalovat všechny závislé knihovny
+  -  Seznam potřebných knihoven najdete na konci této stránky
+  -  Ujistěte se, že všechny závislosti jsou správně nainstalovány
+- Krok 2: Import FLOW LINEA
+  - Importujte soubory FLOW LINEA do vašeho prostředí
+  - Po importu proveďte DEPLOY
+  - Pokud proběhlo DEPLOY bez chyby, import se povedl
+- Krok 3: Základní konfigurace
+  - Na kartě FVE nastavte základní přesun ovládacích prvků a požadované hodnoty
+  - Toto nastavení bude použito jako výchozí (defaultní)
+  - Přejděte na kartu CONFIG a vyplňte minimálně:
+    - IP adresu FVE
+    - Přihlašovací údaje pro VRM 
+- DŮLEŽITÉ: Nezapomeňte uložit konfiguraci!
+- Bez uložené konfigurace nebude FLOW fungovat korektně
+
+### Jak aktualizovat FLOW LINEA na novou verzi?
+- Krok 1: Kontrola a aktualizace knihoven
+  - Zkontrolujte, zda jsou k dispozici novější verze závislých knihoven
+  - Aktualizujte všechny knihovny, které mají novější verze
+- Krok 2: Odstranění staré verze
+  - Smažte všechny existující karty FLOW LINEA
+- Krok 3: Import nové verze
+  - Importujte soubory nové verze FLOW LINEA
+  - Proveďte DEPLOY
+  - Úspěšný DEPLOY bez chyb znamená, že import proběhl v pořádku
+- Krok 4: Konfigurace po aktualizaci
+  - Na kartě FVE nastavte základní přesun ovládacích prvků a požadované hodnoty
+  - Přejděte na kartu CONFIG a:
+    - Vyplňte IP adresu FVE
+    - Přihlašovací údaje pro VRM nemusíte vyplňovat, pokud již byly nastaveny v předchozí verzi
+- Krok 5: Uložení konfigurace
+  - KRITICKY DŮLEŽITÉ: I když jste neprovedli žádné změny v konfiguraci, vždy musíte provést uložení konfigurace
+  - Uložením konfigurace se aktivují i nové položky, které předchozí verze FLOW neobsahovala
+  - Bez tohoto kroku nebude FLOW fungovat správně
+- Poznámka: Pokud konfigurace není uložena po jakékoli instalaci nebo aktualizaci, FLOW LINEA nebude fungovat korektně.
+
 ### Nemám povolení přetoky
 V tomto případě je jakékoli řízení zbytečné, není co řídit.
 
