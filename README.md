@@ -151,6 +151,8 @@ Nevadí, nastavte v Cerbu maximální dovolené povolené přetoky, minus nějak
 - HW Plugin - teploměry pro Cerbo: Pluginy: https://github.com/hacesoft/LM335
 - Návod na obládání bojleru pomocí třeba NODE-RED: https://github.com/hacesoft/Clever_boiler
 - ModBus Scanner: https://github.com/hacesoft/Scanner_ModBus
+- Body for Victron 7 inch display: https://github.com/hacesoft/7_inch_display_for_victron
+
 
 ### Funkce a ovládací prvky:
 
