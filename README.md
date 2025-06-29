@@ -456,6 +456,52 @@ Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-i
 
 Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO aktualizované na minimálně verzi 3.50 a v měničích MultiPlus-II 48 minimální verze FW v510.
 
+### Verze: 📌 SELECTION_flows_28062025.json
+
+#### Opravy a vylepšení:
+- **Opraveny chyby v časové synchronizaci**
+  - Po spuštění FLOW se uskuteční první startovací sekvence v rozmezí cca 20 sekund, takže do minuty a půl je plně FLOW načteno a synchronizováno.
+  - Čas se synchronizuje se skutečným časem - tato chyba byla patrná především při řízení SPOTu, kdy FLOW reagoval nesprávně na časové události.
+
+- **Vylepšení konfigurace na kartě Config**
+  - Parametry jsou rozděleny do více kategorií pro lepší přehlednost
+  - Přidána možnost konfigurace délky peaku pro ranní a večerní prodej baterie (nastavitelné hodnoty od 1 do 4 hodin)
+  - Přidáno zobrazení časů peaku, které FLOW LINEA automaticky vypočítá pro aktuální den
+
+#### Nová funkce: Dynamic SOC Reserve 🔋
+Tato pokročilá funkce je dostupná pouze pro ranní prodej baterie a umožňuje inteligentní řízení rezervy energie v baterii.
+
+**Princip fungování:**
+1. Na kartě Config nastavíte, jak dlouho má funkce pracovat po svítání (parametr: `Set nSunriseProductionOffset`)
+2. Nastavíte typický odběr elektrické energie za hodinu
+3. Funkce automaticky spočítá, kolik energie je třeba pro provoz domácnosti do svítání (než bude možno opět brát elektrickou energii z FV panelů)
+4. Přebytečnou energii nad tuto vypočtenou potřebu prodá do sítě
+5. Do výpočtu se zahrnuje také nastavená hodnota SOC delta pro dodatečnou rezervu
+
+**Zobrazení dat:**
+- Při zadávání parametrů vidíte aktuální vypočtené hodnoty
+- Na kartě FVE u příslušné funkce je zobrazena stejná vypočtená hodnota
+- U funkce "Prodej baterie" je vidět aktuální SOC, do kterého se baterie prodává
+- Pokud není funkce Dynamic SOC Reserve zapnuta, vypočtená hodnota se nepřičítá k celkovému SOC
+
+#### Požadavky pro funkci Dynamic SOC Reserve:
+**Povinné nastavení:**
+- Ve VRM musí být nastavena **pevná poloha FVE** (GPS souřadnice)
+- Funkce je určena pouze pro **pevné instalace** - nefunguje pro lodě a karavany s GPS modulem
+- FLOW LINEA musí být **přihlášen do VRM** pro načtení polohy instalace
+
+**Technické detaily:**
+- Systém využívá FREE API službu https://api.sunrise-sunset.org pro získání času východu slunce
+- Sunrise-Sunset Response Processor načítá komplexní data o slunečních časech, aktuálně je využíván pouze čas východu slunce
+- Data se načítají pouze **jednou denně** - buď bezprostředně po startu FLOW (do jedné minuty), nebo minutu po půlnoci
+- Díky tomuto přístupu nedochází k nadměrnému zatěžování internetového připojení opakovanými dotazy
+
+**Výhody:**
+- Automatická optimalizace prodeje baterie na základě skutečných podmínek
+- Inteligentní řízení rezervy energie s ohledem na denní cyklus
+- Minimální zatížení internetového připojení díky jednomu dotazu denně
+- Přesné výpočty založené na geografické poloze a ročním období
+
 ### Verze: 📌 SELECTION_flows_20052025.json
 - Přidána funkce:
     - SOC delta před exportem :
