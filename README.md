@@ -454,6 +454,38 @@ Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-i
 
 Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO aktualizované na minimálně verzi 3.50 a v měničích MultiPlus-II 48 minimální verze FW v510.
 
+### Verze: 📌 SELECTION_flows_26072025.json
+
+#### ✅ **Opravy a vylepšení:**
+- Opraveny různé chyby v logice a zpracování dat
+- Vylepšena stabilita a výkon systému
+- Optimalizace kódu pro lepší čitelnost
+
+#### 🎨 **Vizuální vylepšení:**
+- **Config karta:** Parametry jsou nyní seskupeny podle barev pro lepší orientaci
+- Přidány barevné oddělovače pro jednotlivé funkční celky
+- Zlepšena uživatelská přívětivost rozhraní
+
+#### ⚡ **NOVÁ FUNKCE: Spot-Grid Charging (Chytré nabíjení ze sítě)**
+
+**Umístění:** Config karta → Zelené nastavovací prvky
+
+**Jak to funguje:**
+- Systém automaticky najde **nejlevnější souvislý časový úsek** pro nabíjení ze sítě
+- Při dosažení optimálního času aktivuje nabíjení s nastavením `-MAX GRID POINT`
+
+**⚠️ DŮLEŽITÉ UPOZORNĚNÍ:**
+> **Nastavte například 4000W, ale systém může nabíjet pouze 2500W!**  
+> Toto je dáno nastavením v měniči. FLOW Linea **nemůže přenastavit** konfiguraci měniče.  
+> Pro změnu maximálního nabíjecího výkonu musíte **upravit nastavení přímo v měničích**.
+
+**Nastavitelné parametry:**
+- **⏱️ Délka nabíjení:** Lze nastavit dobu nákupu ze SPOTu (max. 20 hodin)
+- **💰 Cenový trigger:** Maximální přijatelná cena za kterou chcete nakupovat
+- **📊 Informační displej:** Real-time zobrazení optimálního nabíjecího okna
+  - ⚠️ **Poznámka:** Label se aktualizuje pouze při zapnuté funkci Spot-Grid Charging
+
+
 ### Verze: 📌 SELECTION_flows_28062025.json
 
 #### Opravy a vylepšení:
