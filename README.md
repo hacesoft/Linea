@@ -1,8 +1,6 @@
 # LINEA - Ovládání fotovoltaické elektrárny pomocí Node-RED
 
-![image](https://github.com/user-attachments/assets/625247ef-9893-40fd-85cf-e1719762bcb8)
-
-
+<img width="1142" height="857" alt="image" src="https://github.com/user-attachments/assets/8c4bf9e9-d408-4afd-a879-3800c1791052" />
 
 ## 📑 Obsah
 - [🔗 Nejnovější verze FLOW](#nejnovejsi-flow)
