@@ -708,7 +708,8 @@ do 11:00 hodin, kdy třeba naskočí bojler.
 - Napříč FLOW byly změněny proměnné ze samostatných definic na globální strukturu, která pak jde uložit na disk.
 </details>
 
-![Config panel](https://github.com/user-attachments/assets/ef521fc2-1faa-478d-a702-8a99e7f5978a)
+<img width="1336" height="612" alt="image" src="https://github.com/user-attachments/assets/06d888a1-8cb3-45fb-90d1-c16588064094" />
+
 
 ### Verze 📌 20072024
 <details>
