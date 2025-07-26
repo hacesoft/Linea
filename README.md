@@ -759,8 +759,8 @@ const sTZidentifier = "Europe/Prague";
 
 ## Nainstalované NODE
 
-- node-red - 4.0.3
-- node-red-contrib-modbus - 5.42.0
+- node-red - 4.0.9
+- node-red-contrib-modbus - 5.43.0
 - node-red-dashboard - 3.6.5
 
 ---
