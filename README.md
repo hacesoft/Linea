@@ -566,7 +566,7 @@ Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO ak
 > Pro změnu maximálního nabíjecího výkonu musíte **upravit nastavení přímo v měničích**.
 
 **Nastavitelné parametry:**
-- **⏱️ Délka nabíjení:** Lze nastavit dobu nákupu ze SPOTu (max. 20 hodin)
+- **⏱️ Délka nabíjení:** Lze nastavit dobu nákupu ze SPOTu.
 - **💰 Cenový trigger:** Maximální přijatelná cena za kterou chcete nakupovat
 - **📊 Informační displej:** Real-time zobrazení optimálního nabíjecího okna
   - ⚠️ **Poznámka:** Label se aktualizuje pouze při zapnuté funkci Spot-Grid Charging
