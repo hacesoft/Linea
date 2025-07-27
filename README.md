@@ -540,7 +540,7 @@ Pokud ale **FVE řídíte** a chcete zajistit, aby **nepřekročila limit feed-i
 
 Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO aktualizované na minimálně verzi 3.50 a v měničích MultiPlus-II 48 minimální verze FW v510.
 
-### Verze: 📌 SELECTION_flows_26072025.json
+### Verze: 📌 SELECTION_flows_27072025.json
 
 #### ✅ **Opravy a vylepšení:**
 - Opraveny různé chyby v logice a zpracování dat
