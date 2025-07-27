@@ -28,6 +28,92 @@ Budu rád za jakoukoliv zpětnou odezvu a případnou opravu chyb a vylepšení.
 
 ## FAQ
 
+### Mám posunutý čas ve FLOW - časy se nezobrazují správně
+
+**Co se děje:**
+- Node-RED zobrazuje časy v UTC místo místního času
+- Všechny časové funkce (ranní/večerní špičky, spot charging) pracují s nesprávným časem
+- Problém vzniká, když prostředí kde běží Node-RED nemá nastavenou správnou časovou zónu
+
+**Řešení - nastavení proměnné prostředí TZ:**
+- **Victron Cerbo GX:**
+  - Cerbo má časové pásmo správně nastavené ve výchozím stavu
+  - Kontrola: **Nastavení → Všeobecný → Datum a Čas**
+  - Ujistěte se, že je nastavena správná časová zóna pro vaši lokalitu
+- **Synology Docker:**
+  - Otevřete Docker aplikaci v DSM
+  - Vyberte váš Node-RED kontejner → **Upravit**
+  - Přejděte na záložku **"Prostředí"**
+  - Přidejte novou proměnnou:
+    - **Proměnná:** `TZ`
+    - **Hodnota:** `Europe/Prague`
+  - Uložte změny a restartujte kontejner
+- **Home Assistant Add-on:**
+  - Otevřete Node-RED Add-on v Home Assistant
+  - Přejděte na záložku **"Configuration"**
+  - Přidejte do konfigurace:
+    ```yaml
+    env_vars:
+      - name: TZ
+        value: "Europe/Prague"
+    ```
+  - Nebo alternativně nastavte časovou zónu globálně v **System → Settings → General**
+  - Restartujte Add-on
+- **Ostatní hostování (Windows, Linux, macOS):**
+  - Postup je obdobný - vždy se jedná o nastavení proměnné prostředí `TZ=Europe/Prague`
+  - Konkrétní postup závisí na typu instalace a operačním systému
+
+**⚠️ DŮLEŽITÉ:**
+- Po změně proměnných prostředí je nutné restartovat Node-RED
+- Bez správného nastavení časového pásma nebude FLOW LINEA pracovat s časy korektně
+
+**📋 Kompletní seznam časových zón:** [List of tz database time zones - Wikipedia](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+
+### Nejde mi uložit konfigurace - chyba při ukládání
+
+**Co se děje:**
+- Node-RED nemůže uložit konfiguraci FLOW LINEA
+- Chybové hlášky typu "Cannot write to file" nebo "Permission denied"
+- Konfigurace se po restartu ztrácí nebo se neukládá vůbec
+- Problém vzniká, když Node-RED nemá oprávnění k zápisu do dat nebo chybí persistent storage
+
+**Řešení - nastavení úložiště a oprávnění:**
+- **Victron Cerbo GX:**
+  - Cerbo má vše správně nastaveno ve výchozím stavu
+  - Ukládání probíhá do interní paměti Cerba
+  - Oprávnění jsou nastavena automaticky při instalaci Node-RED
+- **Synology Docker:**
+  - Otevřete Docker aplikaci v DSM
+  - Vyberte váš Node-RED kontejner → **Upravit**
+  - Přejděte na záložku **"Svazek"**
+  - Přidejte nový mount point:
+    - **Cesta na hostiteli:** `/docker/nodered` (nebo jiná složka na vašem NAS)
+    - **Cesta v kontejneru:** `/data`
+    - **Typ:** **Čtení/zápis**
+  - Ujistěte se, že složka na hostiteli existuje a má správná oprávnění
+  - Uložte změny a restartujte kontejner
+- **Home Assistant Add-on:**
+  - Node-RED Add-on má ve výchozím stavu přístup k persistent storage
+  - Pokud přesto dochází k problémům, zkontrolujte:
+    - **Supervisor → System → Storage** - dostupné místo
+    - Restartujte Add-on: **Node-RED → Actions → Restart**
+  - V případě problémů můžete přidat do konfigurace Add-on:
+    ```yaml
+    system_packages: []
+    npm_packages: []
+    init_commands: []
+    ```
+- **Ostatní hostování (Windows, Linux, macOS):**
+  - Postup je obdobný - vždy se jedná o správná oprávnění k zápisu
+  - Zkontrolujte, že uživatel pod kterým běží Node-RED má oprávnění k zápisu do data složky
+  - Obvykle: `~/.node-red/` nebo cesta specifikovaná při instalaci
+
+**⚠️ DŮLEŽITÉ:**
+- Po jakýchkoli změnách je nutné restartovat Node-RED
+- Bez správného nastavení úložiště nebude FLOW LINEA schopen ukládat konfiguraci
+- Pro diagnostiku zkontrolujte logy Node-RED
+
+  
 ### Jak nainstalovat FLOW LINEA poprvé?
 - Krok 1: Instalace závislých knihoven
   -  Před instalací FLOW LINEA je nezbytné nainstalovat všechny závislé knihovny
@@ -484,6 +570,26 @@ Důležitá poznámka: Od verze SELECTION_flows_04052025 je nutné mít CERBO ak
 - **💰 Cenový trigger:** Maximální přijatelná cena za kterou chcete nakupovat
 - **📊 Informační displej:** Real-time zobrazení optimálního nabíjecího okna
   - ⚠️ **Poznámka:** Label se aktualizuje pouze při zapnuté funkci Spot-Grid Charging
+
+#### 🔧 **Dva způsoby řízení nákupu:**
+
+Máte k dispozici dvě možnosti řízení nákupu elektřiny:
+
+1. **Trigger (pevná hodnota)** - nastavíte konkrétní cenovou hranici
+2. **Peak (pohyblivá hodnota)** - systém hledá nejlevnější hodiny v daném období
+
+#### 📋 **Kdy použít který způsob:**
+
+**Scénář 1 - Stabilní ceny:**
+Když jsou ceny elektřiny relativně stabilní, funguje dobře trigger.
+
+**Scénář 2 - Vysoké a kolísavé ceny:**
+Představte si situaci, kdy je elektřina drahá - dnes nejlevněji za 5 Kč/kWh, zítra nejlevněji za 6 Kč/kWh. V tomto případě by trigger na nízkou hodnotu nepomohl, protože by se nikdy nespustil. Zde je výhodnější hledání peaku, které najde nejlevnější hodiny bez ohledu na absolutní cenu.
+
+**Doporučené nastavení pro vysoké ceny:**
+- Trigger nastavte na rozumnou horní hranici (např. 15 Kč/kWh)
+- Rozumně nastavte délku peaku
+- Můžete používat jeden způsob samostatně nebo kombinovat oba
 
 
 ### Verze: 📌 SELECTION_flows_28062025.json
