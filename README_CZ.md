@@ -4,6 +4,9 @@
 
 # ⚡ LINEA
 
+<img width="2043" height="1085" alt="image" src="https://github.com/user-attachments/assets/699968f0-5245-4c0f-8270-250f52725571" />
+
+
 LINEA je projekt v Node-RED pro monitorování a řízení fotovoltaických instalací Victron a bateriových ESS. Nad standardní Victron ESS přidává externí rozhodovací a řídicí vrstvu a spojuje aktuální data z FVE, baterie, spotřeby a sítě se SPOT cenami a predikčními daty.
 
 ## Co LINEA dělá
