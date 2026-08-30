@@ -2,7 +2,7 @@
 
 ---
 
-# ⚡ LINEA / GridSight
+# ⚡ LINEA
 
 LINEA is a Node-RED project for monitoring and controlling Victron photovoltaic and battery ESS installations. It adds an external decision and control layer above the standard Victron ESS and combines live PV, battery, load and grid data with SPOT prices and prediction data.
 
