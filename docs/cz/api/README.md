@@ -1,36 +1,39 @@
-[🇨🇿 Česky](README.md) | [🇬🇧 English](../../en/api/README.md)
-
----
+[🇨🇿 **Česky**](README.md) \| [🇬🇧 English](../../en/api/README.md)
 
 # LINEA API
 
-LINEA API je integrační vrstva uvnitř Node-RED, která zpřístupňuje již existující provozní stav LINEA dalším aplikacím. Aktuální produkčně ověřený kontrakt je **LINEA API `1.0-r2.3.3`, schema `3`**.
+LINEA API je rozhraní **pouze pro čtení**. Zpřístupňuje aktuální
+provozní stav LINEA dalším aplikacím. Samo nerozhoduje o řízení ESS a
+nezapisuje do Modbus registrů.
 
-> **Zásadní pravidlo:** hlavní LINEA API je striktně **READ-ONLY**. Publikuje hotový stav LINEA, neprovádí ESS rozhodování, nepřepočítává řídicí logiku a nezapisuje Modbus registry.
+Aktuální verze rozhraní je **`1.0-r2.3.3`**, datové schema **`3`**.
 
-## Obsah
+## Endpointy
 
-- [Přehled a architektura](01_PREHLED_A_ARCHITEKTURA.md)
-- [Instalace a připojení](02_INSTALACE.md)
-- [Endpointy](03_ENDPOINTY.md)
-- [Datový model schema 3](04_DATOVY_MODEL.md)
-- [Konvence, freshness a dostupnost](05_KONVENCE_A_FRESHNESS.md)
-- [Příklady odpovědí](06_PRIKLADY.md)
-- [Nextcloud, historie a budoucí rozšíření](07_NEXTCLOUD_A_BUDOUCNOST.md)
-
-## Veřejné endpointy
-
-```text
+``` text
 GET /api/v1/health
 GET /api/v1/status
 ```
 
-Řídicí endpointy `/set`, `/control`, `/write` nejsou součástí API a bez konkrétní potřeby se nemají přidávat.
+## Dokumentace
+
+1.  [Přehled a architektura](01_PREHLED_A_ARCHITEKTURA.md)
+2.  [Instalace a připojení](02_INSTALACE.md)
+3.  [Endpointy](03_ENDPOINTY.md)
+4.  [Datový model -- vysvětlení každé položky](04_DATOVY_MODEL.md)
+5.  [Konvence, stáří a dostupnost dat](05_KONVENCE_A_FRESHNESS.md)
+6.  [Kompletní příklad JSON odpovědi](06_PRIKLADY.md)
+7.  [Nextcloud, historie a budoucí
+    rozšíření](07_NEXTCLOUD_A_BUDOUCNOST.md)
 
 ## Rozdělení odpovědností
 
-**LINEA / Node-RED** je autorita pro aktuální stav, Modbus, ESS řízení, bezpečnost a provozní rozhodování. **LINEA API** pouze publikuje výsledek. Budoucí **Nextcloud LINEA Monitor & Analytics** je určen pro historii, databázi, agregace, statistiky, analytiku a vizualizaci.
+**LINEA / Node-RED** řídí ESS, komunikuje přes Modbus a vytváří aktuální
+provozní stav. **LINEA API** tento stav pouze zveřejňuje. Připravovaná
+**Nextcloud aplikace** bude data číst, ukládat do databáze a vytvářet
+historii, agregace, grafy a analytiku.
 
----
+Řídicí endpointy typu `/set`, `/control` nebo `/write` nejsou součástí
+tohoto API.
 
-[← LINEA API](README.md) · [← Hlavní dokumentace](../README.md)
+[← Hlavní dokumentace](../README.md)

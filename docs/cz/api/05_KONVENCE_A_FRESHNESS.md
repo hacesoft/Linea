@@ -1,45 +1,46 @@
-[🇨🇿 Česky](05_KONVENCE_A_FRESHNESS.md) | [🇬🇧 English](../../en/api/05_CONVENTIONS_AND_FRESHNESS.md)
+[🇨🇿 **Česky**](05_KONVENCE_A_FRESHNESS.md) \| [🇬🇧
+English](../../en/api/05_CONVENTIONS_AND_FRESHNESS.md)
 
----
+# Konvence, stáří a dostupnost dat
 
-# Konvence, freshness a dostupnost
+## Výkon sítě
 
-## Znaménka
+`gridPower` používá konvenci: **kladná hodnota = odběr ze sítě**,
+**záporná hodnota = dodávka do sítě**. Jednotkou jsou watty. Stejná
+konvence platí pro jednotlivé fáze v `energy.grid.phases`.
 
-### Síť
+## Výkon baterie
 
-```text
-kladný výkon = import ze sítě
-záporný výkon = export do sítě
-```
+`batteryPower` používá konvenci: **kladná hodnota = nabíjení baterie**,
+**záporná hodnota = vybíjení baterie**. Jednotkou jsou watty.
 
-### Baterie
+## Časové údaje
 
-```text
-kladný výkon = nabíjení
-záporný výkon = vybíjení
-```
+`system.timestamp` je čas vytvoření odpovědi API.
+`system.sourceTimestamp` je čas zdrojového snímku LINEA. `system.ageMs`
+udává jeho stáří v milisekundách. `system.stale` upozorňuje, že zdrojová
+data překročila povolené stáří.
 
-Jednotka výkonu je W. Konvence jsou publikovány také přímo v API odpovědi.
+Jednotlivé moduly mohou mít vlastní `updatedAt`. Proto může být hlavní
+energetický stav čerstvý, zatímco například Daikin, Shelly nebo VRM byly
+aktualizovány dříve. Klient má při zobrazení stáří modulu používat jeho
+vlastní čas aktualizace, pokud je k dispozici.
 
-## Freshness hlavního snapshotu
+## `available`
 
-R2.3.3 považuje hlavní LINEA snapshot za stale přibližně po **30 sekundách**. `system.ageMs` udává stáří zdrojového snapshotu a `system.stale` výsledné vyhodnocení.
+`available: true` znamená, že LINEA má pro daný blok použitelná data.
+`available: false` znamená, že klient nemá obsah bloku považovat za
+aktuálně dostupný. Neznamená to automaticky chybu celého API.
 
-## Různé zdroje mají různou rychlost
+## `null` a nula
 
-- hlavní Modbus/energetika: řádově sekundy;
-- Shelly: event-driven MQTT;
-- UPS: řádově sekundy;
-- Daikin: několik minut kvůli cloud API limitům;
-- VRM/forecast/weather: pomalejší zdroje.
+`null` znamená, že hodnota není k dispozici nebo ji zdroj neposkytl.
+Nula (`0`) je platná číselná hodnota. Klient je nesmí zaměňovat.
 
-Jednotlivé pomalejší moduly mohou mít vlastní `updatedAt`, ale obecný per-module freshness kontrakt není součástí schema 3.
+## Volitelná pole
 
-## Sleeping senzory
+Externí klient má být odolný vůči chybějícím volitelným polím a novým
+polím přidaným v rámci kompatibilního rozšíření. Zásadní změna významu
+nebo struktury musí být vyjádřena změnou `api.schema`.
 
-Shelly Smoke může dlouho spát. Vysoké `ageSec` samo o sobě neznamená poruchu a nesmí se na něj mechanicky aplikovat stejný stale limit jako na sekundový Modbus stream.
-
----
-
-[← LINEA API](README.md) · [← Hlavní dokumentace](../README.md)
+[← Datový model](04_DATOVY_MODEL.md) · [Příklady →](06_PRIKLADY.md)
