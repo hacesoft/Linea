@@ -132,3 +132,8 @@ Ve veřejném repozitáři nemají být skutečné:
 ---
 
 [← Dokumentace LINEA](README.md)
+
+## Moduly a hranice konfigurace
+Aktivní volitelné moduly používají centrální `global.config` pro běžná nastavení (`daikinConfig`, `upsConfig`). Daikin OAuth tokeny jsou provozní tajemství s vlastním životním cyklem.
+
+Modbus TCP parametry (`tcpHost`, `tcpPort`, `unitId`) lze spravovat v LINEA. MQTT připojení je ale Node-RED **MQTT config node**: LINEA jej nemá dynamicky přepisovat. Broker, port, TLS a autentizace se nastavují přímo v editoru Node-RED.

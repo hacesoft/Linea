@@ -4,10 +4,16 @@
 
 # LINEA Version History
 
+## Documentation update — 2026-09-01
+- UPS/NUT aligned with active module: central config, 5 s query, 15 s watchdog, test and events.
+- Daikin current OIDC endpoints, initial OAuth authorization and rotating refresh token.
+- Central `global.config` and Modbus/MQTT configuration boundary.
+- Change-based UPS storage for future Nextcloud database.
+- Disabled development branches are not treated as supported implementations.
+
 ## Documentation 1.0.0 — 30 August 2026
 
-First public release of the reorganized LINEA / GridSight documentation.
-
+First public release of the reorganized LINEA
 - complete Czech and English documentation;
 - `README_CZ.md` and `README.md` are the project introduction; there is no separate Getting Started chapter;
 - consistently numbered main documentation chapters;

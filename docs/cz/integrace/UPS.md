@@ -1,51 +1,29 @@
-[🇨🇿 Česky](UPS.md) | 🇬🇧 English *(bude doplněno)*
+[🇨🇿 **Česky**](UPS.md) | [🇬🇧 English](../../en/integrations/UPS.md)
 
 ---
+# UPS / NUT modul
 
-# Samostatný projekt: Eaton UPS pro Node-RED
+## 1. Účel
+Aktivní volitelný modul poskytuje read-only monitoring UPS přes Network UPS Tools (NUT). LINEA CORE na něm není závislá. Komunikuje přímo s `upsd` přes TCP příkazem `LIST VAR <UPS_NAME>`. Starší disabled UPS větev ponechaná ve vývojovém flow tato dokumentace nepovažuje za podporovanou implementaci.
 
-> Návrh dokumentace budoucího samostatného projektu.
+## 2. Konfigurace
+Konfigurace je v `global.config.upsConfig`:
+```javascript
+upsConfig: { host: "192.168.x.x", port: 3493, upsName: "UPS", timeoutMs: 4000, ntfyUrl: "" }
+```
+`upsName` je case-sensitive. Prázdné `ntfyUrl` notifikace vypíná. Aktivní modul nemá uživatelský `enabled` ani nastavitelný polling. Dashboard umí otestovat právě vyplněný host/port/UPS name ještě před uložením.
 
-## Cíl
+## 3. Periodické čtení a watchdog
+LINEA dotazuje NUT přibližně každých **5 s**. To není frekvence fyzické aktualizace UPS: NUT driver má vlastní `pollinterval` a `pollfreq`, takže stejné hodnoty v několika odpovědích jsou normální. `NUT watchdog` sleduje poslední úspěšnou odpověď a po více než **15 s** bez úspěchu hlásí `NUT OFFLINE`. Sleduje komunikaci, nikoli změnu hodnot.
 
-UPS modul nemá být součástí LINEA CORE. Monitoring UPS je obecná Node-RED funkce a může být použit v libovolném projektu.
+## 4. Data a události
+Parser zpracovává `VAR <UPS_NAME> <key> "<value>"` a vytváří `global.ups`: výrobce/model/firmware, status, baterie, runtime, napětí baterie, load, reálný a jmenovitý výkon, vstupní/výstupní napětí, frekvence a timestamp. Známé statusy zahrnují `OL`, `OB`, `LB`, `CHRG`, `DISCHRG`, `OVER`, `RB`, `BYPASS`. Události zahrnují minimálně `POWER_LOST`, `POWER_RESTORED`, `BATTERY_LOW`.
 
-## Modul musí být soběstačný
+## 5. API a budoucí historie
+Pro veřejné read-only API vzniká redukovaný `global.lineaApiUpsState`. Dlouhodobá historie patří do Nextcloud databáze. U pomalu se měnícího UPS stavu je vhodné změnové ukládání: shodný stav prodlouží `valid_to`; nový řádek vznikne až při změně.
 
-Samostatný release má obsahovat:
-
-- zdroj dat z UPS;
-- parsování;
-- normalizovaný stav;
-- výpočet zbývající výdrže;
-- vstupní/výstupní napětí;
-- frekvenci;
-- výkon/zátěž;
-- stav baterie;
-- historii;
-- Dashboard 2.0;
-- diagnostiku komunikace.
-
-## Rozhraní vůči LINEA
-
-LINEA může UPS data pouze zobrazovat nebo použít jako doplňkový stav. LINEA CORE nesmí přestat řídit FVE jen proto, že UPS modul není nainstalován.
-
-## README samostatného repozitáře musí popsat
-
-1. podporovaný způsob komunikace;
-2. podporované modely;
-3. potřebné Node-RED balíčky;
-4. konfiguraci adresy/portu/protokolu;
-5. význam všech hodnot;
-6. polling interval;
-7. timeout;
-8. chování při odpojení UPS;
-9. Dashboard;
-10. import/export;
-11. troubleshooting.
-
-Před publikací bude tato dokumentace doplněna podle skutečného odděleného UPS flow.
+## 6. Troubleshooting
+Ověřte host/port, přesný case-sensitive UPS name, dostupnost `upsd`, odpověď `LIST VAR <UPS_NAME>` a timeout. `NUT OFFLINE` znamená chybějící úspěšnou odpověď déle než 15 s, nikoli pouze nezměněné hodnoty.
 
 ---
-
 [← Integrace](../06_INTEGRACE_A_DOPLNKY.md)

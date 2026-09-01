@@ -39,3 +39,8 @@ Volitelný samostatný modul monitoringu UPS. Viz [UPS](integrace/UPS.md).
 ---
 
 [← Dokumentace LINEA](README.md) · [FAQ](04_FAQ.md) · [Technická reference](11_REFERENCE_NASTAVENI.md)
+
+## Samostatné moduly
+- [Daikin Onecta](integrace/DAIKIN.md)
+- [UPS / NUT](integrace/UPS.md)
+- [Cooling](integrace/COOLING.md)

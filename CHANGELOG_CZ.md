@@ -4,9 +4,16 @@
 
 # Historie verzí LINEA
 
+## Aktualizace dokumentace — 01.09.2026
+- UPS/NUT podle aktivního modulu: centrální konfigurace, 5s dotaz, 15s watchdog, test a události.
+- Daikin: aktuální OIDC endpointy, první OAuth autorizace a rotační refresh token.
+- Centrální `global.config`, Modbus/MQTT konfigurační hranice.
+- Změnové ukládání UPS pro budoucí Nextcloud databázi.
+- Disabled vývojové větve nejsou podporovanou implementací.
+
 ## Dokumentace 1.0.0 — 30.08.2026
 
-První veřejná verze nové dokumentace LINEA / GridSight.
+První veřejná verze nové dokumentace LINEA
 
 - kompletní česká a anglická dokumentace;
 - hlavní `README_CZ.md` a `README.md` slouží zároveň jako úvod projektu;

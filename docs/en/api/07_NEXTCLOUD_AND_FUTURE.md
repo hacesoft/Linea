@@ -25,3 +25,6 @@ The main LINEA API remains read-only. If very limited control of selected Shelly
 ---
 
 [← LINEA API](README.md) · [← Main documentation](../README.md)
+
+## Change-based storage for slowly changing state
+UPS and similar state blocks do not need duplicate rows every few seconds. When unchanged, Nextcloud can extend the previous record's `valid_to` and create a new row only on change. Historical state is reconstructed from `valid_from`–`valid_to`; events and fast energy measurements may use separate retention policies.

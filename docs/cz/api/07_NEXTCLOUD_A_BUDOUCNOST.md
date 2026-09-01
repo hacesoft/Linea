@@ -37,3 +37,6 @@ Hlavní LINEA API zůstává read-only. Pokud bude někdy realizováno velmi ome
 ---
 
 [← LINEA API](README.md) · [← Hlavní dokumentace](../README.md)
+
+## Změnové ukládání pomalu se měnících stavů
+Pro UPS a podobné stavové bloky není účelné ukládat každých několik sekund identickou kopii. Při nezměněném stavu může Nextcloud prodloužit `valid_to` posledního záznamu a nový řádek vytvořit až při změně. Historický stav se rekonstruuje podle `valid_from`–`valid_to`; události a rychlé energetické veličiny mohou mít jinou retenční politiku.
