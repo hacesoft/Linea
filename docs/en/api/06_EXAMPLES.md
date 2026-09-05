@@ -7,7 +7,7 @@
 ## Health
 
 ```json
-{"name":"LINEA API","version":"1.0-r2.3.3","schema":3,"readOnly":true}
+{"name":"LINEA API","version":"1.0.0","schema":3,"readOnly":true}
 ```
 
 ## Fresh main snapshot
@@ -34,7 +34,7 @@ Unavailable: `{"available": false, "data": null}`
 {"delayCharging":{"start":"04:30","stop":"11:00","startMs":16200000,"stopMs":39600000}}
 ```
 
-The final R2.3.3 operational test confirmed API version/schema/read-only status, the approximately 30-second stale threshold, PV-string mapping including yield, and working VRM, temperatures, Shelly I/O, smoke, UPS, Daikin, ESS, forecast, solar and weather sections.
+The final 1.0.0 operational API version/schema/read-only status, the approximately 30-second stale threshold, PV-string mapping including yield, and working VRM, temperatures, Shelly I/O, smoke, UPS, Daikin, ESS, forecast, solar and weather sections.
 
 ---
 

@@ -1,0 +1,752 @@
+openapi: 3.1.0
+info:
+  title: LINEA API
+  version: 1.0.0
+  description: Read-only monitoring API. Schema 1 adds explicit machine-readable units while keeping descriptions and field
+    contracts in OpenAPI documentation.
+servers:
+- url: http://LINEA_HOST:1880
+  description: Example Node-RED host; replace with your LINEA address
+paths:
+  /api/v1/health:
+    get:
+      summary: Kontrola dostupnosti LINEA API
+      responses:
+        '200':
+          description: API je dostupné
+        '503':
+          description: LINEA se inicializuje nebo zdrojová data nejsou připravena
+  /api/v1/status:
+    get:
+      summary: Aktuální read-only stav LINEA
+      description: Vrací aktuální stav LINEA. Jednotky numerických polí jsou současně uvedeny v top-level objektu units.
+      responses:
+        '200':
+          description: Aktuální stav
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StatusResponse'
+        '503':
+          description: LINEA se inicializuje
+components:
+  schemas:
+    StatusResponse:
+      type: object
+      required:
+      - api
+      - system
+      - units
+      - conventions
+      properties:
+        api:
+          type: object
+          properties:
+            name:
+              type: string
+              example: LINEA API
+            version:
+              type: string
+              example: 1.0.0
+            schema:
+              type: integer
+              const: 1
+            readOnly:
+              type: boolean
+              const: true
+        system:
+          type: object
+        units:
+          type: object
+          description: Mapa JSON cest na jednotky. Popisy, typy, rozlišení a limity jsou v x-linea-fields této OpenAPI specifikace.
+          additionalProperties:
+            type: string
+        conventions:
+          type: object
+        energy:
+          type: object
+        ess:
+          type: object
+        spot:
+          type: object
+        forecast:
+          type: object
+        solar:
+          type: object
+        weather:
+          type: object
+        vrm:
+          type: object
+        temperatures:
+          type: object
+        shelly:
+          type: object
+        ups:
+          type: object
+        climate:
+          type: object
+x-linea-fields:
+- path: api.name
+  type: string
+  unit: null
+  resolution: null
+  range: null
+  nullable: false
+  description: Název rozhraní.
+  source: LINEA API
+- path: api.version
+  type: string
+  unit: null
+  resolution: null
+  range: null
+  nullable: false
+  description: Verze implementace API.
+  source: LINEA API
+- path: api.schema
+  type: integer
+  unit: '1'
+  resolution: '1'
+  range: null
+  nullable: false
+  description: Verze datového schématu.
+  source: LINEA API
+- path: api.readOnly
+  type: boolean
+  unit: null
+  resolution: false/true
+  range: null
+  nullable: false
+  description: API je pouze pro čtení.
+  source: LINEA API
+- path: system.timestamp
+  type: string(date-time)
+  unit: null
+  resolution: null
+  range: null
+  nullable: false
+  description: Čas vytvoření odpovědi.
+  source: LINEA API
+- path: system.sourceTimestamp
+  type: string(date-time)
+  unit: null
+  resolution: null
+  range: null
+  nullable: false
+  description: Čas zdrojového snímku LINEA.
+  source: LINEA
+- path: system.ageMs
+  type: integer
+  unit: ms
+  resolution: 1 ms
+  range: 0…
+  nullable: true
+  description: Stáří zdrojového snímku.
+  source: Výpočet API
+- path: system.stale
+  type: boolean
+  unit: null
+  resolution: false/true
+  range: null
+  nullable: false
+  description: Příznak příliš starých zdrojových dat.
+  source: Výpočet API
+- path: energy.pv.powerW
+  type: number
+  unit: W
+  resolution: 1 W*
+  range: dle zdroje
+  nullable: true
+  description: Celkový okamžitý výkon FVE.
+  source: LINEA / MPPT
+- path: energy.pv.strings[].powerW
+  type: number
+  unit: W
+  resolution: 1 W
+  range: dle zdroje
+  nullable: true
+  description: Okamžitý výkon MPPT větve.
+  source: Modbus; výkon je zaokrouhlen na celé W
+- path: energy.pv.strings[].pvVoltageV
+  type: number
+  unit: V
+  resolution: 0.01 V
+  range: dle zařízení
+  nullable: true
+  description: FV napětí MPPT větve.
+  source: Modbus, raw / 100
+- path: energy.pv.strings[].pvCurrentA
+  type: number
+  unit: A
+  resolution: 0.1 A
+  range: dle zařízení
+  nullable: true
+  description: Vypočtený proud FV větve.
+  source: Výpočet power/voltage, výstup na 0.1 A
+- path: energy.pv.strings[].yieldTodayKWh
+  type: number
+  unit: kWh
+  resolution: 0.1 kWh**
+  range: ≥ 0
+  nullable: true
+  description: Dnešní výnos MPPT větve.
+  source: Modbus, raw / 10
+- path: energy.house.powerW
+  type: number
+  unit: W
+  resolution: dle zdroje
+  range: dle instalace
+  nullable: true
+  description: Celkový okamžitý příkon objektu.
+  source: LINEA
+- path: energy.house.phases.l1PowerW
+  type: number
+  unit: W
+  resolution: dle zdroje
+  range: dle instalace
+  nullable: true
+  description: Okamžitý příkon fáze L1.
+  source: LINEA
+- path: energy.house.phases.l2PowerW
+  type: number
+  unit: W
+  resolution: dle zdroje
+  range: dle instalace
+  nullable: true
+  description: Okamžitý příkon fáze L2.
+  source: LINEA
+- path: energy.house.phases.l3PowerW
+  type: number
+  unit: W
+  resolution: dle zdroje
+  range: dle instalace
+  nullable: true
+  description: Okamžitý příkon fáze L3.
+  source: LINEA
+- path: energy.grid.powerW
+  type: number
+  unit: W
+  resolution: dle zdroje
+  range: dle instalace
+  nullable: true
+  description: Tok výkonu mezi objektem a sítí; + import, − export.
+  source: LINEA
+- path: energy.grid.phases.l1PowerW
+  type: number
+  unit: W
+  resolution: dle zdroje
+  range: dle instalace
+  nullable: true
+  description: Tok výkonu fáze L1; + import, − export.
+  source: LINEA
+- path: energy.grid.phases.l2PowerW
+  type: number
+  unit: W
+  resolution: dle zdroje
+  range: dle instalace
+  nullable: true
+  description: Tok výkonu fáze L2; + import, − export.
+  source: LINEA
+- path: energy.grid.phases.l3PowerW
+  type: number
+  unit: W
+  resolution: dle zdroje
+  range: dle instalace
+  nullable: true
+  description: Tok výkonu fáze L3; + import, − export.
+  source: LINEA
+- path: energy.battery.socPct
+  type: number
+  unit: '%'
+  resolution: dle zdroje
+  range: oček. 0–100 %
+  nullable: true
+  description: Aktuální stav nabití baterie.
+  source: Victron/LINEA
+- path: energy.battery.powerW
+  type: number
+  unit: W
+  resolution: 1 W***
+  range: dle systému
+  nullable: true
+  description: Okamžitý výkon baterie; + nabíjení, − vybíjení.
+  source: Modbus/LINEA
+- path: energy.battery.currentA
+  type: number
+  unit: A
+  resolution: 0.1 A
+  range: zdrojově signed INT16 / 10
+  nullable: true
+  description: Okamžitý proud baterie.
+  source: Modbus, signed raw / 10
+- path: energy.battery.voltageV
+  type: number
+  unit: V
+  resolution: 0.1 V
+  range: zdrojově raw / 10
+  nullable: true
+  description: Napětí baterie.
+  source: Modbus, raw / 10
+- path: energy.battery.batteryLifeSocLimitPct
+  type: number
+  unit: '%'
+  resolution: 0.1 %
+  range: oček. 0–100 %
+  nullable: true
+  description: Spodní SOC limit BatteryLife/ESS.
+  source: Modbus, raw / 10
+- path: ess.decision.gridPointW
+  type: number
+  unit: W
+  resolution: 1 W***
+  range: dle konfigurace
+  nullable: false
+  description: Výsledný požadovaný Grid Point.
+  source: LINEA
+- path: ess.decision.pvSurplusW
+  type: number
+  unit: W
+  resolution: 1 W***
+  range: dle instalace
+  nullable: false
+  description: Interní přebytek/nedostatek FV pro rozhodování.
+  source: LINEA
+- path: ess.decision.predictionActive
+  type: boolean
+  unit: null
+  resolution: false/true
+  range: null
+  nullable: false
+  description: Predikční logika je v rozhodnutí aktivní.
+  source: LINEA
+- path: ess.decision.exportAllowed
+  type: boolean
+  unit: null
+  resolution: false/true
+  range: null
+  nullable: false
+  description: Aktuální rozhodnutí dovoluje export.
+  source: LINEA
+- path: ess.decision.reason.code
+  type: string
+  unit: null
+  resolution: null
+  range: enum se může rozšířit
+  nullable: false
+  description: Strojový kód důvodu rozhodnutí.
+  source: LINEA
+- path: ess.decision.reason.text
+  type: string|null
+  unit: null
+  resolution: null
+  range: null
+  nullable: true
+  description: Volitelný lidský popis důvodu.
+  source: LINEA
+- path: ess.settings.balancingReserveW
+  type: number
+  unit: W
+  resolution: 1 W***
+  range: dle konfigurace
+  nullable: false
+  description: Vyrovnávací výkonová rezerva.
+  source: Konfigurace LINEA
+- path: ess.settings.setGridValueW
+  type: number
+  unit: W
+  resolution: 1 W***
+  range: dle konfigurace
+  nullable: false
+  description: Uživatelská cílová hodnota sítě.
+  source: Konfigurace LINEA
+- path: ess.settings.maxGridPointW
+  type: number
+  unit: W
+  resolution: 1 W***
+  range: dle konfigurace/hardware
+  nullable: false
+  description: Limit Grid Pointu používaný logikou.
+  source: Konfigurace LINEA
+- path: ess.settings.spotThresholdPrice
+  type: number
+  unit: CZK/kWh
+  resolution: dle zdroje/nastavení
+  range: bez API limitu
+  nullable: false
+  description: Cenový práh SPOT strategie.
+  source: Konfigurace LINEA
+- path: ess.settings.morningSocSalesPct
+  type: number
+  unit: '%'
+  resolution: dle nastavení
+  range: 0–100 % oček.
+  nullable: false
+  description: SOC hranice ranní strategie.
+  source: Konfigurace LINEA
+- path: ess.settings.eveningSocSalesPct
+  type: number
+  unit: '%'
+  resolution: dle nastavení
+  range: 0–100 % oček.
+  nullable: false
+  description: SOC hranice večerní strategie.
+  source: Konfigurace LINEA
+- path: ess.settings.gridChargingSocPct
+  type: number
+  unit: '%'
+  resolution: dle nastavení
+  range: 0–100 % oček.
+  nullable: false
+  description: Cílové SOC pro nabíjení ze sítě.
+  source: Konfigurace LINEA
+- path: ess.settings.predictionThresholdKWh
+  type: number
+  unit: kWh
+  resolution: dle nastavení
+  range: ≥ 0 oček.
+  nullable: false
+  description: Energetický práh predikční funkce.
+  source: Konfigurace LINEA
+- path: ess.settings.socDeltaBeforeExportPct
+  type: number
+  unit: '%'
+  resolution: dle nastavení
+  range: 0–100 % oček.
+  nullable: false
+  description: SOC rozdíl/hranice před exportem.
+  source: Konfigurace LINEA
+- path: ess.settings.chargingDurationGridH
+  type: number
+  unit: h
+  resolution: dle nastavení
+  range: ≥ 0 oček.
+  nullable: false
+  description: Délka nabíjení ze sítě.
+  source: Konfigurace LINEA
+- path: ess.settings.acceptablePriceGrid
+  type: number
+  unit: CZK/kWh
+  resolution: dle zdroje/nastavení
+  range: bez API limitu
+  nullable: false
+  description: Maximální přijatelná cena pro GRID charging.
+  source: Konfigurace LINEA
+- path: ess.time.delayCharging.start
+  type: string
+  unit: HH:MM
+  resolution: 1 min
+  range: 00:00–23:59
+  nullable: false
+  description: Začátek okna Delay Charging.
+  source: LINEA
+- path: ess.time.delayCharging.stop
+  type: string
+  unit: HH:MM
+  resolution: 1 min
+  range: 00:00–23:59
+  nullable: false
+  description: Konec okna Delay Charging.
+  source: LINEA
+- path: ess.time.delayCharging.startMs
+  type: number
+  unit: ms
+  resolution: 1 ms
+  range: 0–<86400000 oček.
+  nullable: false
+  description: Začátek okna jako milisekundy od půlnoci.
+  source: LINEA
+- path: ess.time.delayCharging.stopMs
+  type: number
+  unit: ms
+  resolution: 1 ms
+  range: 0–<86400000 oček.
+  nullable: false
+  description: Konec okna jako milisekundy od půlnoci.
+  source: LINEA
+- path: ess.time.morningPeakHours[]
+  type: integer
+  unit: h
+  resolution: 1 h
+  range: 0–23
+  nullable: false
+  description: Hodiny ranní špičky.
+  source: LINEA
+- path: ess.time.eveningPeakHours[]
+  type: integer
+  unit: h
+  resolution: 1 h
+  range: 0–23
+  nullable: false
+  description: Hodiny večerní špičky.
+  source: LINEA
+- path: spot.currentPrice
+  type: number
+  unit: CZK/kWh
+  resolution: dle zdroje
+  range: může být záporná
+  nullable: true
+  description: Aktuální SPOT cena používaná LINEA.
+  source: Delta Green / LINEA
+- path: forecast.solarYieldForecastKWh
+  type: number
+  unit: kWh
+  resolution: dle zdroje
+  range: ≥ 0 oček.
+  nullable: true
+  description: Predikovaná výroba FV.
+  source: Forecast zdroj
+- path: forecast.consumptionForecastKWh
+  type: number
+  unit: kWh
+  resolution: dle zdroje
+  range: ≥ 0 oček.
+  nullable: true
+  description: Predikovaná spotřeba.
+  source: Forecast zdroj
+- path: weather.rainProbabilityPct
+  type: number
+  unit: '%'
+  resolution: dle zdroje
+  range: 0–100 % oček.
+  nullable: true
+  description: Pravděpodobnost srážek.
+  source: Weather zdroj
+- path: vrm.data.today.pvYieldKWh
+  type: number
+  unit: kWh
+  resolution: dle VRM
+  range: ≥ 0
+  nullable: true
+  description: Dnešní výroba FV.
+  source: Victron VRM
+- path: vrm.data.today.consumptionKWh
+  type: number
+  unit: kWh
+  resolution: dle VRM
+  range: ≥ 0
+  nullable: true
+  description: Dnešní spotřeba.
+  source: Victron VRM
+- path: vrm.data.today.gridImportKWh
+  type: number
+  unit: kWh
+  resolution: dle VRM
+  range: ≥ 0
+  nullable: true
+  description: Dnešní import ze sítě.
+  source: Victron VRM
+- path: vrm.data.today.gridExportKWh
+  type: number
+  unit: kWh
+  resolution: dle VRM
+  range: ≥ 0
+  nullable: true
+  description: Dnešní export do sítě.
+  source: Victron VRM
+- path: vrm.data.today.batteryChargeKWh
+  type: number
+  unit: kWh
+  resolution: 0.001 kWh****
+  range: ≥ 0
+  nullable: true
+  description: Kumulativní nabitá energie od restartu Node-RED.
+  source: LINEA čítač Wh / 1000
+- path: vrm.data.today.batteryDischargeKWh
+  type: number
+  unit: kWh
+  resolution: 0.001 kWh****
+  range: ≥ 0
+  nullable: true
+  description: Kumulativní vybitá energie od restartu Node-RED.
+  source: LINEA čítač Wh / 1000
+- path: temperatures.data.racks[].temperatureC
+  type: number
+  unit: degC
+  resolution: 0.01 °C
+  range: dle čidla
+  nullable: true
+  description: Teplota racku/baterie.
+  source: Modbus, raw / 100
+- path: temperatures.data.inverters[].temperatureC
+  type: number
+  unit: degC
+  resolution: 0.01 °C
+  range: dle čidla
+  nullable: true
+  description: Teplota měniče.
+  source: Modbus, raw / 100
+- path: temperatures.data.other[].temperatureC
+  type: number
+  unit: degC
+  resolution: 0.01 °C
+  range: dle čidla
+  nullable: true
+  description: Jiná teplota.
+  source: Modbus, raw / 100
+- path: shelly.data.devices[].channel
+  type: integer
+  unit: '1'
+  resolution: '1'
+  range: ≥ 0
+  nullable: false
+  description: Číslo kanálu Shelly.
+  source: Shelly
+- path: shelly.data.smokeDetectors[].batteryPct
+  type: number
+  unit: '%'
+  resolution: dle Shelly
+  range: 0–100 % oček.
+  nullable: true
+  description: Stav baterie kouřového čidla.
+  source: Shelly
+- path: shelly.data.smokeDetectors[].batteryVoltageV
+  type: number
+  unit: V
+  resolution: dle Shelly
+  range: dle zařízení
+  nullable: true
+  description: Napětí baterie kouřového čidla.
+  source: Shelly
+- path: shelly.data.smokeDetectors[].rssiDbm
+  type: number
+  unit: dBm
+  resolution: 1 dBm typicky
+  range: dle Wi-Fi
+  nullable: true
+  description: Síla Wi-Fi signálu.
+  source: Shelly
+- path: shelly.data.smokeDetectors[].ageSec
+  type: integer
+  unit: s
+  resolution: 1 s
+  range: ≥ 0
+  nullable: true
+  description: Stáří posledního hlášení.
+  source: Výpočet LINEA
+- path: ups.data.battery.chargePct
+  type: number
+  unit: '%'
+  resolution: dle NUT/UPS
+  range: 0–100 % oček.
+  nullable: true
+  description: Nabití UPS baterie.
+  source: NUT
+- path: ups.data.battery.voltageV
+  type: number|null
+  unit: V
+  resolution: dle NUT/UPS
+  range: dle UPS
+  nullable: true
+  description: Napětí UPS baterie.
+  source: NUT
+- path: ups.data.battery.runtimeSec
+  type: number|null
+  unit: s
+  resolution: dle NUT/UPS
+  range: ≥ 0
+  nullable: true
+  description: Odhad zbývajícího runtime.
+  source: NUT
+- path: ups.data.input.voltageV
+  type: number|null
+  unit: V
+  resolution: dle NUT/UPS
+  range: dle UPS
+  nullable: true
+  description: Vstupní napětí UPS.
+  source: NUT
+- path: ups.data.output.voltageV
+  type: number|null
+  unit: V
+  resolution: dle NUT/UPS
+  range: dle UPS
+  nullable: true
+  description: Výstupní napětí UPS.
+  source: NUT
+- path: ups.data.output.frequencyHz
+  type: number|null
+  unit: Hz
+  resolution: dle NUT/UPS
+  range: dle UPS
+  nullable: true
+  description: Výstupní frekvence UPS.
+  source: NUT
+- path: ups.data.load.percent
+  type: number|null
+  unit: '%'
+  resolution: dle NUT/UPS
+  range: 0–100 % běžně
+  nullable: true
+  description: Zatížení UPS.
+  source: NUT
+- path: ups.data.load.realPowerW
+  type: number|null
+  unit: W
+  resolution: dle NUT/UPS
+  range: ≥ 0 běžně
+  nullable: true
+  description: Reálný výkon UPS zátěže.
+  source: NUT
+- path: climate.data.devices[].roomTemperatureC
+  type: number|null
+  unit: degC
+  resolution: dle Onecta
+  range: dle jednotky
+  nullable: true
+  description: Pokojová teplota.
+  source: Daikin Onecta
+- path: climate.data.devices[].outdoorTemperatureC
+  type: number|null
+  unit: degC
+  resolution: dle Onecta
+  range: dle jednotky
+  nullable: true
+  description: Venkovní teplota.
+  source: Daikin Onecta
+- path: climate.data.devices[].setpointC
+  type: number|null
+  unit: degC
+  resolution: dle Onecta
+  range: dle režimu/jednotky
+  nullable: true
+  description: Požadovaná teplota.
+  source: Daikin Onecta
+- path: climate.data.devices[].energy.todayKWh
+  type: number|null
+  unit: kWh
+  resolution: dle Onecta
+  range: ≥ 0
+  nullable: true
+  description: Energie klimatizace za dnešek.
+  source: Daikin Onecta
+- path: climate.data.devices[].energy.weekKWh
+  type: number|null
+  unit: kWh
+  resolution: dle Onecta
+  range: ≥ 0
+  nullable: true
+  description: Energie za týdenní období.
+  source: Daikin Onecta
+- path: climate.data.devices[].energy.monthKWh
+  type: number|null
+  unit: kWh
+  resolution: dle Onecta
+  range: ≥ 0
+  nullable: true
+  description: Energie za měsíční období.
+  source: Daikin Onecta
+- path: climate.data.devices[].energy.coolingMonthKWh
+  type: number|null
+  unit: kWh
+  resolution: dle Onecta
+  range: ≥ 0
+  nullable: true
+  description: Měsíční energie chlazení.
+  source: Daikin Onecta
+- path: climate.data.devices[].energy.heatingMonthKWh
+  type: number|null
+  unit: kWh
+  resolution: dle Onecta
+  range: ≥ 0
+  nullable: true
+  description: Měsíční energie topení.
+  source: Daikin Onecta

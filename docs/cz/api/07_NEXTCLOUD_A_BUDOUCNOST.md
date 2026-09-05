@@ -24,7 +24,7 @@ Pracovní koncept: krátká historie ve vysokém rozlišení, delší historie v
 
 `nBatteryALL_input_Wh` a `nBatteryALL_output_Wh` se po restartu Node-RED vynulují. Budoucí databázová služba Nextcloud má umožnit jednorázovou obnovu posledních uložených hodnot po čerstvém startu LINEA. Restore musí být chráněn interním příznakem a nesmí se opakovat během běžného provozu.
 
-Tato obnova **není součástí API 1.0-r2.3.3**.
+Tato obnova **není součástí API 1.0.0**.
 
 ## Co nyní neměnit
 
@@ -36,7 +36,7 @@ Hlavní LINEA API zůstává read-only. Pokud bude někdy realizováno velmi ome
 
 ---
 
-[← LINEA API](README.md) · [← Hlavní dokumentace](../README.md)
+[← LINEA API](PREHLED.md) · [← Hlavní dokumentace](PREHLED.md)
 
 ## Změnové ukládání pomalu se měnících stavů
 Pro UPS a podobné stavové bloky není účelné ukládat každých několik sekund identickou kopii. Při nezměněném stavu může Nextcloud prodloužit `valid_to` posledního záznamu a nový řádek vytvořit až při změně. Historický stav se rekonstruuje podle `valid_from`–`valid_to`; události a rychlé energetické veličiny mohou mít jinou retenční politiku.

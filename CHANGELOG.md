@@ -1,8 +1,10 @@
 [🇨🇿 Česky](CHANGELOG_CZ.md) | [🇬🇧 **English**](CHANGELOG.md)
 
----
+## LINEA API 1.0.0 — 2026-09-02
 
-# LINEA Version History
+First public LINEA API release. The API is integrated directly into LINEA FLOW starting with version `01092026`, is read-only, uses data schema `1`, exposes explicit units and includes an OpenAPI contract.
+
+
 
 ## Documentation update — 2026-09-01
 - UPS/NUT aligned with active module: central config, 5 s query, 15 s watchdog, test and events.
@@ -13,7 +15,8 @@
 
 ## Documentation 1.0.0 — 30 August 2026
 
-First public release of the reorganized LINEA
+First public release of the reorganized LINEA / GridSight documentation.
+
 - complete Czech and English documentation;
 - `README_CZ.md` and `README.md` are the project introduction; there is no separate Getting Started chapter;
 - consistently numbered main documentation chapters;

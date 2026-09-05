@@ -1,4 +1,4 @@
-[🇨🇿 Česky](../../cz/api/02_INSTALACE.md) | [🇬🇧 English](02_INSTALLATION.md)
+[🇨🇿 Česky](../../cz/api/02_ZPROVOZNENI_A_POUZITI.md) | [🇬🇧 English](02_INSTALLATION.md)
 
 ---
 
@@ -9,7 +9,7 @@ LINEA API runs inside Node-RED alongside the main LINEA flow and reads its exist
 ## Requirements
 
 - working LINEA in Node-RED;
-- imported LINEA API flow/module matching `1.0-r2.3.3`;
+- imported LINEA API flow/module matching `1.0.0`;
 - source globals/snapshots available for the sections used by the installation;
 - client network access to the Node-RED HTTP interface according to the local deployment.
 
@@ -18,7 +18,7 @@ LINEA API runs inside Node-RED alongside the main LINEA flow and reads its exist
 Call `GET /api/v1/health` first. Expected contract:
 
 ```json
-{"name":"LINEA API","version":"1.0-r2.3.3","schema":3,"readOnly":true}
+{"name":"LINEA API","version":"1.0.0","schema":3,"readOnly":true}
 ```
 
 Then verify `GET /api/v1/status`, especially `system.ageMs`, `system.stale`, energy values and `available` on optional modules.

@@ -1,10 +1,10 @@
-[🇨🇿 Česky](../../cz/api/README.md) | [🇬🇧 English](README.md)
+[🇨🇿 Česky](../../cz/api/PREHLED.md) | [🇬🇧 English](README.md)
 
 ---
 
 # LINEA API
 
-LINEA API is an integration layer inside Node-RED that exposes the already existing LINEA operational state to other applications. The current production-verified contract is **LINEA API `1.0-r2.3.3`, schema `3`**.
+LINEA API is an integration layer inside Node-RED that exposes the already existing LINEA operational state to other applications. The current production-verified contract is **LINEA API `1.0.0`, schema `1`**.
 
 > **Core rule:** the main LINEA API is strictly **READ-ONLY**. It publishes the completed LINEA state; it does not make ESS decisions, recalculate control logic, or write Modbus registers.
 
@@ -13,7 +13,7 @@ LINEA API is an integration layer inside Node-RED that exposes the already exist
 - [Overview and architecture](01_OVERVIEW_AND_ARCHITECTURE.md)
 - [Installation and connection](02_INSTALLATION.md)
 - [Endpoints](03_ENDPOINTS.md)
-- [Schema 3 data model](04_DATA_MODEL.md)
+- [schema 1 data model](04_DATA_MODEL.md)
 - [Conventions, freshness and availability](05_CONVENTIONS_AND_FRESHNESS.md)
 - [Response examples](06_EXAMPLES.md)
 - [Nextcloud, history and future work](07_NEXTCLOUD_AND_FUTURE.md)
@@ -34,3 +34,13 @@ Control endpoints such as `/set`, `/control`, or `/write` are not part of the AP
 ---
 
 [← LINEA API](README.md) · [← Main documentation](../README.md)
+
+
+## OpenAPI
+
+[OpenAPI 3.1 specification](openapi.yaml)
+
+## Availability
+
+LINEA API is integrated directly into LINEA FLOW starting with LINEA FLOW version `01092026`. It is not a separately installed module or application. Older LINEA FLOW versions do not provide the API and it will not be backported to them for technical reasons.
+

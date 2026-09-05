@@ -21,20 +21,19 @@ LINEA zůstává zdrojem aktuální pravdy a řídicí logiky. API nesmí znovu 
 
 ## Bezpečnostní princip
 
-Do veřejné odpovědi se nesmí exportovat citlivé nebo zbytečně interní údaje, zejména Daikin/VRM tokeny, klientské secrety, interní IP adresy, Shelly MQTT ID, nepotřebné Modbus Unit ID a nepotřebná sériová čísla. `api.readOnly` je explicitně `true`.
 
 ## Verze a kompatibilita
 
 ```text
-API version: 1.0-r2.3.3
-schema:      3
+API version: 1.0.0
+schema:      1
 path:        /api/v1/...
 ```
 
 Klient se má při kompatibilitě orientovat především podle `schema`. Bugfix implementace může změnit `version` bez změny datového schématu. Nekompatibilní změna veřejné struktury vyžaduje zvýšení schema; nový API path má smysl až podle rozsahu skutečné změny.
 
-R2.3.3 je uzavřená první produkčně použitelná verze pro monitorovací účely. Bez konkrétní potřeby klienta se API nemá kosmeticky měnit.
+1.0.0 je uzavřená první produkčně použitelná verze pro monitorovací účely. Bez konkrétní potřeby klienta se API nemá kosmeticky měnit.
 
 ---
 
-[← LINEA API](README.md) · [← Hlavní dokumentace](../README.md)
+[← LINEA API](PREHLED.md) · [← Hlavní dokumentace](PREHLED.md)

@@ -41,7 +41,6 @@ Redirect URI musí být ve všech krocích přesně shodná.
 Běžná konfigurace směřuje do `global.config.daikinConfig` (`clientId`, `clientSecret`, `pollMinutes`). Tokeny jsou provozní tajemství s jiným životním cyklem. Pracovní flow může ještě obsahovat přechodové části staršího ukládání; ty nejsou považovány za definitivní architekturu.
 
 ## 6. Čtení a veřejný stav
-Platný access token čte `GET https://api.onecta.daikineurope.com/v1/gateway-devices`. Parser zpracovává podle dostupnosti cloud stav, on/off, režim, pokojovou/venkovní teplotu, setpoint, ventilátor, powerful/holiday, plán, energii, chyby a firmware. Redukovaný `global.lineaApiClimateState` může publikovat pouze monitorovací údaje; tokeny, Client ID/Secret, interní IP, sériová čísla a plánování do veřejného API nepatří.
 
 ## 7. Polling
 Cílové nastavení používá `pollMinutes` s minimem **8 minut**. Aktuální pracovní flow může ještě obsahovat starší pevný polling; při dokončení Daikin modulu se má sjednotit na jediný konfigurovatelný mechanismus.

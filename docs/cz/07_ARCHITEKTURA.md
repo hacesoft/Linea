@@ -89,4 +89,4 @@ Daikin, UPS a externí chlazení nejsou součástí řídicího jádra. Integrac
 [← Dokumentace LINEA](README.md)
 ## LINEA API
 
-Nad hotovým stavem LINEA je dostupná samostatná **read-only** integrační vrstva. API nezasahuje do řídicí logiky ani Modbus registrů; pouze publikuje existující stav pro klienty. Viz [LINEA API](api/README.md).
+Nad hotovým stavem LINEA je dostupná samostatná **read-only** integrační vrstva. API nezasahuje do řídicí logiky ani Modbus registrů; pouze publikuje existující stav pro klienty. Viz [LINEA API](api/PREHLED.md).

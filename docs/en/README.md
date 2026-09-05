@@ -30,7 +30,7 @@ LINEA is a Node-RED project for monitoring and controlling Victron photovoltaic 
 
 The **[LINEA API](api/README.md)** is a READ-ONLY interface publishing existing Node-RED state for external monitoring clients.
 
-Current API: **1.0-r2.3.3 · schema 3**
+Current API: **1.0.0 · schema 1**
 
 ➡️ **[Open LINEA API documentation](api/README.md)**
 

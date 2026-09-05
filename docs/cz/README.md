@@ -30,11 +30,11 @@ Tato stránka je hlavní rozcestník české dokumentace.
 
 ## 🔌 LINEA API
 
-**[LINEA API](api/README.md)** je samostatné **READ-ONLY rozhraní**, které publikuje existující stav Node-RED pro externí klienty. API samo zařízení neřídí ani nemění nastavení LINEA.
+**[LINEA API](api/PREHLED.md)** je samostatné **READ-ONLY rozhraní**, které publikuje existující stav Node-RED pro externí klienty. API samo zařízení neřídí ani nemění nastavení LINEA.
 
-Aktuální API: **1.0-r2.3.3 · schema 3**
+Aktuální API: **1.0.0 · schema 1**
 
-➡️ **[Otevřít dokumentaci LINEA API](api/README.md)**
+➡️ **[Otevřít dokumentaci LINEA API](api/PREHLED.md)**
 
 ## 🧠 Architektura a data
 
@@ -42,7 +42,7 @@ Aktuální API: **1.0-r2.3.3 · schema 3**
 - [Tok dat](08_TOK_DAT.md)
 - [Modbus](12_MODBUS.md)
 - [Registry a režimy](13_REGISTRY_A_REZIMY.md)
-- [LINEA API](api/README.md)
+- [LINEA API](api/PREHLED.md)
 
 ## 🧩 Integrace a samostatné moduly
 
@@ -79,7 +79,7 @@ Aktuální API: **1.0-r2.3.3 · schema 3**
 | Energie | [SPOT, Energy a predikce](14_SPOT_ENERGY_PREDIKCE.md) |
 | Konfigurace | [Konfigurace](15_KONFIGURACE.md) |
 | UI | [Dashboard](16_DASHBOARD.md) |
-| API | **[LINEA API](api/README.md)** |
+| API | **[LINEA API](api/PREHLED.md)** |
 | Diagnostika | [Troubleshooting](17_TROUBLESHOOTING.md) |
 | Bezpečnost | [Bezpečnost](18_BEZPECNOST.md) |
 | Historie | [CHANGELOG](../../CHANGELOG.md) |

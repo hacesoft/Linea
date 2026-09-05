@@ -12,7 +12,7 @@ A working retention concept is high-resolution short history, 15-minute aggregat
 
 ## Future battery-counter restore
 
-`nBatteryALL_input_Wh` and `nBatteryALL_output_Wh` reset after a Node-RED restart. A future Nextcloud database service is intended to allow a one-time restore of the last stored values after a fresh LINEA start. Restore must be guarded by an internal flag so it cannot occur repeatedly during normal operation. This is **not part of API 1.0-r2.3.3**.
+`nBatteryALL_input_Wh` and `nBatteryALL_output_Wh` reset after a Node-RED restart. A future Nextcloud database service is intended to allow a one-time restore of the last stored values after a fresh LINEA start. Restore must be guarded by an internal flag so it cannot occur repeatedly during normal operation. This is **not part of API 1.0.0**.
 
 ## What not to change now
 

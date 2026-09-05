@@ -1,4 +1,4 @@
-[🇨🇿 Česky](03_ENDPOINTY.md) | [🇬🇧 English](../../en/api/03_ENDPOINTS.md)
+[🇨🇿 Česky](03_KONCOVE_BODY.md) | [🇬🇧 English](../../en/api/03_ENDPOINTS.md)
 
 ---
 
@@ -11,7 +11,7 @@ Slouží k jednoduchému ověření dostupnosti konektoru a jeho kontraktu.
 ```json
 {
   "name": "LINEA API",
-  "version": "1.0-r2.3.3",
+  "version": "1.0.0",
   "schema": 3,
   "readOnly": true
 }
@@ -21,7 +21,7 @@ Slouží k jednoduchému ověření dostupnosti konektoru a jeho kontraktu.
 
 ## `GET /api/v1/status`
 
-Vrací jeden konsolidovaný snapshot provozního stavu LINEA. Hlavní sekce schema 3:
+Vrací jeden konsolidovaný snapshot provozního stavu LINEA. Hlavní sekce schema 1:
 
 ```text
 api
@@ -60,4 +60,4 @@ Hlavní API nemá řídicí endpointy. Zejména neexistuje univerzální `/set`,
 
 ---
 
-[← LINEA API](README.md) · [← Hlavní dokumentace](../README.md)
+[← LINEA API](PREHLED.md) · [← Hlavní dokumentace](PREHLED.md)

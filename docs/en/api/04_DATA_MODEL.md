@@ -2,7 +2,7 @@
 
 ---
 
-# Data model – schema 3
+# Data model – schema 1
 
 ## `system`
 
@@ -15,7 +15,7 @@
 - `energy.pv.powerW` – total instantaneous PV power [W].
 - `energy.pv.strings[]` – MPPT strings with `name`, `powerW`, `pvVoltageV`, `pvCurrentA`, `yieldTodayKWh`.
 
-Internal `instance` is not published. Verified names include `MPPT WEST` and `MPPT VJ`. If the main PV snapshot temporarily reports 0 W while strings have non-zero power, R2.3.3 falls back to the sum of string power.
+Internal `instance` is not published. Verified names include `MPPT WEST` and `MPPT VJ`. If the main PV snapshot temporarily reports 0 W while strings have non-zero power, 1.0.0 falls back to the sum of string power.
 
 ### House and grid
 

@@ -1,4 +1,4 @@
-[🇨🇿 Česky](../../cz/api/05_KONVENCE_A_FRESHNESS.md) | [🇬🇧 English](05_CONVENTIONS_AND_FRESHNESS.md)
+[🇨🇿 Česky](../../cz/api/05_KONVENCE_A_STARI_DAT.md) | [🇬🇧 English](05_CONVENTIONS_AND_FRESHNESS.md)
 
 ---
 
@@ -10,9 +10,9 @@ Grid: positive power = import, negative power = export. Battery: positive power 
 
 ## Main snapshot freshness
 
-R2.3.3 marks the main LINEA snapshot stale after approximately **30 seconds**. `system.ageMs` is source age and `system.stale` is the evaluated result.
+1.0.0 marks the main LINEA snapshot stale after approximately **30 seconds**. `system.ageMs` is source age and `system.stale` is the evaluated result.
 
-Source update rates differ: main Modbus/energy data are on the order of seconds; Shelly is event-driven MQTT; UPS is seconds; Daikin is several minutes due to cloud API limits; VRM/forecast/weather are slower. Some slower modules have their own `updatedAt`, but a generic per-module freshness contract is not part of schema 3.
+Source update rates differ: main Modbus/energy data are on the order of seconds; Shelly is event-driven MQTT; UPS is seconds; Daikin is several minutes due to cloud API limits; VRM/forecast/weather are slower. Some slower modules have their own `updatedAt`, but a generic per-module freshness contract is not part of schema 1.
 
 Shelly Smoke devices may sleep for long periods. A high `ageSec` alone is not a fault and must not be evaluated with the same stale threshold as a second-level Modbus stream.
 

@@ -26,14 +26,14 @@ Sensitive or unnecessarily internal data must not be exported, especially Daikin
 ## Versioning and compatibility
 
 ```text
-API version: 1.0-r2.3.3
-schema:      3
+API version: 1.0.0
+schema:      1
 path:        /api/v1/...
 ```
 
 Clients should primarily use `schema` for compatibility. An implementation bugfix may change `version` without changing the data schema. An incompatible public-structure change requires a schema increment; a new API path should only be considered when a real change justifies it.
 
-R2.3.3 is the closed first production-usable monitoring release. The API should not be changed cosmetically without a concrete client need.
+1.0.0 is the closed first production-usable monitoring release. The API should not be changed cosmetically without a concrete client need.
 
 ---
 

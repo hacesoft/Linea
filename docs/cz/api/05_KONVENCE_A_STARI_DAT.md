@@ -1,4 +1,4 @@
-[🇨🇿 **Česky**](05_KONVENCE_A_FRESHNESS.md) \| [🇬🇧
+[🇨🇿 **Česky**](05_KONVENCE_A_STARI_DAT.md) \| [🇬🇧
 English](../../en/api/05_CONVENTIONS_AND_FRESHNESS.md)
 
 # Konvence, stáří a dostupnost dat

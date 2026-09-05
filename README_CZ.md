@@ -26,7 +26,7 @@ Victron systém, firmware měničů, BMS a nastavené hardwarové limity zůstá
 - řízení Grid Point;
 - Modbus komunikace přes registr 2700 nebo 2716/2717;
 - zpracování energie a predikce;
-- read-only [LINEA API](docs/cz/api/README.md) pro externí monitorovací klienty.
+- read-only [LINEA API](docs/cz/api/PREHLED.md) pro externí monitorovací klienty.
 
 ## Základní princip
 
@@ -57,9 +57,9 @@ Podrobnosti komunikace jsou v kapitolách [Modbus](docs/cz/12_MODBUS.md) a [Regi
 
 ## LINEA API
 
-[LINEA API](docs/cz/api/README.md) je samostatné **READ-ONLY** rozhraní pro externí monitorovací aplikace. Publikuje stav, který již existuje v Node-RED, a neposkytuje řídicí endpointy.
+[LINEA API](docs/cz/api/PREHLED.md) je samostatné **READ-ONLY** rozhraní pro externí monitorovací aplikace. Publikuje stav, který již existuje v Node-RED, a neposkytuje řídicí endpointy.
 
-Aktuální API: **1.0-r2.3.3 · schema 3**
+Aktuální API: **1.0.0 · schema 1**
 
 ## Modulární architektura
 

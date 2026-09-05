@@ -13,7 +13,7 @@ identifikátory jsou nahrazené obecnými názvy.
 {
   "api": {
     "name": "LINEA API",
-    "version": "1.0-r2.3.3",
+    "version": "1.0.0",
     "schema": 3,
     "readOnly": true
   },
@@ -286,6 +286,65 @@ identifikátory jsou nahrazené obecnými názvy.
 ```
 
 Význam každé položky, datový typ, jednotka a znaménková konvence jsou
-popsány v [Datovém modelu -- schema 3](04_DATOVY_MODEL.md).
+popsány v [Datovém modelu -- schema 1](04_DATOVY_MODEL.md).
 
-[← LINEA API](README.md)
+[← LINEA API](PREHLED.md)
+
+## Příklad SPOT cen
+
+```json
+{
+  "spot": {
+    "available": true,
+    "currentPrice": 4.12,
+    "intervalMinutes": 60,
+    "today": {
+      "date": "2026-09-05",
+      "available": true,
+      "prices": [
+        {"hour": 0, "price": 2.31},
+        {"hour": 1, "price": 2.12}
+      ]
+    },
+    "tomorrow": {
+      "date": "2026-09-06",
+      "available": true,
+      "prices": [
+        {"hour": 0, "price": 1.98},
+        {"hour": 1, "price": 1.87}
+      ]
+    }
+  }
+}
+```
+
+## Příklad VRM predikce pro graf
+
+```json
+{
+  "forecast": {
+    "available": true,
+    "source": "Victron VRM",
+    "intervalMinutes": 15,
+    "solarYieldForecastKWh": 25.33,
+    "consumptionForecastKWh": 20.64,
+    "series": {
+      "solarYield": [
+        {
+          "timestampMs": 1788595200000,
+          "timestamp": "2026-09-05T08:00:00.000Z",
+          "energyKWh": 0.18
+        }
+      ],
+      "consumption": [
+        {
+          "timestampMs": 1788595200000,
+          "timestamp": "2026-09-05T08:00:00.000Z",
+          "energyKWh": 0.21
+        }
+      ]
+    }
+  }
+}
+```
+

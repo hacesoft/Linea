@@ -1,8 +1,10 @@
 [🇨🇿 **Česky**](CHANGELOG_CZ.md) | [🇬🇧 English](CHANGELOG.md)
 
----
+## LINEA API 1.0.0 — 02.09.2026
 
-# Historie verzí LINEA
+První veřejná verze LINEA API. API je integrováno přímo do LINEA FLOW od verze `01092026`, je pouze pro čtení, používá datové schéma `1`, explicitní mapu jednotek a OpenAPI popis datového kontraktu.
+
+
 
 ## Aktualizace dokumentace — 01.09.2026
 - UPS/NUT podle aktivního modulu: centrální konfigurace, 5s dotaz, 15s watchdog, test a události.
@@ -13,7 +15,7 @@
 
 ## Dokumentace 1.0.0 — 30.08.2026
 
-První veřejná verze nové dokumentace LINEA
+První veřejná verze nové dokumentace LINEA / GridSight.
 
 - kompletní česká a anglická dokumentace;
 - hlavní `README_CZ.md` a `README.md` slouží zároveň jako úvod projektu;

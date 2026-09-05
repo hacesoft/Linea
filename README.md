@@ -58,7 +58,7 @@ For communication details see [Modbus](docs/en/12_MODBUS.md) and [Registers and 
 
 The [LINEA API](docs/en/api/README.md) is a separate READ-ONLY interface for external monitoring applications. It publishes state already available in Node-RED and does not provide control endpoints.
 
-Current API: **1.0-r2.3.3 · schema 3**
+Current API: **1.0.0 · schema 1**
 
 ## Modular architecture
 

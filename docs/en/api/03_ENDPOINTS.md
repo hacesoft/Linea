@@ -1,4 +1,4 @@
-[🇨🇿 Česky](../../cz/api/03_ENDPOINTY.md) | [🇬🇧 English](03_ENDPOINTS.md)
+[🇨🇿 Česky](../../cz/api/03_KONCOVE_BODY.md) | [🇬🇧 English](03_ENDPOINTS.md)
 
 ---
 
@@ -11,7 +11,7 @@ Provides a simple connector and contract health check.
 ```json
 {
   "name": "LINEA API",
-  "version": "1.0-r2.3.3",
+  "version": "1.0.0",
   "schema": 3,
   "readOnly": true
 }
@@ -21,7 +21,7 @@ Provides a simple connector and contract health check.
 
 ## `GET /api/v1/status`
 
-Returns one consolidated LINEA operational snapshot. Schema 3 top-level sections are:
+Returns one consolidated LINEA operational snapshot. schema 1 top-level sections are:
 
 ```text
 api
