@@ -97,7 +97,7 @@ INT16
 
 Jedná se o starší způsob řízení.
 
-Hodnota je v zařízení realizována v nevolatilní FLASH/EEPROM oblasti. Proto není vhodné bezdůvodně zapisovat stejnou hodnotu každou sekundu.
+Větev 2700 je ve flow určena pro zápis při změně nastavení.
 
 LINEA v tomto režimu používá **send-on-change** logiku:
 
@@ -128,7 +128,7 @@ INT32
 
 32bitová hodnota je ve flow rozdělena na dvě 16bitová slova a zapisována od adresy 2716.
 
-Tento setpoint je provozní hodnota v RAM a je určen pro aktivní externí řízení.
+Tato větev je určena pro průběžně obnovované externí řízení.
 
 ### Proč se 2716/2717 zapisuje periodicky
 
@@ -138,11 +138,7 @@ U tohoto režimu je periodický zápis **záměrný a nutný**.
 500 W → 500 W → 500 W → 500 W ...
 ```
 
-Externí controller tím dává měniči najevo, že stále žije. Pokud LINEA přestane setpoint obnovovat, firmware po bezpečnostním timeoutu vrátí hodnotu typicky na:
-
-```text
-0 W
-```
+Externí controller tím obnovuje požadavek. Timeout a návratový setpoint při ztrátě obnovování je nutné ověřit pro konkrétní GX/firmware; nelze je považovat za nezávislou bezpečnostní záruku.
 
 Proto zde nesmí být:
 
@@ -154,7 +150,7 @@ deduplikace stejných hodnot
 
 ### Proč se 2700 naopak periodicky nezapisuje
 
-Registr 2700 je historický parametr uložený v nevolatilní paměti. Zbytečný periodický zápis by jen zvyšoval počet zápisových cyklů FLASH/EEPROM.
+Větev 2700 potlačuje opakované zápisy stejné hodnoty.
 
 Současný `sendValueWithinLimits` proto odlišuje oba režimy:
 
@@ -167,8 +163,7 @@ Současný `sendValueWithinLimits` proto odlišuje oba režimy:
 
 
 ```text
-Cerbo / Venus OS minimálně 3.50
-MultiPlus-II 48 firmware minimálně v510
+Ověřte podporu registrů 2716/2717 v konkrétní verzi Venus OS a zařízení.
 ```
 
 Před použitím je vhodné podporu ověřit pro konkrétní zařízení a firmware.
@@ -352,11 +347,7 @@ Skutečný nabíjecí výkon může být nižší kvůli:
 
 ### Fail-safe
 
-Pokud nejsou ceny validní, aktuální opravené flow nevytvoří umělý fallback blok od půlnoci.
-
-```text
-neplatná SPOT data → automatické GRID nabíjení se nespustí
-```
+`findCheapestContinuousBlock` při neplatném poli nebo nenalezeném bloku vrací náhradní první hodiny. Nelze tedy tvrdit, že neplatná SPOT data automatické nabíjení vždy zablokují. Konečné spuštění závisí i na dalších podmínkách a aktuální ceně; při nedostupných nebo neúplných cenách funkci vypněte.
 
 ---
 
@@ -526,13 +517,7 @@ Delay Charging
 Současný flow porovnává predikovanou výrobu s požadovanou hranicí/spotřebou.
 
 
-```text
-Prediction Threshold ON
-+
-neplatná predikce
-=
-závislá operace se nepovolí
-```
+Při platném zdroji se porovnává FV predikce v kWh s vyšší z predikované spotřeby a uživatelského prahu. Při neplatném zdroji nastaví referenční flow `bPredikce = true`: filtr se **neuplatní**, závislá operace není z tohoto důvodu blokována. Ostatní podmínky strategie zůstávají v platnosti.
 
 ---
 
@@ -738,27 +723,7 @@ Dashboard neposílá své přepínače přímo do Modbus write nodu.
 
 Tok je:
 
-```text
-UI
- ↓
-ESS :: Widget_Handler
- ↓
-setConfigProperty()
- ↓
-centrální config
- ↓
-AC LOAD / ESS logika
- ↓
-nSet_Grid_Point
- ↓
-sendValueWithinLimits
- ↓
-Control Mode
- ├─ 2700
- └─ 2716/2717
- ↓
-Modbus write
-```
+UI přes `ESS :: Widget_Handler` a `setConfigProperty()` mění centrální config. AC LOAD vypočte `nSet_Grid_Point`, který zpracuje `sendValueWithinLimits`. Podle Control Mode potom následuje zápis **buď do 2700, nebo do 2716/2717**.
 
 To je důležité pro diagnostiku.
 
@@ -793,7 +758,7 @@ Pokud přepínač v UI změní stav, ale FVE nereaguje, je nutné postupně ově
 | Morning Sales | `nMorningPeakBatterySales` | bool | ranní prodej baterie |
 | Morning SOC | `nMorningSOC_sales` | % | minimální ranní SOC |
 | Prediction Threshold | `nPredictionThreshold` | bool | zapíná filtr predikce |
-| Prediction limit | `sPredictionThresholdKW` | kW | práh predikce |
+| Prediction limit | `sPredictionThresholdKW` | kWh | práh predikce |
 | Evening Sales | `nEveningPeakBatterySales` | bool | večerní prodej |
 | Evening SOC | `nEveningSOC_sales` | % | minimální večerní SOC |
 | Grid Charging | `sGridChargingSwitch` | bool | ruční GRID nabíjení |

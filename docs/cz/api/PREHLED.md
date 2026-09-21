@@ -6,11 +6,7 @@ LINEA API je rozhraní pouze pro čtení určené pro předávání provozních 
 
 ## Dostupnost API
 
-**LINEA API je integrováno přímo do LINEA FLOW od verze `01092026`.**
-
-Ve starších verzích LINEA FLOW API není k dispozici a z technických důvodů do nich nebude zpětně doplňováno. Pro použití LINEA API je proto nutné používat LINEA FLOW verze `01092026` nebo novější.
-
-LINEA API není samostatný modul ani samostatná aplikace a **neinstaluje se odděleně**. Je nedílnou součástí LINEA FLOW.
+LINEA API je součástí referenčního LINEA flow a neinstaluje se odděleně. Dostupnost ověřte přítomností HTTP In uzlů `/api/v1/health` a `/api/v1/status`; samotné datum názvu exportu není spolehlivá kontrola. Viz [zprovoznění](02_ZPROVOZNENI_A_POUZITI.md).
 
 ## Verze
 

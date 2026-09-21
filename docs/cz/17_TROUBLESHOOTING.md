@@ -23,21 +23,7 @@ Zkontrolujte, zda na výstupní větvi není:
 
 Postupujte po datové cestě:
 
-```text
-UI
- ↓
-config
- ↓
-ESS logika
- ↓
-nSet_Grid_Point
- ↓
-limitace
- ↓
-Control Mode
- ↓
-Modbus write
-```
+`UI` → `config` → `ESS logika` → `nSet_Grid_Point` → `limitace` → `Control Mode` → `Modbus write`
 
 Ověřte také živě přečtenou hodnotu cílového registru.
 
@@ -53,7 +39,7 @@ Použijte explicitní validaci `undefined`, `null` a `Number.isFinite()`.
 
 ## Energetické čítače nesedí
 
-Ověřte:
+`Battery W counter` předpokládá periodu 1 s a přičítá `P / 3600`; skutečné Δt neměří. Ověřte:
 
 - jednotku vstupního výkonu;
 - čas mezi vzorky;
@@ -85,7 +71,7 @@ Ověřte:
 
 ## Prediction Threshold blokuje strategii
 
-Ověřte platnost predikčních dat a nastavenou hodnotu `sPredictionThresholdKW`.
+Ověřte platnost predikčních dat a práh `sPredictionThresholdKW` v kWh. Při neplatných datech se filtr naopak vynechá; nejde o ochranné zablokování strategie.
 
 ## Konfigurace se po restartu ztrácí
 

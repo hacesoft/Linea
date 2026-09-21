@@ -8,32 +8,15 @@
 
 LINEA odděluje získání dat od rozhodování a samotného zápisu do FVE.
 
-```text
-ZDROJE DAT
-   │
-   ▼
-SBĚR A VALIDACE
-   │
-   ▼
-NORMALIZOVANÝ STAV
-   │
-   ├────► Dashboard
-   ├────► energetické výpočty
-   └────► diagnostika
-   │
-   ▼
-ESS ROZHODOVACÍ LOGIKA
-   │
-   ▼
-VÝPOČET GRID POINTU
-   │
-   ▼
-LIMITACE A FAIL-SAFE
-   │
-   ▼
-VOLBA ŘÍDICÍHO REŽIMU
-   ├────► registr 2700
-   └────► registry 2716/2717
+```mermaid
+flowchart TD
+    M["Modbus / externí data"] --> S["AC LOAD / společný stav"]
+    C["Konfigurace"] --> S
+    S --> D["Dashboard a API"]
+    S --> W["Požadavek a výstupní omezení"]
+    W --> T{"Control Mode"}
+    T -->|OFF| A["Registr 2700"]
+    T -->|ON| B["Registry 2716/2717"]
 ```
 
 ## Zdroje dat
@@ -48,7 +31,7 @@ LINEA pracuje zejména s těmito zdroji:
 - čas a poloha instalace;
 - Shelly/MQTT zařízení.
 
-Každý zdroj je posuzován samostatně. Nedostupná nebo neplatná hodnota nesmí být automaticky považována za platnou nulu.
+Zdroje se obnovují nezávisle. Referenční flow u některých vstupů používá uložené náhradní hodnoty nebo nulu; podrobnosti popisuje [tok dat](08_TOK_DAT.md).
 
 ## Normalizovaný stav
 
@@ -67,7 +50,7 @@ Každý zdroj je posuzován samostatně. Nedostupná nebo neplatná hodnota nesm
 
 ## Rozhodovací vrstva
 
-ESS algoritmus vyhodnocuje provozní stav a aktivní strategie. Jednotlivé strategie neurčují Modbus zápis přímo. Jejich výsledkem je požadovaný Grid Point, který dále prochází limity a bezpečnostními kontrolami.
+ESS algoritmus vyhodnocuje provozní stav a aktivní strategie. Jejich výsledkem je požadovaný Grid Point předávaný výstupnímu omezení a převodu pro Modbus. Rozsah této kontroly má [implementační omezení](12_MODBUS.md).
 
 ## Výstupní vrstva
 

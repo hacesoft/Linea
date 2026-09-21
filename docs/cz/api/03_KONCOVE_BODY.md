@@ -1,63 +1,54 @@
-[🇨🇿 Česky](03_KONCOVE_BODY.md) | [🇬🇧 English](../../en/api/03_ENDPOINTS.md)
-
----
-
-# Endpointy
+# Koncové body
 
 ## `GET /api/v1/health`
 
-Slouží k jednoduchému ověření dostupnosti konektoru a jeho kontraktu.
+Kontroluje existenci hlavního stavu, nikoli zdraví všech zařízení. Vrací HTTP **200**, pokud existuje pravdivý `global.lineaDecisionState`, jinak **503**. `status: "ok"` může být současně se `stale: true`.
 
 ```json
 {
-  "name": "LINEA API",
-  "version": "1.0.0",
-  "schema": 3,
-  "readOnly": true
+  "api": {
+    "name": "LINEA API",
+    "version": "1.0.0",
+    "schema": 1,
+    "readOnly": true
+  },
+  "status": "ok",
+  "sourceAgeMs": 1000,
+  "stale": false,
+  "timestamp": "2026-09-21T12:00:00.000Z"
 }
 ```
 
-`version` je verze implementace konektoru. `schema` je verze veřejného datového modelu.
+`sourceAgeMs` je stáří zdrojové časové značky. `stale` je `true`, pokud stáří nelze určit nebo je **větší než 5 000 ms**. Tělo 503 má stejná pole, `status: "initializing"`, `sourceAgeMs: null` a `stale: true`.
 
 ## `GET /api/v1/status`
 
-Vrací jeden konsolidovaný snapshot provozního stavu LINEA. Hlavní sekce schema 1:
+Vrací HTTP **200** s bloky `api`, `system`, `units`, `conventions`, `energy`, `ess`, `spot`, `forecast`, `solar`, `weather`, `vrm`, `temperatures`, `shelly`, `ups`, `climate`. API má **version 1.0.0, schema 1**.
 
-```text
-api
-system
-conventions
-energy
-ess
-spot
-forecast
-solar
-weather
-vrm
-temperatures
-shelly
-ups
-climate
-```
+`system.stale` je `true`, pokud stáří nelze určit nebo je **větší než 30 000 ms**. Starý snapshot stále vrací HTTP 200. API tím nepotvrzuje úspěšný zápis Modbus ani čerstvost jednotlivých senzorů.
 
-Volitelné moduly používají jednotný princip:
+Pokud hlavní snapshot nebo jeho `timestamp` chybí, vrací HTTP **503**:
 
 ```json
-{"available": true, "data": {}}
+{
+  "api": {
+    "name": "LINEA API",
+    "version": "1.0.0",
+    "schema": 1,
+    "readOnly": true
+  },
+  "status": "initializing",
+  "timestamp": "2026-09-21T12:00:00.000Z"
+}
 ```
 
-nebo:
+Odpověď 503 nemá `system`, `units` ani energetické bloky. `/status` nastavuje `Cache-Control: no-store`; `/health` tento header v referenční funkci nenastavuje.
 
-```json
-{"available": false, "data": null}
-```
+`vrm`, `temperatures`, `shelly`, `ups` a `climate` používají obálku `{available, data}`. Ostatní sekce mají vlastní strukturu. `available` samo o sobě nezaručuje čerstvost ani online zařízení. Nepřítomný volitelný modul běžně neblokuje celý status.
 
-Výpadek Daikin, UPS, Shelly nebo jiného volitelného zdroje tedy neznamená selhání celého `/status`.
+## Rozsah
 
-## Co API nemá
+Tyto endpointy jsou pouze pro čtení. Neexistuje zde `/set`, `/control`, `/write` ani endpoint historie. Cesta je relativní k HTTP kořeni Node-RED; prefix reverse proxy nebo `httpNodeRoot` ji může změnit.
 
-Hlavní API nemá řídicí endpointy. Zejména neexistuje univerzální `/set`, `/control` nebo `/write`. Pokud někdy vznikne omezené ovládání několika povolených zařízení, musí být oddělené od hlavního read-only API.
 
----
-
-[← LINEA API](PREHLED.md) · [← Hlavní dokumentace](PREHLED.md)
+[English](../../en/api/03_ENDPOINTS.md) · [← LINEA API](PREHLED.md) · [← LINEA](../README.md)

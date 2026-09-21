@@ -1,5 +1,13 @@
 [🇨🇿 **Česky**](CHANGELOG_CZ.md) | [🇬🇧 English](CHANGELOG.md)
 
+## Revize dokumentace — 21.09.2026
+
+- Doplněny repozitáře modulů, Shelly/MQTT postup a anglické kapitoly.
+- API příklady a OpenAPI sjednoceny s dodaným flow: schema 1, obálky 200/503, limity stáří 5/30 s.
+- Opraveny popisy verzování, Join, konfigurace, predikčního filtru, SPOT fallbacku a energetických čítačů.
+- Omezení referenčního kódu a rozsah ověření jsou v [REVIEW_CZ.md](REVIEW_CZ.md).
+- Dokumentační změna; řídicí flow nebylo upraveno. API verze zůstává 1.0.0/schema 1.
+
 ## LINEA API 1.0.0 — 02.09.2026
 
 První veřejná verze LINEA API. API je integrováno přímo do LINEA FLOW od verze `01092026`, je pouze pro čtení, používá datové schéma `1`, explicitní mapu jednotek a OpenAPI popis datového kontraktu.

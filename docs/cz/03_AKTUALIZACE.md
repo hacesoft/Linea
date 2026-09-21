@@ -22,7 +22,7 @@ Zálohujte flow i konfiguraci, poznamenejte vlastní úpravy a přečtěte [CHAN
 
 ## Konfigurace mezi verzemi
 
-Konfigurace se slučuje s výchozí šablonou. Chybějící nový klíč dostane výchozí hodnotu a existující uživatelská hodnota zůstane zachována.
+Po načtení porovnejte uloženou konfiguraci s výchozí šablonou nové verze. Referenční `Parse Config` načtený objekt přímo vloží do `global.config`; automatické sloučení všech nových klíčů není zaručeno. Chybějící položky doplňte přes podporované nastavení a konfiguraci znovu uložte.
 
 ## Vlastní úpravy
 
@@ -30,7 +30,7 @@ Lokální změny Function nodů a UI se automaticky nepřenášejí. Porovnejte 
 
 ## Verze
 
-`config.oVersion` používá formát `DDMMYYYY:HHMM`. Update checker porovnává datum před dvojtečkou s release na GitHubu.
+`config.flow_version` používá formát `DDMMYYYY_HHMM`. Inicializace jej předává do `global.linea_version_local`. Update checker porovnává datum **i čas** se suffixem názvů JSON/ZIP souborů v `release/`, například `LINEA_flows_15092026_1757.json`. Staré `oVersion` se ještě může objevit ve stavovém popisku parseru, není však zdrojem aktuálního update checkeru.
 
 ---
 

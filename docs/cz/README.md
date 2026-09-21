@@ -47,6 +47,7 @@ Aktuální API: **1.0.0 · schema 1**
 ## 🧩 Integrace a samostatné moduly
 
 - [Integrace a doplňky](06_INTEGRACE_A_DOPLNKY.md)
+- [Shelly a ruční nastavení MQTT](integrace/SHELLY.md)
 - [Daikin](integrace/DAIKIN.md)
 - [UPS](integrace/UPS.md)
 - [Cooling](integrace/COOLING.md)
@@ -89,3 +90,18 @@ Aktuální API: **1.0.0 · schema 1**
 Před zapnutím automatických strategií ověřte Modbus komunikaci, znaménkovou konvenci, podporu použitých registrů, limity distributora a skutečné chování konkrétní instalace.
 
 ➡️ **[Zpět na hlavní stránku LINEA →](../../README_CZ.md)**
+
+## Repozitáře modulů
+
+Úplné návody k instalaci a exporty jednotlivých modulů:
+
+| Modul | Repozitář |
+|---|---|
+| Shelly | [node-red-shelly](https://github.com/hacesoft/node-red-shelly) |
+| Daikin ONECTA | [node-red-daikin](https://github.com/hacesoft/node-red-daikin) |
+| Eaton UPS / NUT | [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups) |
+| Cooling | [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack) |
+
+Nextcloud monitoring je ve vývoji; odkaz na repozitář a náhled aplikace zatím čekají na doplnění.
+
+[Přehled oprav a rozsah kontroly](../../REVIEW_CZ.md)

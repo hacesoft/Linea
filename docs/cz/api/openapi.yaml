@@ -2,8 +2,8 @@ openapi: 3.1.0
 info:
   title: LINEA API
   version: 1.0.0
-  description: Read-only monitoring API. Schema 1 adds explicit machine-readable units while keeping descriptions and field
-    contracts in OpenAPI documentation.
+  description: Read-only LINEA monitoring API 1.0.0, schema 1. Reference-flow contract; access control depends on
+    Node-RED/reverse-proxy deployment.
 servers:
 - url: http://LINEA_HOST:1880
   description: Example Node-RED host; replace with your LINEA address
@@ -14,12 +14,29 @@ paths:
       responses:
         '200':
           description: API je dostupné
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              examples:
+                reference:
+                  externalValue: ../../examples/health.json
         '503':
           description: LINEA se inicializuje nebo zdrojová data nejsou připravena
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+              examples:
+                reference:
+                  externalValue: ../../examples/health-initializing.json
+      description: 200 if the main state object exists, including stale state; otherwise 503. Freshness threshold
+        > 5000 ms.
   /api/v1/status:
     get:
       summary: Aktuální read-only stav LINEA
-      description: Vrací aktuální stav LINEA. Jednotky numerických polí jsou současně uvedeny v top-level objektu units.
+      description: 200 for a timestamped snapshot, including stale state. Threshold > 30000 ms. 503 if state or
+        timestamp is missing. Does not validate every cached module or physical input.
       responses:
         '200':
           description: Aktuální stav
@@ -27,10 +44,88 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/StatusResponse'
+              examples:
+                reference:
+                  externalValue: ../../examples/status.json
         '503':
           description: LINEA se inicializuje
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitializingResponse'
+              examples:
+                reference:
+                  externalValue: ../../examples/status-initializing.json
 components:
   schemas:
+    ApiInfo:
+      type: object
+      required:
+      - name
+      - version
+      - schema
+      - readOnly
+      properties:
+        name:
+          const: LINEA API
+        version:
+          const: 1.0.0
+        schema:
+          const: 1
+        readOnly:
+          const: true
+    HealthResponse:
+      type: object
+      required:
+      - api
+      - status
+      - sourceAgeMs
+      - stale
+      - timestamp
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiInfo'
+        status:
+          enum:
+          - ok
+          - initializing
+        sourceAgeMs: &id002
+          type:
+          - integer
+          - 'null'
+          minimum: 0
+        stale:
+          type: boolean
+          description: True when source age is unknown or > 5000 ms.
+        timestamp: &id001
+          type: string
+          format: date-time
+    InitializingResponse:
+      type: object
+      required:
+      - api
+      - status
+      - timestamp
+      properties:
+        api:
+          $ref: '#/components/schemas/ApiInfo'
+        status:
+          const: initializing
+        timestamp: *id001
+    ModuleEnvelope:
+      type: object
+      required:
+      - available
+      - data
+      properties:
+        available:
+          type: boolean
+          description: Presence of cached state; not a freshness or connectivity guarantee.
+        data:
+          type:
+          - object
+          - 'null'
+          additionalProperties: true
     StatusResponse:
       type: object
       required:
@@ -38,53 +133,72 @@ components:
       - system
       - units
       - conventions
+      - energy
+      - ess
+      - spot
+      - forecast
+      - solar
+      - weather
+      - vrm
+      - temperatures
+      - shelly
+      - ups
+      - climate
       properties:
         api:
-          type: object
-          properties:
-            name:
-              type: string
-              example: LINEA API
-            version:
-              type: string
-              example: 1.0.0
-            schema:
-              type: integer
-              const: 1
-            readOnly:
-              type: boolean
-              const: true
+          $ref: '#/components/schemas/ApiInfo'
         system:
           type: object
+          required:
+          - timestamp
+          - sourceTimestamp
+          - ageMs
+          - stale
+          properties:
+            timestamp: *id001
+            sourceTimestamp:
+              type: string
+              description: Timestamp supplied by the source snapshot; malformed non-empty values can occur.
+            ageMs: *id002
+            stale:
+              type: boolean
+              description: True when age is unknown or > 30000 ms.
         units:
           type: object
-          description: Mapa JSON cest na jednotky. Popisy, typy, rozlišení a limity jsou v x-linea-fields této OpenAPI specifikace.
           additionalProperties:
             type: string
         conventions:
           type: object
         energy:
           type: object
+          additionalProperties: true
         ess:
           type: object
+          additionalProperties: true
         spot:
           type: object
+          additionalProperties: true
         forecast:
           type: object
+          additionalProperties: true
         solar:
           type: object
+          additionalProperties: true
         weather:
           type: object
+          additionalProperties: true
         vrm:
-          type: object
+          $ref: '#/components/schemas/ModuleEnvelope'
         temperatures:
-          type: object
+          $ref: '#/components/schemas/ModuleEnvelope'
         shelly:
-          type: object
+          $ref: '#/components/schemas/ModuleEnvelope'
         ups:
-          type: object
+          $ref: '#/components/schemas/ModuleEnvelope'
         climate:
-          type: object
+          $ref: '#/components/schemas/ModuleEnvelope'
+      description: Envelope validation. Detailed paths are documented in x-linea-fields; this catalogue is descriptive
+        metadata, not enforced nested JSON Schema. Source/module fields remain extensible.
 x-linea-fields:
 - path: api.name
   type: string
@@ -300,7 +414,7 @@ x-linea-fields:
   resolution: 1 W***
   range: dle konfigurace
   nullable: false
-  description: Výsledný požadovaný Grid Point.
+  description: Požadavek AC LOAD před výstupním omezením, nikoli potvrzený zápis nebo měření.
   source: LINEA
 - path: ess.decision.pvSurplusW
   type: number
@@ -316,7 +430,7 @@ x-linea-fields:
   resolution: false/true
   range: null
   nullable: false
-  description: Predikční logika je v rozhodnutí aktivní.
+  description: Výsledek bPredikce; true i při vypnutém nebo vynechaném filtru.
   source: LINEA
 - path: ess.decision.exportAllowed
   type: boolean
@@ -545,18 +659,20 @@ x-linea-fields:
 - path: vrm.data.today.batteryChargeKWh
   type: number
   unit: kWh
-  resolution: 0.001 kWh****
+  resolution: dle integrace
   range: ≥ 0
   nullable: true
-  description: Kumulativní nabitá energie od restartu Node-RED.
+  description: Cumulative energy since reset; reference counter assumes one-second calls and adds P/3600. Not daily
+    energy or a guaranteed 0.001 kWh resolution.
   source: LINEA čítač Wh / 1000
 - path: vrm.data.today.batteryDischargeKWh
   type: number
   unit: kWh
-  resolution: 0.001 kWh****
+  resolution: dle integrace
   range: ≥ 0
   nullable: true
-  description: Kumulativní vybitá energie od restartu Node-RED.
+  description: Cumulative energy since reset; reference counter assumes one-second calls and adds P/3600. Not daily
+    energy or a guaranteed 0.001 kWh resolution.
   source: LINEA čítač Wh / 1000
 - path: temperatures.data.racks[].temperatureC
   type: number
@@ -761,7 +877,8 @@ x-linea-fields:
 - path: spot.today.prices[].hour
   type: integer
   unit: h
-  description: Hour of day 0-23.
+  description: Array index assigned as hour; length and DST mapping are not validated by the API.
+  range: Index pole; API rozsah nevaliduje
 - path: spot.today.prices[].price
   type: number|null
   unit: CZK/kWh
@@ -773,7 +890,8 @@ x-linea-fields:
 - path: spot.tomorrow.prices[].hour
   type: integer
   unit: h
-  description: Hour of day 0-23.
+  description: Array index assigned as hour; length and DST mapping are not validated by the API.
+  range: Index pole; API rozsah nevaliduje
 - path: spot.tomorrow.prices[].price
   type: number|null
   unit: CZK/kWh

@@ -4,7 +4,7 @@
 
 # LINEA API
 
-LINEA API is an integration layer inside Node-RED that exposes the already existing LINEA operational state to other applications. The current production-verified contract is **LINEA API `1.0.0`, schema `1`**.
+LINEA API is an integration layer inside Node-RED that exposes the already existing LINEA operational state to other applications. The contract in the supplied reference flow is **LINEA API `1.0.0`, schema `1`**.
 
 > **Core rule:** the main LINEA API is strictly **READ-ONLY**. It publishes the completed LINEA state; it does not make ESS decisions, recalculate control logic, or write Modbus registers.
 
@@ -42,5 +42,4 @@ Control endpoints such as `/set`, `/control`, or `/write` are not part of the AP
 
 ## Availability
 
-LINEA API is integrated directly into LINEA FLOW starting with LINEA FLOW version `01092026`. It is not a separately installed module or application. Older LINEA FLOW versions do not provide the API and it will not be backported to them for technical reasons.
-
+The API is part of the reference LINEA flow and is not installed separately. Verify the two HTTP In nodes in the imported contents rather than relying on the filename date.

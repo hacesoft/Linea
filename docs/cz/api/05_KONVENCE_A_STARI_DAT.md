@@ -1,46 +1,32 @@
-[🇨🇿 **Česky**](05_KONVENCE_A_STARI_DAT.md) \| [🇬🇧
-English](../../en/api/05_CONVENTIONS_AND_FRESHNESS.md)
-
 # Konvence, stáří a dostupnost dat
 
-## Výkon sítě
+## Znaménka a jednotky
 
-`gridPower` používá konvenci: **kladná hodnota = odběr ze sítě**,
-**záporná hodnota = dodávka do sítě**. Jednotkou jsou watty. Stejná
-konvence platí pro jednotlivé fáze v `energy.grid.phases`.
+Síť: kladný výkon = import, záporný = export. Baterie: kladný výkon = nabíjení, záporný = vybíjení. Výkony jsou ve W, energie v kWh. Objekt `units` mapuje číselné cesty na jednotky; nejde o validátor ani úplný popis typu pole.
 
-## Výkon baterie
+## Stáří hlavního stavu
 
-`batteryPower` používá konvenci: **kladná hodnota = nabíjení baterie**,
-**záporná hodnota = vybíjení baterie**. Jednotkou jsou watty.
+`system.timestamp` je vytvoření odpovědi, `system.sourceTimestamp` vytvoření snapshotu `lineaDecisionState` v AC LOAD. `system.ageMs` je jejich časový odstup vůči serverovým hodinám, záporný rozdíl je oříznut na nulu. `/status` označuje stáří **> 30 000 ms**, `/health` stáří **> 5 000 ms**. Neplatný čas vede na `null` stáří a `stale: true`.
 
-## Časové údaje
+Čerstvý AC LOAD může obsahovat dříve uložené náhradní hodnoty. Hlavní timestamp tedy nepotvrzuje poslední fyzické měření každého registru. HTTP 200 není potvrzení čerstvosti ani zdraví zařízení.
 
-`system.timestamp` je čas vytvoření odpovědi API.
-`system.sourceTimestamp` je čas zdrojového snímku LINEA. `system.ageMs`
-udává jeho stáří v milisekundách. `system.stale` upozorňuje, že zdrojová
-data překročila povolené stáří.
+## Moduly a `available`
 
-Jednotlivé moduly mohou mít vlastní `updatedAt`. Proto může být hlavní
-energetický stav čerstvý, zatímco například Daikin, Shelly nebo VRM byly
-aktualizovány dříve. Klient má při zobrazení stáří modulu používat jeho
-vlastní čas aktualizace, pokud je k dispozici.
+Obálka volitelného modulu hodnotí přítomnost uloženého objektu. `available: true` neznamená online ani čerstvá data. Sledujte vlastní `updatedAt` nebo `lastSeen`; chybí-li, stáří je neznámé. Nejnovější `shelly.data.updatedAt` může patřit jen jedné části Shelly, ne všem zařízením. Uložené `ageSec` kouřového čidla se nemusí přepočítat při každém HTTP požadavku; pro průběžné stáří použijte `lastSeen`.
 
-## `available`
+`energy.available` je u úspěšné odpovědi vždy `true`. `forecast.available` testuje `success === true`, `spot.available` přítomnost ceny nebo cenového pole. Ani jeden příznak sám nekontroluje stáří či úplnost dat. Jednotná per-module freshness smlouva zde není.
 
-`available: true` znamená, že LINEA má pro daný blok použitelná data.
-`available: false` znamená, že klient nemá obsah bloku považovat za
-aktuálně dostupný. Neznamená to automaticky chybu celého API.
+## Nula a chybějící hodnota
 
-## `null` a nula
+Klient musí zachovat rozdíl mezi nulou a `null`. Implementace však má omezení: `finiteOrNull` používá `Number(v)`, takže `null`, prázdný řetězec a `false` mohou skončit jako **0**. AC LOAD navíc u některých vstupů dosazuje dřívější hodnotu nebo nulu. Nelze proto tvrdit, že každá nula je ověřené fyzické měření.
 
-`null` znamená, že hodnota není k dispozici nebo ji zdroj neposkytl.
-Nula (`0`) je platná číselná hodnota. Klient je nesmí zaměňovat.
+## Časové řady
 
-## Volitelná pole
+SPOT pole je mapováno indexem na `hour`, s `intervalMinutes: 60` a datem ze systémového lokálního času. API negarantuje 24 položek ani neřeší zvlášť 23/25hodinový den. Zkontrolujte datum, délku a skutečný zdrojový interval před výpočtem nákladů. Forecast deklaruje 15 minut, převádí Wh na kWh a nevkládá chybějící body.
 
-Externí klient má být odolný vůči chybějícím volitelným polím a novým
-polím přidaným v rámci kompatibilního rozšíření. Zásadní změna významu
-nebo struktury musí být vyjádřena změnou `api.schema`.
+## Kompatibilita
 
-[← Datový model](04_DATOVY_MODEL.md) · [Příklady →](06_PRIKLADY.md)
+Kontrolujte `api.schema === 1`, tolerujte nová pole a chybějící volitelné hodnoty. Změna významu nebo struktury může vyžadovat nové schema. Název `vrm.data.today` nemění fakt, že bateriové čítače jsou kumulativní od resetu, nikoli denní.
+
+
+[English](../../en/api/05_CONVENTIONS_AND_FRESHNESS.md) · [← LINEA API](PREHLED.md) · [← LINEA](../README.md)

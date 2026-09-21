@@ -45,6 +45,10 @@ Current API: **1.0.0 · schema 1**
 ## 🧩 Integrations
 
 - [Integrations and tools](06_INTEGRATIONS_AND_TOOLS.md)
+- [Shelly / MQTT](integrations/SHELLY.md)
+- [Daikin](integrations/DAIKIN.md)
+- [UPS / NUT](integrations/UPS.md)
+- [Cooling](integrations/COOLING.md)
 
 ## 🛠️ Help
 
@@ -77,3 +81,18 @@ Current API: **1.0.0 · schema 1**
 | Diagnostics | [Troubleshooting](17_TROUBLESHOOTING.md) |
 | Safety | [Safety](18_SAFETY.md) |
 | History | [CHANGELOG](../../CHANGELOG.md) |
+
+## Module repositories
+
+Full module installation instructions and flow downloads:
+
+| Module | Repository |
+|---|---|
+| Shelly | [node-red-shelly](https://github.com/hacesoft/node-red-shelly) |
+| Daikin ONECTA | [node-red-daikin](https://github.com/hacesoft/node-red-daikin) |
+| Eaton UPS / NUT | [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups) |
+| Cooling | [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack) |
+
+Nextcloud monitoring is in development; its repository link and preview are pending.
+
+[Documentation review and scope](../../REVIEW_EN.md)

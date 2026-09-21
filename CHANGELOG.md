@@ -1,5 +1,13 @@
 [🇨🇿 Česky](CHANGELOG_CZ.md) | [🇬🇧 **English**](CHANGELOG.md)
 
+## Documentation review — 2026-09-21
+
+- Added module repository links, Shelly MQTT setup and English chapters.
+- Aligned API examples/OpenAPI with supplied flow: schema 1, 200/503 envelopes, 5/30-second freshness thresholds.
+- Corrected versioning, Join, configuration loading, prediction bypass, SPOT fallback and energy-counter descriptions.
+- Reference-code limitations and verification scope: [REVIEW_EN.md](REVIEW_EN.md).
+- Documentation only; no control-flow changes. API remains 1.0.0/schema 1.
+
 ## LINEA API 1.0.0 — 2026-09-02
 
 First public LINEA API release. The API is integrated directly into LINEA FLOW starting with version `01092026`, is read-only, uses data schema `1`, exposes explicit units and includes an OpenAPI contract.

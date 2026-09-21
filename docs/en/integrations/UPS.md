@@ -13,3 +13,6 @@ The parser builds `global.ups`; a reduced `global.lineaApiUpsState` is exposed t
 
 ---
 [← Integrations](../06_INTEGRATIONS_AND_TOOLS.md)
+
+
+Complete installation, NUT setup and current flow: [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups).

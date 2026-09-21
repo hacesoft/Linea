@@ -34,7 +34,7 @@ Jde o externí provozní setpoint s heartbeat/fail-safe chováním. Viz [Modbus]
 
 ## Proč se 2700 nezapisuje periodicky?
 
-Jde o nevolatilní parametr; LINEA používá zápis při změně.
+Tato větev LINEA používá zápis při změně a potlačuje opakování stejné hodnoty.
 
 ## 2716/2717 se po chvíli vrátí na 0
 

@@ -3,6 +3,8 @@
 ---
 # UPS / NUT modul
 
+Úplný návod, nastavení NUT, instalace a aktuální flow: [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups).
+
 ## 1. Účel
 Aktivní volitelný modul poskytuje read-only monitoring UPS přes Network UPS Tools (NUT). LINEA CORE na něm není závislá. Komunikuje přímo s `upsd` přes TCP příkazem `LIST VAR <UPS_NAME>`. Starší disabled UPS větev ponechaná ve vývojovém flow tato dokumentace nepovažuje za podporovanou implementaci.
 

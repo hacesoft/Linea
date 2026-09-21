@@ -1,21 +1,32 @@
-[🇨🇿 Česky](../../cz/api/05_KONVENCE_A_STARI_DAT.md) | [🇬🇧 English](05_CONVENTIONS_AND_FRESHNESS.md)
+# Conventions and freshness
 
----
+## Signs and units
 
-# Conventions, freshness and availability
+Grid power: positive = import, negative = export. Battery power: positive = charging, negative = discharging. Power is W and energy is kWh. `units` maps numeric paths to units; it is not a validator or a complete type description.
 
-## Sign conventions
+## Main-state freshness
 
-Grid: positive power = import, negative power = export. Battery: positive power = charging, negative power = discharging. Power is in W. These conventions are also published in the API response.
+`system.timestamp` is response creation time; `system.sourceTimestamp` is when AC LOAD creates `lineaDecisionState`. `system.ageMs` uses server time and clamps a negative difference to zero. `/status` becomes stale at **> 30,000 ms**, `/health` at **> 5,000 ms**. An invalid timestamp produces null age and `stale: true`.
 
-## Main snapshot freshness
+A fresh AC LOAD snapshot can contain cached fallback values. Its timestamp does not prove the last physical measurement time of each register. HTTP 200 does not confirm freshness or device health.
 
-1.0.0 marks the main LINEA snapshot stale after approximately **30 seconds**. `system.ageMs` is source age and `system.stale` is the evaluated result.
+## Modules and `available`
 
-Source update rates differ: main Modbus/energy data are on the order of seconds; Shelly is event-driven MQTT; UPS is seconds; Daikin is several minutes due to cloud API limits; VRM/forecast/weather are slower. Some slower modules have their own `updatedAt`, but a generic per-module freshness contract is not part of schema 1.
+Optional-module availability tests whether a cached object exists. It does not prove connectivity or freshness. Check module `updatedAt` or device `lastSeen`; missing time means unknown age. `shelly.data.updatedAt` may describe only the most recently updated Shelly section. Stored smoke `ageSec` may not advance on every HTTP request; calculate ongoing age from `lastSeen`.
 
-Shelly Smoke devices may sleep for long periods. A high `ageSec` alone is not a fault and must not be evaluated with the same stale threshold as a second-level Modbus stream.
+Successful status always sets `energy.available: true`. Forecast tests `success === true`; SPOT tests whether a price or price array exists. None of these flags independently validates freshness or completeness. There is no uniform per-module freshness contract.
 
----
+## Zero and missing values
 
-[← LINEA API](README.md) · [← Main documentation](../README.md)
+Clients must distinguish zero from null. However, `finiteOrNull` uses `Number(v)`, which converts null, empty strings and false to **0**. Some AC LOAD inputs also substitute cached values or zero. A returned zero is therefore not always a verified physical measurement.
+
+## Time series
+
+SPOT maps array indices to `hour`, declares `intervalMinutes: 60` and assigns dates using server local time. It does not guarantee 24 samples or explicitly handle 23/25-hour days. Check dates, lengths and the upstream interval before cost calculations. Forecast declares 15-minute intervals, converts Wh to kWh and does not interpolate missing points.
+
+## Compatibility
+
+Check `api.schema === 1`, tolerate additional fields and missing optional values. A structural or semantic change may require a new schema. Despite their location under `vrm.data.today`, battery energy counters accumulate since reset and are not daily counters.
+
+
+[Česky](../../cz/api/05_KONVENCE_A_STARI_DAT.md) · [← LINEA API](README.md) · [← LINEA](../README.md)

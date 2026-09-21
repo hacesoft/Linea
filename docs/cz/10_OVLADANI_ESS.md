@@ -19,7 +19,7 @@ nControl_Mode_ESS_AC_Grid
 - **ON** → používá INT32 registry **2716/2717**;
 - **OFF** → používá starší INT16 registr **2700**.
 
-ESS widget zobrazuje živě oba setpointy a zvýrazňuje právě aktivní cestu. fileciteturn4file7L186-L188
+ESS widget zobrazuje živě oba setpointy a zvýrazňuje právě aktivní cestu. 
 
 Podrobnosti o periodickém zápisu jsou v `MODBUS.md`.
 
@@ -74,7 +74,7 @@ nNonBatteryPriorityMode
 
 Režim prioritizuje jinou spotřebu před vybíjením baterie. V současném projektu byl vytvořen zejména pro nabíjení elektromobilu.
 
-Pokud FV nepokryje spotřebu domu a výkon baterie, chybějící výkon je požadován ze sítě místo dalšího vybíjení baterie. Tato vazba je přímo součástí centrální ESS logiky. fileciteturn4file4L53-L55
+Pokud FV nepokryje spotřebu domu a výkon baterie, chybějící výkon je požadován ze sítě místo dalšího vybíjení baterie. Tato vazba je přímo součástí centrální ESS logiky. 
 
 ## Delay Charging
 
@@ -132,9 +132,9 @@ Prodej vyžaduje mimo jiné:
 - dostatečné SOC;
 - povolené přetoky;
 - cenu nad limitem;
-- dostatečnou predikci výroby.
+- splnění predikčního filtru, pokud se uplatní (při neplatných datech se filtr vynechá).
 
-Při aktivní Dynamic SOC Reserve se místo pevného ranního SOC použije dynamicky vypočtená rezerva. fileciteturn4file1L20-L22
+Při aktivní Dynamic SOC Reserve se místo pevného ranního SOC použije dynamicky vypočtená rezerva. 
 
 ## Prediction Threshold
 
@@ -147,7 +147,7 @@ sPredictionThresholdKW
 
 Zapíná kontrolu predikce výroby.
 
-Ranní prodej a Delay Charging se aktivují pouze tehdy, pokud je očekávaná výroba dostatečná. Flow porovnává predikci s potřebami objektu a nastaveným limitem.
+Při platných datech flow porovnává očekávanou výrobu s potřebami objektu a nastaveným limitem v kWh. Při neplatné predikci se filtr vynechá (`bPredikce = true`), takže sám závislé strategie nezablokuje.
 
 Při vypnutém přepínači se tato podmínka nepoužije.
 
@@ -169,7 +169,7 @@ Podmínky zahrnují:
 - povolené přetoky;
 - SPOT cenu nad nastaveným limitem.
 
-Na rozdíl od ranního prodeje se zde predikce výroby nekontroluje. fileciteturn4file2L31-L33
+Na rozdíl od ranního prodeje se zde predikce výroby nekontroluje. 
 
 ## Grid Charging
 
@@ -210,25 +210,11 @@ Limit dodávky do sítě. Řídicí větev jím ořezává požadovaný export p
 
 ## Kde se změny ukládají
 
-ESS widget nepíše přímo do Modbusu. Hodnoty posílá do `ESS :: Widget_Handler`, který povoluje pouze definované konfigurační klíče a zapisuje je do centrální konfigurace. Seznam povolených boolean a numeric klíčů je explicitně definován ve flow. fileciteturn4file0L9-L11
+ESS widget nepíše přímo do Modbusu. Hodnoty posílá do `ESS :: Widget_Handler`, který povoluje pouze definované konfigurační klíče a zapisuje je do centrální konfigurace. Seznam povolených boolean a numeric klíčů je explicitně definován ve flow. 
 
 Řídicí logika následně tuto konfiguraci načte a podle ní vypočítá požadovaný Grid Point.
 
-```text
-UI přepínač
-    ↓
-Widget_Handler
-    ↓
-config
-    ↓
-ESS / AC LOAD logika
-    ↓
-limitace
-    ↓
-volba 2700 nebo 2716/2717
-    ↓
-Modbus
-```
+`UI přepínač` → `Widget_Handler` → `config` → `ESS / AC LOAD logika` → `limitace` → `volba 2700 nebo 2716/2717` → `Modbus`
 
 ---
 

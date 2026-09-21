@@ -1,0 +1,12 @@
+{
+  "api": {
+    "name": "LINEA API",
+    "version": "1.0.0",
+    "schema": 1,
+    "readOnly": true
+  },
+  "status": "ok",
+  "sourceAgeMs": 1000,
+  "stale": false,
+  "timestamp": "2026-09-21T12:00:00.000Z"
+}

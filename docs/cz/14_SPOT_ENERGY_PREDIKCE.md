@@ -8,13 +8,7 @@
 
 SPOT ceny vstupují do několika nezávislých funkcí:
 
-```text
-SPOT
- ├─ automatické řízení přetoků
- ├─ Morning Peak
- ├─ Evening Peak
- └─ Spot-Grid Charging
-```
+`SPOT` → `automatické řízení přetoků` → `Morning Peak` → `Evening Peak` → `Spot-Grid Charging`
 
 ## Automatické řízení podle SPOTu
 
@@ -61,19 +55,7 @@ nMAX_Grid_Point
 
 Postup:
 
-```text
-SPOT ceny
-   ↓
-validace
-   ↓
-nejlevnější souvislý blok N hodin
-   ↓
-aktuální čas uvnitř bloku
-   ↓
-cena splňuje limit
-   ↓
-nabíjení ze sítě
-```
+`SPOT ceny` → `validace` → `nejlevnější souvislý blok N hodin` → `aktuální čas uvnitř bloku` → `cena splňuje limit` → `nabíjení ze sítě`
 
 ## Predikce
 
@@ -88,7 +70,7 @@ sPredictionThresholdKW
 
 ovlivňuje zejména Morning Peak a Delay Charging.
 
-Pokud je Prediction Threshold aktivní, závislá strategie vyžaduje platná predikční data a splnění nastavené podmínky.
+Při platných datech musí FV predikce v kWh překročit vyšší z predikované spotřeby a `sPredictionThresholdKW` (navzdory názvu je práh v kWh). Při neplatných datech se filtr v referenčním flow vynechá (`bPredikce = true`); nejde o blokování strategie při výpadku predikce.
 
 ## Časové pásmo
 

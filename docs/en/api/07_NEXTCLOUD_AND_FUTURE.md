@@ -12,7 +12,7 @@ A working retention concept is high-resolution short history, 15-minute aggregat
 
 ## Future battery-counter restore
 
-`nBatteryALL_input_Wh` and `nBatteryALL_output_Wh` reset after a Node-RED restart. A future Nextcloud database service is intended to allow a one-time restore of the last stored values after a fresh LINEA start. Restore must be guarded by an internal flag so it cannot occur repeatedly during normal operation. This is **not part of API 1.0.0**.
+`nBatteryALL_input_Wh` and `nBatteryALL_output_Wh` are lost on restart with default memory context; verify behavior when persistent context is configured. A future Nextcloud database service is intended to allow a one-time restore of the last stored values after a fresh LINEA start. Restore must be guarded by an internal flag so it cannot occur repeatedly during normal operation. This is **not part of API 1.0.0**.
 
 ## What not to change now
 
@@ -28,3 +28,7 @@ The main LINEA API remains read-only. If very limited control of selected Shelly
 
 ## Change-based storage for slowly changing state
 UPS and similar state blocks do not need duplicate rows every few seconds. When unchanged, Nextcloud can extend the previous record's `valid_to` and create a new row only on change. Historical state is reconstructed from `valid_from`–`valid_to`; events and fast energy measurements may use separate retention policies.
+
+## Project status
+
+The application is in development. Its repository URL and preview have not been supplied; this page does not claim an installable release. Collection, aggregation and counter restoration above are plans, not LINEA API features.

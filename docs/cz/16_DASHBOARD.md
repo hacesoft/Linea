@@ -32,10 +32,7 @@ záporná hodnota = dodávka do sítě
 
 ESS karta obsahuje přepínače a hodnoty pro jednotlivé strategie. Kompletní popis je v:
 
-```text
-OVLADANI_ESS.md
-REFERENCE_NASTAVENI.md
-```
+[Ovládání ESS](10_OVLADANI_ESS.md) a [Reference nastavení](11_REFERENCE_NASTAVENI.md).
 
 ## Control Mode
 

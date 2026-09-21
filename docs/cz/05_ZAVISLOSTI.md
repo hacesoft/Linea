@@ -49,3 +49,10 @@ Doinstalujte balíček odpovídající chybějícímu typu nodu a podle potřeby
 ---
 
 [← Dokumentace LINEA](README.md) · [FAQ](04_FAQ.md) · [Technická reference](11_REFERENCE_NASTAVENI.md)
+
+## Balíčky v referenčním exportu
+
+- `@flowfuse/node-red-dashboard`: 1.30.2
+- `node-red-contrib-modbus`: 5.45.2
+
+Jde o verze uvedené v exportu, nikoli o tvrzení o nejnovější verzi nebo minimální kompatibilitě. MQTT, HTTP, TCP, Function a File uzly jsou součástí Node-RED. Závislosti samostatných modulů kontrolujte v jejich repozitářích.

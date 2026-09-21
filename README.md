@@ -29,16 +29,7 @@ The Victron system, inverter firmware, BMS and configured hardware limits remain
 
 ## Basic principle
 
-```text
-PV production
-   │
-   ├─► site consumption
-   │
-   └─► available surplus
-           │
-           ├─► battery
-           └─► grid
-```
+PV generation supplies the house. Depending on strategy and limits, surplus can charge the battery or be exported; a deficit can be supplied by the battery or grid.
 
 LINEA decides how the available energy should be handled according to the active strategy and system state.
 
@@ -69,3 +60,18 @@ LINEA CORE remains focused on FVE/ESS control. Optional integrations and indepen
 The complete English documentation is available in the [documentation index](docs/en/README.md).
 
 For diagnostics use [FAQ](docs/en/04_FAQ.md) and [Troubleshooting](docs/en/17_TROUBLESHOOTING.md). Read [Safety](docs/en/18_SAFETY.md) before commissioning the control system.
+
+## Module repositories
+
+Full module installation instructions and flow downloads:
+
+| Module | Repository |
+|---|---|
+| Shelly | [node-red-shelly](https://github.com/hacesoft/node-red-shelly) |
+| Daikin ONECTA | [node-red-daikin](https://github.com/hacesoft/node-red-daikin) |
+| Eaton UPS / NUT | [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups) |
+| Cooling | [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack) |
+
+Nextcloud monitoring is in development; its repository link and preview are pending.
+
+[Documentation review and scope](REVIEW_EN.md)

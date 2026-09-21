@@ -1,46 +1,13 @@
-[🇨🇿 Česky](COOLING.md) | 🇬🇧 English *(bude doplněno)*
+# Chlazení racku a MPPT — zapojení do LINEA
 
----
+Flow a úplný popis nastavení jsou v [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack).
 
-# Samostatný projekt: FVE Cooling
+Chlazení je samostatný projekt. Referenční flow využívá výkonové hodnoty `global.pvPower` a `global.nBattery_Power`, převod znaménka bateriového registru a HTTP příkazy relé. Při použití bez LINEA je nutné dodat odpovídající vstupy a pomocné funkce se stejnými jednotkami a významem.
 
-Chlazení je samostatná funkce a nemá být pevně svázána s LINEA CORE.
+Před spuštěním nastavte adresy relé, kanály, výkonové prahy, časový plán a hysterézi podle své instalace. Konkrétní hodnoty a funkce ověřte v návodu daného exportu; tento modul není obecný hotový adaptér libovolných teplotních čidel.
 
-## Princip
+Příkaz OFF ani zobrazený požadovaný stav nepotvrzuje skutečné vypnutí ventilátoru. V referenčním flow nelze tlačítko `FAN ALL STOP` považovat za okamžité bezpečnostní zastavení: zpráva prochází běžnou hysterézí. Vyhodnoťte skutečnou odezvu relé a ventilátoru.
 
-Projekt má přijímat definované teplotní/stavové vstupy a podle vlastní logiky řídit externí ventilátory/chlazení.
+Hlavní LINEA API nemá samostatný blok `cooling` ani řídicí endpoint pro ventilátory. Případně zobrazené teploty v `temperatures` nejsou potvrzením jejich stavu.
 
-## Opravy z auditu
-
-
-- přenos `_general_stop`;
-- okamžitý General STOP;
-- oddělení požadovaného a potvrzeného stavu ventilátoru;
-- retry při neúspěšném příkazu;
-- hysteréze běžného řízení.
-
-## General STOP
-
-General STOP je bezpečnostní požadavek a nemá čekat na standardní hysterézi.
-
-```text
-GENERAL STOP
-    │
-    └──► okamžitý požadavek OFF
-```
-
-## Samostatnost
-
-Cooling projekt musí dokumentovat své vstupy tak, aby zdrojem teplot mohl být:
-
-- LINEA;
-- jiný Node-RED flow;
-- MQTT;
-- Modbus;
-- jiný senzorový systém.
-
-LINEA má v dokumentaci pouze odkazovat na samostatný repozitář chlazení.
-
----
-
-[← Integrace](../06_INTEGRACE_A_DOPLNKY.md)
+[English](../../en/integrations/COOLING.md) · [← Integrace](../06_INTEGRACE_A_DOPLNKY.md)

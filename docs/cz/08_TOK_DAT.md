@@ -10,13 +10,13 @@ LINEA periodicky získává provozní hodnoty z FVE, ESS a dalších datových z
 
 ## 2. Modbus snapshot
 
-Hlavní Modbus snapshot je sestaven z **13 vstupních hodnot**. Join čeká na kompletní sadu, aby další zpracování dostalo konzistentní stav měření.
+Join `AC CON.` má v referenčním flow nastaveno **24 položek**, objekt podle `msg.topic`, `accumulate: false` a **timeout 1 s**. Výstup může vzniknout i po timeoutu s neúplnou sadou. Nejde o záruku současného a kompletního měření všech registrů.
 
 Snapshot odděluje asynchronní příchod jednotlivých Modbus odpovědí od řídicí logiky. Algoritmus tak pracuje se sestavenou sadou hodnot místo samostatných zpráv přicházejících v různých okamžicích.
 
 ## 3. Validace hodnot
 
-U číselných veličin se rozlišuje platná nula od neplatné hodnoty.
+Pro interpretaci má být nula odlišena od chybějící hodnoty. Referenční implementace však toto pravidlo neuplatňuje všude: některé vstupy používají `parseFloat(...) || posledníHodnota`, což nahradí i platnou nulu. `fCheckValue` u sítě a FV filtruje nulu až do deseti po sobě jdoucích nulových vzorků. Následující význam hodnot je požadovaná interpretace, nikoli záruka každého převodu ve flow.
 
 ```text
 0         → platná hodnota
@@ -29,15 +29,13 @@ To je důležité zejména pro výkony a Grid Point, kde je 0 W běžný provozn
 
 ## 4. Energetické čítače
 
-Energie se integruje z okamžitého výkonu a skutečně uplynulého času mezi vzorky:
+Fyzikální vztah pro energii z výkonu je:
 
 ```text
 ΔE [Wh] = P [W] × Δt [s] / 3600
 ```
 
-Pro každý nový vzorek se určí čas od předchozího měření a vypočtený přírůstek se přičte do příslušného čítače.
-
-Díky tomu výpočet nezávisí na přesně konstantním intervalu příchodu zpráv.
+Referenční `Battery W counter` přičítá při každém volání `P / 3600`, tedy předpokládá interval **1 sekunda**. Skutečný čas mezi vzorky neměří. Při výpadcích nebo jiném intervalu proto čítače mohou vykazovat odchylku. Kumulativní bateriové čítače nejsou kalendářní denní energií. Akumulují od resetu a při výchozím paměťovém contextu se ztratí restartem; persistentní context může chování změnit.
 
 ## 5. Vstupy ESS algoritmu
 
@@ -80,7 +78,7 @@ Podle konfigurace mohou do výsledku zasáhnout například:
 
 ## 8. Výsledný Grid Point
 
-Výstupem rozhodovací vrstvy je požadovaný Grid Point. Před zápisem je zkontrolován datový typ, rozsah a limit maximálního feed-in.
+Výstupem rozhodovací vrstvy je požadovaný Grid Point. Výstupní funkce omezuje export podle načteného 2706 a převádí hodnotu pro cílový registr. Neprovádí však úplnou validaci konečnosti a rozsahu všech vstupů; viz [Modbus](12_MODBUS.md).
 
 ## 9. Modbus zápis
 

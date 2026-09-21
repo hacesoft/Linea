@@ -61,6 +61,8 @@ Podmínky zahrnují:
 - cenovou podmínku;
 - Prediction Threshold, pokud je aktivní.
 
+Při neplatné predikci se predikční filtr vynechá; neznamená to automatické zablokování prodeje.
+
 Minimální SOC určuje `nMorningSOC_sales`, případně Dynamic SOC Reserve.
 
 ## Dynamic SOC Reserve
@@ -93,7 +95,7 @@ Nabíjení je povoleno pouze při splnění cenové podmínky `nAcceptable_Price
 
 ## Výstup
 
-Všechny aktivní strategie jsou vyhodnoceny v ESS logice a výsledkem je jeden požadovaný Grid Point. Ten následně prochází bezpečnostními limity a Modbus výstupem.
+Všechny aktivní strategie jsou vyhodnoceny v ESS logice a výsledkem je jeden požadovaný Grid Point. Ten následně prochází výstupním omezením a Modbus větví; [omezení validace](12_MODBUS.md) je třeba zohlednit.
 
 ---
 

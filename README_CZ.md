@@ -30,16 +30,7 @@ Victron systém, firmware měničů, BMS a nastavené hardwarové limity zůstá
 
 ## Základní princip
 
-```text
-FV výroba
-   │
-   ├─► spotřeba objektu
-   │
-   └─► dostupný přebytek
-           │
-           ├─► baterie
-           └─► síť
-```
+FV výroba pokrývá spotřebu objektu. Podle strategie a limitů může přebytek nabíjet baterii nebo odcházet do sítě; při nedostatku se využívá baterie nebo síť.
 
 LINEA podle aktivní strategie a stavu systému rozhoduje, jak má být dostupná energie využita.
 
@@ -70,3 +61,18 @@ LINEA CORE zůstává zaměřena na řízení FVE/ESS. Volitelné integrace a sa
 Kompletní česká dokumentace je dostupná v [rozcestníku dokumentace](docs/cz/README.md).
 
 Pro diagnostiku použijte [FAQ](docs/cz/04_FAQ.md) a [Troubleshooting](docs/cz/17_TROUBLESHOOTING.md). Před uvedením řízení do provozu si přečtěte [Bezpečnost](docs/cz/18_BEZPECNOST.md).
+
+## Repozitáře modulů
+
+Úplné návody k instalaci a exporty jednotlivých modulů:
+
+| Modul | Repozitář |
+|---|---|
+| Shelly | [node-red-shelly](https://github.com/hacesoft/node-red-shelly) |
+| Daikin ONECTA | [node-red-daikin](https://github.com/hacesoft/node-red-daikin) |
+| Eaton UPS / NUT | [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups) |
+| Cooling | [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack) |
+
+Nextcloud monitoring je ve vývoji; odkaz na repozitář a náhled aplikace zatím čekají na doplnění.
+
+[Přehled oprav a rozsah kontroly](REVIEW_CZ.md)

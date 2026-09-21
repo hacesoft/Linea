@@ -30,6 +30,8 @@ OFF → 2700
 ON  → 2716/2717
 ```
 
+OFF není hlavní vypínač řízení.
+
 Viz [Registry a režimy](13_REGISTRY_A_REZIMY.md).
 
 ## 5. Začněte malým Set Pointem

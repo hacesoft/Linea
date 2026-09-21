@@ -47,6 +47,8 @@ Nainstalujte balíčky z [přehledu závislostí](05_ZAVISLOSTI.md), nejlépe p�
 Node-RED → Menu → Import → select a file → JSON flow → Import → Deploy
 ```
 
+**Před Deploy zkontrolujte importované zapisovací uzly a zabraňte zápisům do doby ověření adres a limitů.** Výchozí nastavení patří referenční instalaci. `Control Mode = OFF` neznamená vypnutí řízení, ale volbu registru 2700.
+
 Po Deploy nesmí editor hlásit chybějící typy nodů.
 
 ## 6. Základní CONFIG

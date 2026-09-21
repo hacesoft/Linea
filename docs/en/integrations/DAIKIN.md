@@ -1,17 +1,11 @@
-[🇨🇿 Česky](../../cz/integrace/DAIKIN.md) | [🇬🇧 **English**](DAIKIN.md)
+# Daikin ONECTA — LINEA integration
 
----
-# Daikin Onecta module
+Use [node-red-daikin](https://github.com/hacesoft/node-red-daikin) for registration, application creation, initial OAuth authorization, tokens, installation and troubleshooting. The optional Dashboard 2.0 module reads device state, temperatures and available energy data from the ONECTA Cloud API.
 
-The optional module reads HVAC state from Daikin Onecta Cloud API using OAuth 2.0 Authorization Code flow. It is not required by LINEA CORE. The working flow is still evolving, so this page documents the current operating principle rather than final internal wiring.
+Normal settings use `global.config.daikinConfig`: `clientId`, `clientSecret`, `pollMinutes`. Set polling to **8 minutes**; the interval is configurable with an 8-minute minimum. Tokens have a separate lifecycle and must not be published in flow exports or the API.
 
-Current endpoints are `https://idp.onecta.daikineurope.com/v1/oidc/authorize` for authorization, `https://idp.onecta.daikineurope.com/v1/oidc/token` for token exchange/refresh, and `https://api.onecta.daikineurope.com/v1/gateway-devices` for devices. Older endpoint examples do not match the current implementation.
+Preserve initialization, token-manager and persistence connections. Check `daikin_config.json`, the token file, permissions and restart recovery using the module manual. Do not assume the generic LINEA save action writes every standalone module file.
 
-For initial authorization, create a Daikin developer application, register the exact Redirect URI, save Client ID/Secret, authorize with scope `openid onecta:basic.integration`, copy the returned `code`, and exchange it at the token endpoint using `grant_type=authorization_code`. Store the returned refresh token securely. Refresh tokens rotate: a newly returned refresh token must replace the previous one. `global.daikinRefreshInFlight` prevents overlapping refreshes.
+`global.lineaApiClimateState` supplies `climate.data`. Check its `updatedAt` independently of the main energy snapshot. A reported operation mode does not prove that the compressor is running. For authorization failures check Client ID/Secret, identical Redirect URIs and the latest rotating refresh token.
 
-Normal settings are intended to live in `global.config.daikinConfig`; tokens are operational secrets with a separate lifecycle. The intended polling minimum is **8 minutes**. A reduced `global.lineaApiClimateState` exposes monitoring data only and never credentials or tokens.
-
-Troubleshooting: `waiting for Client ID/Secret` means the active global config lacks credentials; a stored refresh token plus expired access token still requires valid Client ID/Secret for renewal.
-
----
-[← Integrations](../06_INTEGRATIONS_AND_TOOLS.md)
+[Česky](../../cz/integrace/DAIKIN.md) · [← Integrations](../06_INTEGRATIONS_AND_TOOLS.md)

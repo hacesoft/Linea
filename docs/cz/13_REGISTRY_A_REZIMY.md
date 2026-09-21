@@ -34,7 +34,6 @@ ON  → 2716/2717
 ## 2700
 
 - INT16;
-- nevolatilní uložení;
 - zápis při změně;
 - bez periodického heartbeat.
 
@@ -42,9 +41,9 @@ ON  → 2716/2717
 
 - INT32;
 - dvě 16bitová slova;
-- provozní setpoint v RAM;
+- průběžně obnovovaný provozní setpoint;
 - periodický heartbeat;
-- bezpečný návrat setpointu při ztrátě externího řízení.
+- timeout a návratový setpoint je nutné ověřit na konkrétním firmware.
 
 ## 2706
 

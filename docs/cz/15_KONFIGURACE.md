@@ -11,14 +11,10 @@ LINEA používá centrální objekt `config`. Uživatelské nastavení z Dashboa
 ## Verze
 
 ```javascript
-oVersion: "DDMMYYYY:HHMM"
+flow_version: "DDMMYYYY_HHMM"
 ```
 
-Pro update checker se používá datum:
-
-```javascript
-const localVersion = String(config.oVersion || "").split(":")[0];
-```
+Update checker používá `global.linea_version_local`, naplněnou při inicializaci z `config.flow_version`, a porovnává datum i čas s názvy souborů v `release/`. Verze flow, `configSchemaVersion` a `api.schema` označují různé věci.
 
 ## ESS parametry
 
@@ -56,7 +52,7 @@ isSpotAutoCtrlEnabled
 spotTresholdPrice
 ```
 
-Význam jednotlivých parametrů je popsán v `REFERENCE_NASTAVENI.md`.
+Význam jednotlivých parametrů je popsán v [referenci nastavení](11_REFERENCE_NASTAVENI.md).
 
 ## Modbus připojení
 
@@ -91,33 +87,13 @@ Poloha se používá pro časové/astronomické údaje a související výpočty
 
 ## MQTT
 
-```javascript
-mqtt: {
-    broker: "...",
-    port: 1883,
-    clientid: "..."
-}
-```
-
-MQTT používají části projektu napojené na Shelly nebo další MQTT zařízení.
+MQTT broker, port, autentizace a TLS se nastavují ručně v konfiguračním uzlu Node-RED. Objekt `config.mqtt` nepovažujte za ovládání aktivního spojení. Přesný postup je v [Shelly — nastavení MQTT](integrace/SHELLY.md).
 
 ## Uložení konfigurace
 
 Dashboard neposílá běžné konfigurační změny přímo do Modbusu. Tok je:
 
-```text
-UI
- ↓
-Widget Handler
- ↓
-centrální config
- ↓
-řídicí logika
- ↓
-výpočet setpointu
- ↓
-Modbus
-```
+`UI` → `Widget Handler` → `centrální config` → `řídicí logika` → `výpočet setpointu` → `Modbus`
 
 ## Bezpečnost konfigurace
 

@@ -46,7 +46,7 @@ Referenční popis je záměrně oddělen od běžné JSON odpovědi. JSON obsah
 | `energy.battery.batteryLifeSocLimitPct` | number | % | 0.1 % | oček. 0–100 % | ano | Spodní SOC limit BatteryLife/ESS. | Modbus, raw / 10 |
 | `ess.decision.gridPointW` | number | W | 1 W*** | dle konfigurace | ne | Výsledný požadovaný Grid Point. | LINEA |
 | `ess.decision.pvSurplusW` | number | W | 1 W*** | dle instalace | ne | Interní přebytek/nedostatek FV pro rozhodování. | LINEA |
-| `ess.decision.predictionActive` | boolean | — | false/true | — | ne | Predikční logika je v rozhodnutí aktivní. | LINEA |
+| `ess.decision.predictionActive` | boolean | — | false/true | — | ne | Výsledek `bPredikce`, nikoli stav zapnutí filtru; true i při vynechaném filtru. | LINEA |
 | `ess.decision.exportAllowed` | boolean | — | false/true | — | ne | Aktuální rozhodnutí dovoluje export. | LINEA |
 | `ess.decision.reason.code` | string | — | — | enum se může rozšířit | ne | Strojový kód důvodu rozhodnutí. | LINEA |
 | `ess.decision.reason.text` | string\|null | — | — | — | ano | Volitelný lidský popis důvodu. | LINEA |
@@ -75,8 +75,8 @@ Referenční popis je záměrně oddělen od běžné JSON odpovědi. JSON obsah
 | `vrm.data.today.consumptionKWh` | number | kWh | dle VRM | ≥ 0 | ano | Dnešní spotřeba. | Victron VRM |
 | `vrm.data.today.gridImportKWh` | number | kWh | dle VRM | ≥ 0 | ano | Dnešní import ze sítě. | Victron VRM |
 | `vrm.data.today.gridExportKWh` | number | kWh | dle VRM | ≥ 0 | ano | Dnešní export do sítě. | Victron VRM |
-| `vrm.data.today.batteryChargeKWh` | number | kWh | 0.001 kWh**** | ≥ 0 | ano | Kumulativní nabitá energie od restartu Node-RED. | LINEA čítač Wh / 1000 |
-| `vrm.data.today.batteryDischargeKWh` | number | kWh | 0.001 kWh**** | ≥ 0 | ano | Kumulativní vybitá energie od restartu Node-RED. | LINEA čítač Wh / 1000 |
+| `vrm.data.today.batteryChargeKWh` | number | kWh | dle integrace**** | ≥ 0 | ano | Kumulativní nabitá energie od restartu Node-RED. | LINEA čítač Wh / 1000 |
+| `vrm.data.today.batteryDischargeKWh` | number | kWh | dle integrace**** | ≥ 0 | ano | Kumulativní vybitá energie od restartu Node-RED. | LINEA čítač Wh / 1000 |
 | `temperatures.data.racks[].temperatureC` | number | degC | 0.01 °C | dle čidla | ano | Teplota racku/baterie. | Modbus, raw / 100 |
 | `temperatures.data.inverters[].temperatureC` | number | degC | 0.01 °C | dle čidla | ano | Teplota měniče. | Modbus, raw / 100 |
 | `temperatures.data.other[].temperatureC` | number | degC | 0.01 °C | dle čidla | ano | Jiná teplota. | Modbus, raw / 100 |
@@ -114,7 +114,7 @@ Referenční popis je záměrně oddělen od běžné JSON odpovědi. JSON obsah
 
 ## Jednotky přímo v JSON
 
-Schema 1 přidává top-level objekt `units`, kde je pro každou číselnou veličinu uvedena jednotka podle cesty, například:
+Schema 1 přidává top-level objekt `units`, kde je pro publikované číselné veličiny uvedena jednotka podle cesty, například:
 
 ```json
 {
@@ -142,12 +142,12 @@ Sekce `spot` obsahuje aktuální cenu a hodinové ceny pro dnešní a následuj�
 | `spot.today.date` | string | — | Datum dne ve formátu `YYYY-MM-DD` |
 | `spot.today.available` | boolean | — | Dostupnost dnešního cenového pole |
 | `spot.today.prices[]` | array<object> | — | Hodinové ceny dneška |
-| `spot.today.prices[].hour` | integer | h | Hodina 0–23 |
+| `spot.today.prices[].hour` | integer | h | Index pole použitý jako hodina; API rozsah nevaliduje |
 | `spot.today.prices[].price` | number \| null | CZK/kWh | Cena pro danou hodinu |
 | `spot.tomorrow.date` | string | — | Datum následujícího dne |
 | `spot.tomorrow.available` | boolean | — | `true`, pokud už jsou ceny následujícího dne dostupné |
 | `spot.tomorrow.prices[]` | array<object> | — | Hodinové ceny následujícího dne |
-| `spot.tomorrow.prices[].hour` | integer | h | Hodina 0–23 |
+| `spot.tomorrow.prices[].hour` | integer | h | Index pole použitý jako hodina; API rozsah nevaliduje |
 | `spot.tomorrow.prices[].price` | number \| null | CZK/kWh | Cena pro danou hodinu |
 
 Pokud ceny následujícího dne ještě nejsou zdrojem zveřejněny, `spot.tomorrow.available` je `false` a `spot.tomorrow.prices` je prázdné pole.
@@ -173,3 +173,15 @@ LINEA již načítá forecast z Victron VRM v intervalu `15mins`. API proto vedl
 
 Hodnoty časových řad jsou převáděny z Wh poskytovaných VRM na kWh. API neprovádí interpolaci ani dopočítávání chybějících bodů.
 
+
+## Hranice interpretace
+
+`ess.decision.gridPointW` je požadavek z AC LOAD před výstupním omezením a není potvrzený zápis ani měřený výkon sítě. `predictionActive` kopíruje `bPredikce`: může být true také při vypnutém filtru nebo neplatné predikci. Skutečné zapnutí filtru ukazuje `ess.switches.predictionThreshold`.
+
+Bateriové čítače mají zlomkové Wh; dělení 1000 není záruka rozlišení 0,001 kWh. `Battery W counter` předpokládá jednu sekundu na volání. Čítače akumulují od resetu; při výchozím paměťovém contextu se ztratí restartem. Jiný persistentní context může chování změnit — konfigurace context storage není součástí exportu.
+
+Tabulka popisuje očekávané typy a zdroje, nikoli kontrolu každého vstupu. `null` se v některých převodech může změnit na nulu. Viz [stáří a omezení](05_KONVENCE_A_STARI_DAT.md).
+
+## Stavová pole modulů
+
+`ups.data.online` odpovídá stavu NUT `OL` (napájení ze sítě), nikoli obecné dostupnosti komunikace. `onBattery` odpovídá `OB`. `status.raw` zachovává NUT příznaky. Shelly `state` je uložený stav konkrétního kanálu; jeho `available` není heartbeat. U Daikin `cloudUp`, `on`, `operationMode` a `error` představují poslední zpracovaný cloudový stav. `firmwareChanged` je porovnání při zpracování, nikoli trvalá historie změn.

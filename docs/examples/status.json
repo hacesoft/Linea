@@ -1,0 +1,477 @@
+{
+  "api": {
+    "name": "LINEA API",
+    "version": "1.0.0",
+    "schema": 1,
+    "readOnly": true
+  },
+  "system": {
+    "timestamp": "2026-09-21T12:00:00.000Z",
+    "sourceTimestamp": "2026-09-21T11:59:59.000Z",
+    "ageMs": 1000,
+    "stale": false
+  },
+  "units": {
+    "system.ageMs": "ms",
+    "energy.pv.powerW": "W",
+    "energy.pv.strings[].powerW": "W",
+    "energy.pv.strings[].pvVoltageV": "V",
+    "energy.pv.strings[].pvCurrentA": "A",
+    "energy.pv.strings[].yieldTodayKWh": "kWh",
+    "energy.house.powerW": "W",
+    "energy.house.phases.l1PowerW": "W",
+    "energy.house.phases.l2PowerW": "W",
+    "energy.house.phases.l3PowerW": "W",
+    "energy.grid.powerW": "W",
+    "energy.grid.phases.l1PowerW": "W",
+    "energy.grid.phases.l2PowerW": "W",
+    "energy.grid.phases.l3PowerW": "W",
+    "energy.battery.socPct": "%",
+    "energy.battery.powerW": "W",
+    "energy.battery.currentA": "A",
+    "energy.battery.voltageV": "V",
+    "energy.battery.batteryLifeSocLimitPct": "%",
+    "ess.decision.gridPointW": "W",
+    "ess.decision.pvSurplusW": "W",
+    "ess.settings.balancingReserveW": "W",
+    "ess.settings.setGridValueW": "W",
+    "ess.settings.maxGridPointW": "W",
+    "ess.settings.spotThresholdPrice": "CZK/kWh",
+    "ess.settings.morningSocSalesPct": "%",
+    "ess.settings.eveningSocSalesPct": "%",
+    "ess.settings.gridChargingSocPct": "%",
+    "ess.settings.predictionThresholdKWh": "kWh",
+    "ess.settings.socDeltaBeforeExportPct": "%",
+    "ess.settings.chargingDurationGridH": "h",
+    "ess.settings.acceptablePriceGrid": "CZK/kWh",
+    "ess.time.delayCharging.startMs": "ms",
+    "ess.time.delayCharging.stopMs": "ms",
+    "ess.time.morningPeakHours[]": "h",
+    "ess.time.eveningPeakHours[]": "h",
+    "spot.currentPrice": "CZK/kWh",
+    "spot.today.prices[].price": "CZK/kWh",
+    "spot.tomorrow.prices[].price": "CZK/kWh",
+    "forecast.series.solarYield[].timestampMs": "ms",
+    "forecast.series.solarYield[].energyKWh": "kWh",
+    "forecast.series.consumption[].timestampMs": "ms",
+    "forecast.series.consumption[].energyKWh": "kWh",
+    "forecast.solarYieldForecastKWh": "kWh",
+    "forecast.consumptionForecastKWh": "kWh",
+    "weather.rainProbabilityPct": "%",
+    "vrm.data.today.pvYieldKWh": "kWh",
+    "vrm.data.today.consumptionKWh": "kWh",
+    "vrm.data.today.gridImportKWh": "kWh",
+    "vrm.data.today.gridExportKWh": "kWh",
+    "vrm.data.today.batteryChargeKWh": "kWh",
+    "vrm.data.today.batteryDischargeKWh": "kWh",
+    "temperatures.data.racks[].temperatureC": "degC",
+    "temperatures.data.inverters[].temperatureC": "degC",
+    "temperatures.data.other[].temperatureC": "degC",
+    "shelly.data.devices[].channel": "1",
+    "shelly.data.smokeDetectors[].batteryPct": "%",
+    "shelly.data.smokeDetectors[].batteryVoltageV": "V",
+    "shelly.data.smokeDetectors[].rssiDbm": "dBm",
+    "shelly.data.smokeDetectors[].ageSec": "s",
+    "ups.data.battery.chargePct": "%",
+    "ups.data.battery.voltageV": "V",
+    "ups.data.battery.runtimeSec": "s",
+    "ups.data.input.voltageV": "V",
+    "ups.data.output.voltageV": "V",
+    "ups.data.output.frequencyHz": "Hz",
+    "ups.data.load.percent": "%",
+    "ups.data.load.realPowerW": "W",
+    "climate.data.devices[].roomTemperatureC": "degC",
+    "climate.data.devices[].outdoorTemperatureC": "degC",
+    "climate.data.devices[].setpointC": "degC",
+    "climate.data.devices[].energy.todayKWh": "kWh",
+    "climate.data.devices[].energy.weekKWh": "kWh",
+    "climate.data.devices[].energy.monthKWh": "kWh",
+    "climate.data.devices[].energy.coolingMonthKWh": "kWh",
+    "climate.data.devices[].energy.heatingMonthKWh": "kWh"
+  },
+  "conventions": {
+    "gridPower": {
+      "positive": "import",
+      "negative": "export",
+      "unit": "W"
+    },
+    "batteryPower": {
+      "positive": "charging",
+      "negative": "discharging",
+      "unit": "W"
+    }
+  },
+  "energy": {
+    "available": true,
+    "pv": {
+      "powerW": 0,
+      "strings": [
+        {
+          "name": "MPPT 1",
+          "powerW": 0,
+          "pvVoltageV": 0.75,
+          "pvCurrentA": 0,
+          "yieldTodayKWh": 15.6
+        },
+        {
+          "name": "MPPT 2",
+          "powerW": 0,
+          "pvVoltageV": 0.82,
+          "pvCurrentA": 0,
+          "yieldTodayKWh": 15.3
+        }
+      ]
+    },
+    "house": {
+      "powerW": 594,
+      "phases": {
+        "l1PowerW": 74,
+        "l2PowerW": 210,
+        "l3PowerW": 310
+      }
+    },
+    "grid": {
+      "powerW": -6,
+      "phases": {
+        "l1PowerW": 2,
+        "l2PowerW": -5,
+        "l3PowerW": -3
+      }
+    },
+    "battery": {
+      "socPct": 86,
+      "powerW": -696,
+      "currentA": -14,
+      "voltageV": 49.7,
+      "batteryLifeSocLimitPct": 15
+    }
+  },
+  "ess": {
+    "available": true,
+    "decision": {
+      "gridPointW": 0,
+      "pvSurplusW": -724,
+      "predictionActive": true,
+      "exportAllowed": true,
+      "reason": {
+        "code": "UNCLASSIFIED",
+        "text": null
+      }
+    },
+    "switches": {
+      "controlModeEssAcGrid": true,
+      "spotGridCharging": false,
+      "gridCharging": false,
+      "gridConsumption": true,
+      "energyThresholdInjector": true,
+      "nonBatteryPriority": false,
+      "delayCharging": true,
+      "dynamicSocReserve": false,
+      "predictionThreshold": true,
+      "socDeltaBeforeExport": false,
+      "morningPeakBatterySales": false,
+      "eveningPeakBatterySales": false
+    },
+    "settings": {
+      "balancingReserveW": 130,
+      "setGridValueW": -100,
+      "maxGridPointW": -4000,
+      "spotThresholdPrice": 1.04,
+      "morningSocSalesPct": 38,
+      "eveningSocSalesPct": 95,
+      "gridChargingSocPct": 90,
+      "predictionThresholdKWh": 22,
+      "socDeltaBeforeExportPct": 35,
+      "chargingDurationGridH": 10,
+      "acceptablePriceGrid": 2.01
+    },
+    "time": {
+      "delayCharging": {
+        "start": "04:30",
+        "stop": "11:00",
+        "startMs": 16200000,
+        "stopMs": 39600000
+      },
+      "morningPeakHours": [
+        7,
+        8
+      ],
+      "eveningPeakHours": [
+        20,
+        21
+      ]
+    }
+  },
+  "spot": {
+    "available": true,
+    "currentPrice": 2.1,
+    "intervalMinutes": 60,
+    "today": {
+      "date": "2026-09-21",
+      "available": true,
+      "prices": [
+        {
+          "hour": 0,
+          "price": 1
+        },
+        {
+          "hour": 1,
+          "price": 1.1
+        },
+        {
+          "hour": 2,
+          "price": 1.2
+        },
+        {
+          "hour": 3,
+          "price": 1.3
+        },
+        {
+          "hour": 4,
+          "price": 1.4
+        },
+        {
+          "hour": 5,
+          "price": 1.5
+        },
+        {
+          "hour": 6,
+          "price": 1.6
+        },
+        {
+          "hour": 7,
+          "price": 1.7
+        },
+        {
+          "hour": 8,
+          "price": 1.8
+        },
+        {
+          "hour": 9,
+          "price": 1.9
+        },
+        {
+          "hour": 10,
+          "price": 2
+        },
+        {
+          "hour": 11,
+          "price": 2.1
+        },
+        {
+          "hour": 12,
+          "price": 2.2
+        },
+        {
+          "hour": 13,
+          "price": 2.3
+        },
+        {
+          "hour": 14,
+          "price": 2.4
+        },
+        {
+          "hour": 15,
+          "price": 2.5
+        },
+        {
+          "hour": 16,
+          "price": 2.6
+        },
+        {
+          "hour": 17,
+          "price": 2.7
+        },
+        {
+          "hour": 18,
+          "price": 2.8
+        },
+        {
+          "hour": 19,
+          "price": 2.9
+        },
+        {
+          "hour": 20,
+          "price": 3
+        },
+        {
+          "hour": 21,
+          "price": 3.1
+        },
+        {
+          "hour": 22,
+          "price": 3.2
+        },
+        {
+          "hour": 23,
+          "price": 3.3
+        }
+      ]
+    },
+    "tomorrow": {
+      "date": "2026-09-22",
+      "available": false,
+      "prices": []
+    }
+  },
+  "forecast": {
+    "available": true,
+    "source": "Victron VRM",
+    "intervalMinutes": 15,
+    "solarYieldForecastKWh": 18,
+    "consumptionForecastKWh": 12,
+    "series": {
+      "solarYield": [
+        {
+          "timestampMs": 1789992000000,
+          "timestamp": "2026-09-21T12:00:00.000Z",
+          "energyKWh": 0.5
+        }
+      ],
+      "consumption": [
+        {
+          "timestampMs": 1789992000000,
+          "timestamp": "2026-09-21T12:00:00.000Z",
+          "energyKWh": 0.2
+        }
+      ]
+    }
+  },
+  "solar": {
+    "available": true,
+    "sunrise": "06:40",
+    "sunset": "19:00",
+    "dayLength": "12h 20m"
+  },
+  "weather": {
+    "available": true,
+    "today": "Zataženo",
+    "rainProbabilityPct": 3,
+    "trend": "stejné"
+  },
+  "vrm": {
+    "available": true,
+    "data": {
+      "updatedAt": "2026-09-21T11:50:00.000Z",
+      "source": "Victron VRM live_feed + LINEA battery counters",
+      "today": {
+        "pvYieldKWh": 30.9,
+        "consumptionKWh": 18.95,
+        "gridImportKWh": 1.11,
+        "gridExportKWh": 8.26,
+        "batteryChargeKWh": 38.92,
+        "batteryDischargeKWh": 39
+      }
+    }
+  },
+  "temperatures": {
+    "available": true,
+    "data": {
+      "updatedAt": "2026-09-21T11:50:00.000Z",
+      "racks": [
+        {
+          "name": "Rack",
+          "temperatureC": 28.76
+        }
+      ],
+      "inverters": [
+        {
+          "name": "Měnič L1",
+          "temperatureC": 31.9
+        }
+      ],
+      "other": []
+    }
+  },
+  "shelly": {
+    "available": true,
+    "data": {
+      "updatedAt": "2026-09-21T11:50:00.000Z",
+      "devices": [
+        {
+          "name": "Bojler",
+          "kind": "output",
+          "channel": 0,
+          "state": false,
+          "available": true
+        }
+      ],
+      "smokeDetectors": [
+        {
+          "name": "Kouřové čidlo",
+          "alarm": false,
+          "ok": true,
+          "batteryPct": 92,
+          "batteryVoltageV": 2.97,
+          "rssiDbm": -27,
+          "wakeupReason": "timer",
+          "lastSeen": "2026-09-21T11:40:00.000Z",
+          "ageSec": 600
+        }
+      ]
+    }
+  },
+  "ups": {
+    "available": true,
+    "data": {
+      "updatedAt": "2026-09-21T11:50:00.000Z",
+      "name": "UPS",
+      "online": true,
+      "onBattery": false,
+      "status": {
+        "raw": "OL",
+        "lowBattery": false,
+        "charging": false,
+        "discharging": false,
+        "overload": false,
+        "replaceBattery": false,
+        "bypass": false
+      },
+      "battery": {
+        "chargePct": 100,
+        "voltageV": null,
+        "runtimeSec": 2382
+      },
+      "input": {
+        "voltageV": 231
+      },
+      "output": {
+        "voltageV": 234,
+        "frequencyHz": 50
+      },
+      "load": {
+        "percent": 13,
+        "realPowerW": 57
+      }
+    }
+  },
+  "climate": {
+    "available": true,
+    "data": {
+      "updatedAt": "2026-09-21T11:50:00.000Z",
+      "devices": [
+        {
+          "name": "Místnost",
+          "cloudUp": true,
+          "on": false,
+          "operationMode": "cooling",
+          "roomTemperatureC": 25,
+          "outdoorTemperatureC": 17.5,
+          "setpointC": 18,
+          "energy": {
+            "unit": "kWh",
+            "todayKWh": 2.4,
+            "weekKWh": 5.7,
+            "monthKWh": 397.8,
+            "coolingMonthKWh": 396.2,
+            "heatingMonthKWh": 1.6
+          },
+          "error": false,
+          "errorCode": "00-",
+          "firmwareVersion": "2_6_2",
+          "firmwareChanged": false
+        }
+      ]
+    }
+  }
+}

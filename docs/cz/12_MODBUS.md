@@ -25,14 +25,14 @@ Používá se při:
 Control Mode: ESS / AC Grid = OFF
 ```
 
-Hodnota registru 2700 je ukládána v nevolatilní interní paměti zařízení. Proto se stejná hodnota neposílá periodicky.
+Větev 2700 je ve flow určena pro zápis při změně, nikoli pro periodický heartbeat.
 
 ```text
 hodnota se změnila → zapsat
 hodnota je stejná → nezapisovat
 ```
 
-Tím se omezuje zbytečné zapisování do FLASH/EEPROM.
+Tím se omezují opakované zápisy stejného nastavení.
 
 ### Registry 2716/2717
 
@@ -49,7 +49,7 @@ Control Mode: ESS / AC Grid = ON
 
 32bitová hodnota je přenášena ve dvou 16bitových registrech.
 
-Tento setpoint je provozní hodnota v RAM a je určen pro aktivní externí řízení.
+Tato větev je určena pro průběžně obnovované externí řízení.
 
 ## Heartbeat 2716/2717
 
@@ -59,7 +59,7 @@ Hodnota 2716/2717 se zapisuje periodicky i tehdy, když se požadovaný Grid Poi
 500 W → 500 W → 500 W → 500 W ...
 ```
 
-Opakovaný zápis funguje jako heartbeat. Pokud externí controller přestane hodnotu obnovovat, firmware měniče po timeoutu vrátí setpoint do bezpečného stavu, typicky 0 W.
+Opakovaný zápis funguje jako heartbeat. Při ztrátě obnovování ověřte skutečný timeout a návratový setpoint pro konkrétní GX/firmware. Předpokládaný návrat na 0 W není nezávislá bezpečnostní záruka.
 
 Na této větvi proto nesmí být použito RBE ani jiné potlačení opakovaných hodnot.
 
@@ -88,15 +88,7 @@ nMAX_Grid_Point → výkon požadovaný strategií
 
 ## Validace zápisu
 
-Před zápisem se kontroluje:
-
-- platnost čísla;
-- `NaN`;
-- rozsah;
-- znaménko;
-- cílový datový typ;
-- feed-in limit;
-- aktivní Control Mode.
+`sendValueWithinLimits` načte hodnoty přes `parseFloat(...) || 0`, omezí záporný setpoint proti `-Math.abs(2706)` a vybere výstup. Pro 2716/2717 rozděluje hodnotu na vyšší a nižší slovo. Tato konverze není úplná validace konečnosti čísla ani INT16/INT32 rozsahu. Zvláštní význam neomezeného feed-in (`-1`) není v této funkci samostatně ošetřen. Používejte ověřený konečný limit; odečtený registr a skutečný tok kontrolujte nezávisle.
 
 ---
 
