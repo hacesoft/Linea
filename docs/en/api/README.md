@@ -16,7 +16,7 @@ LINEA API is an integration layer inside Node-RED that exposes the already exist
 - [schema 1 data model](04_DATA_MODEL.md)
 - [Conventions, freshness and availability](05_CONVENTIONS_AND_FRESHNESS.md)
 - [Response examples](06_EXAMPLES.md)
-- [Nextcloud, history and future work](07_NEXTCLOUD_AND_FUTURE.md)
+- [GridSight in Nextcloud](07_NEXTCLOUD_GRIDSIGHT.md)
 
 ## Public endpoints
 
@@ -29,7 +29,7 @@ Control endpoints such as `/set`, `/control`, or `/write` are not part of the AP
 
 ## Responsibility split
 
-**LINEA / Node-RED** is authoritative for current state, Modbus, ESS control, safety and operational decisions. **LINEA API** only publishes the result. The future **Nextcloud [GridSight](https://github.com/hacesoft/GridSight)** is intended for history, database storage, aggregation, statistics, analytics and visualization.
+**LINEA / Node-RED** is authoritative for current state, Modbus, ESS control, safety and operational decisions. **LINEA API** only publishes the result. **[GridSight](https://github.com/hacesoft/GridSight)** is the Nextcloud application connected to LINEA API. Its [manual](https://github.com/hacesoft/GridSight/blob/main/README.md) documents application features, data storage and configuration.
 
 ---
 

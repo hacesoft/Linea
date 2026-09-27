@@ -102,6 +102,6 @@ Před zapnutím automatických strategií ověřte Modbus komunikaci, znaménkov
 | Eaton UPS / NUT | [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups) |
 | Cooling | [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack) |
 
-Nextcloud monitoring: [GridSight](https://github.com/hacesoft/GridSight). Aktuální dokumentaci, stav vývoje a pokyny k instalaci najdete v repozitáři aplikace.
+**[GridSight](https://github.com/hacesoft/GridSight)** je funkční aplikace pro monitoring LINEA v Nextcloudu. Instalaci, konfiguraci a popis funkcí najdete v [českém manuálu GridSight](https://github.com/hacesoft/GridSight/blob/main/README_CZ.md).
 
 [Přehled oprav a rozsah kontroly](../../REVIEW_CZ.md)

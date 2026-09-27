@@ -1,5 +1,12 @@
 [🇨🇿 Česky](CHANGELOG_CZ.md) | [🇬🇧 **English**](CHANGELOG.md)
 
+## GridSight documentation — 2026-09-27
+
+- Documented GridSight as a working Nextcloud application and removed outdated monitoring plans.
+- Added direct Czech and English manual links and practical LINEA API connectivity checks.
+- Aligned overviews, architecture and UPS documentation; refreshed docs.zip.
+- Documentation only; the supplied flow, including air-conditioning fixes, is unchanged.
+
 ## Documentation review — 2026-09-21
 
 - Added module repository links, Shelly MQTT setup and English chapters.

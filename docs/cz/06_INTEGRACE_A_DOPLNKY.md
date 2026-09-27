@@ -15,7 +15,13 @@ Zálohujte flow i konfiguraci. Nejprve ověřte, zda daný modul už není souč
 
 ## GridSight — Nextcloud monitoring
 
-Aplikace [GridSight](https://github.com/hacesoft/GridSight) je určena pro monitoring a analytiku LINEA v Nextcloudu přes [LINEA API](api/PREHLED.md). Aktuální dokumentaci, stav vývoje a pokyny k instalaci najdete v repozitáři GridSight. Viz také [návrh integrace a budoucího rozšíření](api/07_NEXTCLOUD_A_BUDOUCNOST.md).
+[GridSight](https://github.com/hacesoft/GridSight) je funkční aplikace pro monitoring LINEA v Nextcloudu, která využívá [LINEA API](api/PREHLED.md).
+
+- [Český manuál — instalace, konfigurace a funkce](https://github.com/hacesoft/GridSight/blob/main/README_CZ.md)
+- [Anglický manuál](https://github.com/hacesoft/GridSight/blob/main/README.md)
+- [Napojení GridSight na LINEA API](api/07_NEXTCLOUD_GRIDSIGHT.md)
+
+LINEA zajišťuje řízení ESS a publikuje provozní data. GridSight je zobrazuje v Nextcloudu. Požadavky aplikace, instalaci a nastavení provádějte podle jejího manuálu; tento repozitář popisuje část integrace na straně Node-RED.
 
 ## Související projekty
 - [LM335](https://github.com/hacesoft/LM335)

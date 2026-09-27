@@ -72,6 +72,6 @@ Full module installation instructions and flow downloads:
 | Eaton UPS / NUT | [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups) |
 | Cooling | [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack) |
 
-Nextcloud monitoring: [GridSight](https://github.com/hacesoft/GridSight). See the application repository for current documentation, development status and installation instructions.
+**[GridSight](https://github.com/hacesoft/GridSight)** is a working application for monitoring LINEA in Nextcloud. See the [GridSight English manual](https://github.com/hacesoft/GridSight/blob/main/README.md) for installation, configuration and features.
 
 [Documentation review and scope](REVIEW_EN.md)

@@ -6,7 +6,7 @@
 
 ## Purpose
 
-The API is a small read-only integration layer over existing LINEA globals and completed snapshots. The first client will be Nextcloud [GridSight](https://github.com/hacesoft/GridSight), but the same interface may later be consumed by an external display, Home Assistant, Grafana or another monitoring solution.
+The API is a small read-only integration layer over existing LINEA globals and completed snapshots. A client is the Nextcloud application [GridSight](https://github.com/hacesoft/GridSight), but the same interface may later be consumed by an external display, Home Assistant, Grafana or another monitoring solution.
 
 ```mermaid
 flowchart TD

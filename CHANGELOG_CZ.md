@@ -1,5 +1,12 @@
 [🇨🇿 **Česky**](CHANGELOG_CZ.md) | [🇬🇧 English](CHANGELOG.md)
 
+## Dokumentace GridSight — 27.09.2026
+
+- GridSight popsán jako funkční Nextcloud aplikace; odstraněny zastaralé plány monitoringu.
+- Doplněny přímé odkazy na český a anglický manuál a praktický postup ověření LINEA API.
+- Sjednoceny přehledy, architektura a dokumentace UPS; aktualizován archiv docs.zip.
+- Pouze dokumentace; dodané flow včetně oprav klimatizace zůstává beze změny.
+
 ## Revize dokumentace — 21.09.2026
 
 - Doplněny repozitáře modulů, Shelly/MQTT postup a anglické kapitoly.

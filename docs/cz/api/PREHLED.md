@@ -23,7 +23,7 @@ Datové schéma této verze je **`schema: 1`**. Číslo schématu označuje verz
 4. [Datový model](04_DATOVY_MODEL.md)
 5. [Konvence a stáří dat](05_KONVENCE_A_STARI_DAT.md)
 6. [Příklady](06_PRIKLADY.md)
-7. [Nextcloud a budoucí rozšíření](07_NEXTCLOUD_A_BUDOUCNOST.md)
+7. [GridSight v Nextcloudu](07_NEXTCLOUD_GRIDSIGHT.md)
 
 ## Strojově čitelný popis
 

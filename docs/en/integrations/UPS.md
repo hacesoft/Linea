@@ -9,7 +9,7 @@ Configuration lives in `global.config.upsConfig`: host, port (normally 3493), ca
 
 LINEA queries NUT about every **5 seconds**. This is not the physical UPS refresh rate because the driver has separate `pollinterval` and `pollfreq`. The watchdog reports `NUT OFFLINE` after more than **15 seconds** without a successful response; unchanged values are not a communication fault.
 
-The parser builds `global.ups`; a reduced `global.lineaApiUpsState` is exposed through the public read-only API. Events include at least `POWER_LOST`, `POWER_RESTORED` and `BATTERY_LOW`. Future Nextcloud history should use change-based validity intervals for slowly changing UPS state.
+The parser builds `global.ups`; a reduced `global.lineaApiUpsState` is exposed through the public read-only API. Events include at least `POWER_LOST`, `POWER_RESTORED` and `BATTERY_LOW`. See the [GridSight manual](https://github.com/hacesoft/GridSight/blob/main/README.md) for application-side history and storage. The LINEA API publishes the current UPS state and does not store history.
 
 ---
 [← Integrations](../06_INTEGRATIONS_AND_TOOLS.md)
