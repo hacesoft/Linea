@@ -13,9 +13,9 @@ LINEA CORE handles PV/ESS control. Shelly, Daikin, UPS and cooling are optional 
 
 Back up the flow and configuration. Check whether the module is already included in your LINEA export. Replace the existing module instead of running a second copy: duplicate MQTT subscriptions, NUT polling, cloud calls or device commands can interfere. Check shared Dashboard pages/groups, configuration nodes, link nodes, globals and file paths before Deploy. Standalone operation requires the dependencies documented by that module; importing JSON alone does not provide missing LINEA helpers.
 
-## Nextcloud monitoring — in development
+## GridSight — Nextcloud monitoring
 
-The planned LINEA Monitor & Analytics application will read the [LINEA API](api/README.md). Its repository URL and preview image are not supplied in this documentation package. Installation and history collection are not available here. See [planned scope](api/07_NEXTCLOUD_AND_FUTURE.md).
+[GridSight](https://github.com/hacesoft/GridSight) is intended for LINEA monitoring and analytics in Nextcloud through the [LINEA API](api/README.md). See the GridSight repository for current documentation, development status and installation instructions. See also the [integration and future work proposal](api/07_NEXTCLOUD_AND_FUTURE.md).
 
 ## Related projects
 - [LM335](https://github.com/hacesoft/LM335)

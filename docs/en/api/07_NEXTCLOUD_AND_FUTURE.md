@@ -4,7 +4,7 @@
 
 # Nextcloud, history and future work
 
-## Nextcloud LINEA Monitor & Analytics
+## [GridSight](https://github.com/hacesoft/GridSight) — Nextcloud monitoring & analytics
 
 The planned application is a read-only monitoring and analytics layer: `LIVE` displays `/api/v1/status`; `HISTORY` uses a Nextcloud background collector and database; `ANALYTICS` provides charts, statistics, economics and correlations. The browser must not be responsible for long-term collection.
 
@@ -31,4 +31,4 @@ UPS and similar state blocks do not need duplicate rows every few seconds. When 
 
 ## Project status
 
-The application is in development. Its repository URL and preview have not been supplied; this page does not claim an installable release. Collection, aggregation and counter restoration above are plans, not LINEA API features.
+See the [GridSight](https://github.com/hacesoft/GridSight) repository for current application status, documentation and installation instructions. Collection, aggregation and counter restoration above are integration proposals, not LINEA API features. Check the GridSight documentation for the availability of individual features.

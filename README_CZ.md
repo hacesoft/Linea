@@ -73,6 +73,6 @@ Pro diagnostiku použijte [FAQ](docs/cz/04_FAQ.md) a [Troubleshooting](docs/cz/1
 | Eaton UPS / NUT | [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups) |
 | Cooling | [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack) |
 
-Nextcloud monitoring je ve vývoji; odkaz na repozitář a náhled aplikace zatím čekají na doplnění.
+Nextcloud monitoring: [GridSight](https://github.com/hacesoft/GridSight). Aktuální dokumentaci, stav vývoje a pokyny k instalaci najdete v repozitáři aplikace.
 
 [Přehled oprav a rozsah kontroly](REVIEW_CZ.md)

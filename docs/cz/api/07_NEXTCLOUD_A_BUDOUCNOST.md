@@ -4,7 +4,7 @@
 
 # Nextcloud, historie a budoucí rozšíření
 
-## Nextcloud LINEA Monitor & Analytics
+## [GridSight](https://github.com/hacesoft/GridSight) — Nextcloud monitoring & analytics
 
 Plánovaná aplikace je read-only monitorovací a analytická vrstva se třemi základními oblastmi:
 
@@ -43,4 +43,4 @@ Pro UPS a podobné stavové bloky není účelné ukládat každých několik se
 
 ## Stav projektu
 
-Aplikace je ve vývoji. Adresa repozitáře a náhled aplikace zatím nebyly dodány; tato stránka neslibuje dostupný instalační balíček. Popsané ukládání, agregace a obnova čítačů jsou návrh, nikoli funkce LINEA API.
+Aktuální stav aplikace, dokumentaci a pokyny k instalaci najdete v repozitáři [GridSight](https://github.com/hacesoft/GridSight). Popsané ukládání, agregace a obnova čítačů jsou návrh integrace, nikoli funkce LINEA API. Dostupnost jednotlivých funkcí ověřte v dokumentaci GridSight.

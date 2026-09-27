@@ -6,7 +6,7 @@
 
 ## Účel
 
-API je malá read-only integrační vrstva nad existujícími LINEA globals a hotovými snapshoty. Prvním klientem bude Nextcloud LINEA Monitor & Analytics, ale stejné rozhraní může využít externí displej, Home Assistant, Grafana nebo jiné monitorovací řešení.
+API je malá read-only integrační vrstva nad existujícími LINEA globals a hotovými snapshoty. Prvním klientem bude Nextcloud [GridSight](https://github.com/hacesoft/GridSight), ale stejné rozhraní může využít externí displej, Home Assistant, Grafana nebo jiné monitorovací řešení.
 
 ```mermaid
 flowchart TD

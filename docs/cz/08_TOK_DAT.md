@@ -96,4 +96,4 @@ Periodický zápis 2716/2717 současně plní funkci heartbeat externího říze
 [← Dokumentace LINEA](README.md)
 ## Výstup do LINEA API
 
-LINEA API odebírá již připravené globals/snapshoty. Nesmí vytvářet paralelní ESS výpočet. Dlouhodobá historie a agregace patří do klientské databázové vrstvy, zejména plánovaného Nextcloud LINEA Monitor & Analytics. Viz [LINEA API](api/PREHLED.md).
+LINEA API odebírá již připravené globals/snapshoty. Nesmí vytvářet paralelní ESS výpočet. Dlouhodobá historie a agregace patří do klientské databázové vrstvy, zejména plánovaného Nextcloud [GridSight](https://github.com/hacesoft/GridSight). Viz [LINEA API](api/PREHLED.md).

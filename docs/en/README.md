@@ -93,6 +93,6 @@ Full module installation instructions and flow downloads:
 | Eaton UPS / NUT | [node-red-eaton-ups](https://github.com/hacesoft/node-red-eaton-ups) |
 | Cooling | [Cooling_Trackers_Rack](https://github.com/hacesoft/Cooling_Trackers_Rack) |
 
-Nextcloud monitoring is in development; its repository link and preview are pending.
+Nextcloud monitoring: [GridSight](https://github.com/hacesoft/GridSight). See the application repository for current documentation, development status and installation instructions.
 
 [Documentation review and scope](../../REVIEW_EN.md)

@@ -13,9 +13,9 @@ LINEA CORE zajišťuje řízení FVE/ESS. Shelly, Daikin, UPS a chlazení jsou v
 
 Zálohujte flow i konfiguraci. Nejprve ověřte, zda daný modul už není součástí vašeho LINEA exportu. Nahraďte existující modul; nespouštějte dvě kopie současně. Duplicitní MQTT odběry, NUT dotazy, cloudové požadavky nebo příkazy zařízením se mohou navzájem ovlivňovat. Před Deploy zkontrolujte sdílené Dashboard stránky/skupiny, konfigurační uzly, link uzly, globals a cesty k souborům. Samostatný provoz vyžaduje závislosti popsané v návodu modulu; samotný import JSON nedoplní chybějící pomocné funkce LINEA.
 
-## Nextcloud monitoring — ve vývoji
+## GridSight — Nextcloud monitoring
 
-Plánovaná aplikace LINEA Monitor & Analytics bude číst [LINEA API](api/PREHLED.md). Adresa jejího repozitáře ani náhledový obrázek zatím nejsou součástí tohoto balíčku dokumentace. Instalace ani sběr historie zde nejsou k dispozici. Viz [plánovaný rozsah](api/07_NEXTCLOUD_A_BUDOUCNOST.md).
+Aplikace [GridSight](https://github.com/hacesoft/GridSight) je určena pro monitoring a analytiku LINEA v Nextcloudu přes [LINEA API](api/PREHLED.md). Aktuální dokumentaci, stav vývoje a pokyny k instalaci najdete v repozitáři GridSight. Viz také [návrh integrace a budoucího rozšíření](api/07_NEXTCLOUD_A_BUDOUCNOST.md).
 
 ## Související projekty
 - [LM335](https://github.com/hacesoft/LM335)

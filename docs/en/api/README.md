@@ -29,7 +29,7 @@ Control endpoints such as `/set`, `/control`, or `/write` are not part of the AP
 
 ## Responsibility split
 
-**LINEA / Node-RED** is authoritative for current state, Modbus, ESS control, safety and operational decisions. **LINEA API** only publishes the result. The future **Nextcloud LINEA Monitor & Analytics** is intended for history, database storage, aggregation, statistics, analytics and visualization.
+**LINEA / Node-RED** is authoritative for current state, Modbus, ESS control, safety and operational decisions. **LINEA API** only publishes the result. The future **Nextcloud [GridSight](https://github.com/hacesoft/GridSight)** is intended for history, database storage, aggregation, statistics, analytics and visualization.
 
 ---
 
